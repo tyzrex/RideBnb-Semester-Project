@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 import regimage from "../../assets/register.jpg";
 import Animate from 'react-smooth'
+import {useNavigate} from 'react-router-dom'
+import validate from "../../validation/RegisterValidation";
+import { toastError,toastSuccess } from "../Toast/Toast";
 
 const Register = () => {
   const [errors, setErrors] = useState({});
-  const [subError, setSubError] = useState(null);
+  const navigate = useNavigate();
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -16,56 +18,20 @@ const Register = () => {
     phone: "",
   });
 
-  const validate = () => {
-    let errors = {};
-    if (!data.name.trim()) {
-      errors.name = "Username required";
-    }
-    if (!data.email) {
-      errors.email = "Email required";
-    } else if (!/\S+@\S+.\S+/.test(data.email)) {
-      errors.email = "Email address is invalid";
-    }
-    if (!data.password) {
-      errors.password = "Password is required";
-    } else if (data.password.length < 6) {
-      errors.password = "Password needs to be 6 characters or more";
-    }
-    if (!data.address) {
-      errors.address = "Address is required";
-    }
-    if (!data.phone) {
-      errors.phone = "Phone is required";
-    } else if (data.phone.length < 10) {
-      errors.phone = "Phone needs to be 10 characters or more";
-    } else if (!Number(data.phone)) {
-      errors.phone = "Phone needs to be number";
-    }
-    setErrors(errors);
-    return errors;
-  };
-
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
   const notify = () => {
-    toast("Registered", {
-      position: "top-right",
-      type: "success",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
+    toastSuccess("Register Success");
   };
   //handle submit for button click
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const errors = validate();
+    const errors = validate(data);
+    if (errors) {
+      setErrors(errors);
+    }
     if (Object.keys(errors).length === 0) {
       try {
         const res = await axios.post(
@@ -74,22 +40,18 @@ const Register = () => {
         );
         console.log(res);
         notify();
-        setTimeout(() => {
-          navigate("/login");
-        }, 5000);
+        // setTimeout(() => {
+        //   navigate("/login");
+        // }, 5000);
       } catch (error) {
-        console.log(error.response);
-        setSubError(error.response.data.message);
-        toast.error(error.response.data.message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        if (error.response.status === 422) {
+          const errors = error.response.data.errors;
+          const errorMessage = errors.map((error) => error.msg).join(' & ');
+          toastError(errorMessage);  
+        }
+        else{
+          toastError(error)
+        }
       }
     }
   };

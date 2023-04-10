@@ -1,5 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
+import { ToastContainer } from "react-toastify";
+import { toastSuccess, toastError } from "../Toast/Toast";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -13,20 +16,40 @@ const Login = () => {
     });
   };
 
-  const [error, setError] = useState({});
-  const [subError, setSubError] = useState("");
+  const [loginError, setLoginError] = useState({});
 
   const validate = () => {
     let error = {};
     if (!data.name) {
-      error.username = "Username is required";
+      error.name = "Username is required";
     }
     if (!data.password) {
       error.password = "Password is required";
     }
-    setError(error);
+    setLoginError(error);
     return error;
   };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const error = validate();
+    if (Object.keys(error).length === 0) {
+      try{
+        const res = await axios.post("http://localhost:5000/auth/login", {
+          name: data.name,
+          password: data.password,
+        });
+        toastSuccess("Login Success");
+      }catch(err){
+        if(err.response.status === 422){
+          toastError("Invalid credentials");
+        }
+      }
+    } else {
+      toastError("Fill all fields");
+    }
+  };
+
 
   return (
        <div>
@@ -59,13 +82,13 @@ const Login = () => {
                     <input
                       onChange={handleChange}
                       type="text"
-                      id="UserName"
+                      id="username"
                       name="name"
                       autoComplete="username"
-                      className="mt-1 p-2 w-full rounded-md border border-gray-300 bg-main-fg text-sm text-white shadow-sm"
+                      className="mt-1 p-2 w-full rounded-md border border-gray-300 text-black bg-main-fg text-sm shadow-sm"
                     />
-                    {error.name && (
-                      <p className="text-red-500">{error.name}</p>
+                    {loginError.name && (
+                      <p className="text-red-500">{loginError.name}</p>
                     )}
                   </div>
 
@@ -81,24 +104,16 @@ const Login = () => {
                       autoComplete="current-password"
                       className="mt-1 p-2 w-full rounded-md  border border-gray-300 bg-main-fg text-sm text-gray-700 shadow-sm"
                     />
-                    {error.password && (
-                      <p className="text-red-500">{error.password}</p>
-                    )}
-                  </div>
-
-                  <div className="col-span-6 sm:col-span-3 flex items-center">
-                    {subError ? (
-                      <h1 className="text-red-600">{subError}</h1>
-                    ) : (
-                      <></>
+                    {loginError.password && (
+                      <p className="text-red-500">{loginError.password}</p>
                     )}
                   </div>
 
                   <div className=" flex flex-col items-center gap-4">
-                    <button className="inline-block bg-main-text hover:bg-white  hover:border-2 hover:border-gray-500 hover:text-black shrink-0 rounded-md border  px-12 py-3 text-sm font-medium text-white transition focus:outline focus:ring">
+                    <button onClick={handleSubmit} className="inline-block bg-main-text hover:bg-white  hover:border-2 hover:border-gray-500 hover:text-black shrink-0 rounded-md border  px-12 py-3 text-sm font-medium text-white transition focus:outline focus:ring">
                       Login
                     </button>
-
+                    <ToastContainer />
                     <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                       Don't have an account?
                       <a

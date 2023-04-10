@@ -40,27 +40,3 @@
     transform: scaleX(1);
     transform-origin: bottom left;
 }
-
-.nav1{
-    background: linear-gradient(
-        rgba(0, 0, 0, 0.163), 
-        rgba(0, 0, 0, 0.16)
-      ),  url('./assets/herocar.jpg') no-repeat;
-    background-size: cover;
-    background-position: 0% 50%;
-}
-
-.nav2{
-    background: linear-gradient(
-        rgba(0, 0, 0, 0.163), 
-        rgba(0, 0, 0, 0.16)
-      ),  url('./assets/herobike.jpg') no-repeat;
-    background-size: cover;
-    background-position: 0% 50%;
-}
-
-@media only screen and (max-width: 600px) {
-    .nav{
-        background-position: 90% 0%;
-    }
-  }

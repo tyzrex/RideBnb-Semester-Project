@@ -1,37 +1,56 @@
-// Import the necessary modules
-const { body, validationResult } = require('express-validator');
+import pool from "../config/database.js";
+import bcrypt from "bcrypt";
+import { check } from "express-validator";
 
-// Define the validation middleware
-exports.validateUserDetails = [
-  // Check the username
-  body('username')
-    .trim()
-    .isLength({ min: 5 })
-    .withMessage('Username must be at least 5 characters long')
+
+// registration check
+
+// check password
+const password = check('password')
+    .isLength({ min: 6, max: 15 })
+    .withMessage('Password has to be between 6 and 15 characters')
     .isAlphanumeric()
-    .withMessage('Username must contain only letters and numbers'),
+    .withMessage('Password needs to contain alphanumeric characters');
 
-  // Check the email
-  body('email')
+// email validation and
+// check if email already exists
+const email = check('email')
     .isEmail()
-    .withMessage('Please enter a valid email address'),
+    .withMessage('Please enter a valid email.')
+    .normalizeEmail()
+    .custom(async (value) => {
+        const { rows } = await pool.query("SELECT * FROM customer WHERE email = $1", [value]);
+        if (rows.length != 0) {
+            throw new Error('User already exists');
+        }
+    });
 
-  // Check the password
-  body('password')
-    .isLength({ min: 8 })
-    .withMessage('Password must be at least 8 characters long'),
+// check if username is entered or not and if it is already in use
+const username = check('name')
+    .isLength({ min: 3 })
+    .withMessage('Please enter a valid username')
+    .custom(async (value) => {
+        const { rows } = await pool.query("SELECT * FROM customer WHERE customername = $1", [value]);
+        if (rows.length > 0) {
+            throw new Error('Username already in use');
+        }
+    });
 
-  // Check the phone number
-  body('phone_number')
-    .isMobilePhone()
-    .withMessage('Please enter a valid phone number'),
+// login validation
+const loginFieldCheck = check('name')
+    .custom(async (value, { req }) => {
+        const user = await pool.query("SELECT * FROM customer WHERE customername = $1", [value]);
+        if (user.rows.length === 0) {
+            throw new Error('Name not found');
+        }
 
-  // Check for validation errors
-  (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    next();
-  }
-];
+        const isMatch = await bcrypt.compare(req.body.password, user.rows[0].password);
+        if (!isMatch) {
+            throw new Error('Password is incorrect');
+        }
+        req.user = user.rows[0];
+    });
+
+
+export const registerValidation = [password, email, username];
+export const loginValidation = [loginFieldCheck];
