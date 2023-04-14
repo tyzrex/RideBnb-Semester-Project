@@ -1,8 +1,9 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import { toastSuccess, toastError } from "../Toast/Toast";
+import { AuthContext } from "../../Context/AuthContext";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -15,6 +16,8 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const {user,loginUser} = useContext(AuthContext);
 
   const [loginError, setLoginError] = useState({});
 
@@ -35,10 +38,7 @@ const Login = () => {
     const error = validate();
     if (Object.keys(error).length === 0) {
       try{
-        const res = await axios.post("http://localhost:5000/auth/login", {
-          name: data.name,
-          password: data.password,
-        });
+        loginUser(data,loginError,setLoginError)
         toastSuccess("Login Success");
       }catch(err){
         if(err.response.status === 422){

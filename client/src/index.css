@@ -40,3 +40,12 @@
     transform: scaleX(1);
     transform-origin: bottom left;
 }
+
+/* hide scroll bar */
+::-webkit-scrollbar {
+    display: none;
+}
+
+.button-hover{
+    @apply border-2 border-black hover:text-black hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300;
+}
