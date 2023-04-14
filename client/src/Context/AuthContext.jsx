@@ -1,23 +1,33 @@
-import { createContext, useEffect, useState,setState } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from "axios"; 
+import { toastError,toastSuccess } from "../Components/Toast/Toast";
 import { Navigate } from "react-router-dom";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || "");
 
-    const loginUser = async (data,loginError,setLoginError) => {
-        
+    const loginUser = async (data,subError,setSubError) => {
         try {
-            const response = await axios.post("http://localhost:5000/auth/login", data)
+            const response = await axios.post("http://localhost:5000/auth/login", data);
             setUser(response.data);
-            <Navigate to= "/"/>
+            toastSuccess("Login Successful Redirecting...");
+            setTimeout(() => {
+                window.location.replace('/')
+            }
+            , 2000);
         }
         catch (err) {
-            setLoginError(err.response.data)
-            console.log(err)
+            if (err.response.status === 422) {
+                toastError("Invalid credentials");
+                setSubError(err.response.data);
+            }
+            else{
+                toastError("Something went wrong");
+            }
         }
     }
+
 
     const logoutUser = async (data) => {
         await axios.post('http://localhost:5000/auth/logout')

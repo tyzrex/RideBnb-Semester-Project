@@ -1,9 +1,10 @@
 import React from "react";
 import { useState,useContext } from "react";
-import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import { toastSuccess, toastError } from "../Toast/Toast";
 import { AuthContext } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -17,9 +18,12 @@ const Login = () => {
     });
   };
 
+  const navigate = useNavigate();
+
   const {user,loginUser} = useContext(AuthContext);
 
   const [loginError, setLoginError] = useState({});
+  const [subError, setSubError] = useState({});
 
   const validate = () => {
     let error = {};
@@ -34,17 +38,11 @@ const Login = () => {
   };
   
   const handleSubmit = async (e) => {
+    console.log("submit");
     e.preventDefault();
     const error = validate();
     if (Object.keys(error).length === 0) {
-      try{
-        loginUser(data,loginError,setLoginError)
-        toastSuccess("Login Success");
-      }catch(err){
-        if(err.response.status === 422){
-          toastError("Invalid credentials");
-        }
-      }
+      loginUser(data,subError,setSubError);
     } else {
       toastError("Fill all fields");
     }
@@ -110,7 +108,7 @@ const Login = () => {
                   </div>
 
                   <div className=" flex flex-col items-center gap-4">
-                    <button onClick={handleSubmit} className="inline-block bg-main-text hover:bg-white  hover:border-2 hover:border-gray-500 hover:text-black shrink-0 rounded-md border  px-12 py-3 text-sm font-medium text-white transition focus:outline focus:ring">
+                    <button onClick={handleSubmit} className="inline-block bg-main-text hover:bg-white  hover:border-2 hover:border-gray-500 hover:text-black shrink-0 rounded-md border  px-12 py-3 text-sm font-medium text-white transition">
                       Login
                     </button>
                     <ToastContainer />
