@@ -29,12 +29,14 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="menu-items">
-            <ul className="lg:flex gap-4 cursor-pointer hidden">
-              <li className="li-style ">Dashboard</li>
-              <li className="li-style ">Booking Schedule</li>
-              <li className="li-style ">Account Settings</li>
-              <li className="li-style ">List Vehicle</li>
-            </ul>
+            <div className="lg:flex gap-4 cursor-pointer hidden">
+              <div className="li-style ">Dashboard</div>
+              <div className="li-style ">Booking Schedule</div>
+              <div className="li-style ">Account Settings</div>
+              <Link to="/listvehicle">
+                <div className="li-style ">List Vehicle</div>
+              </Link>
+            </div>
           </div>
 
           <div className="buttons flex justify-center items-center gap-6">
@@ -180,7 +182,7 @@ const Navbar = () => {
                 <li className="li-style ">Dashboard</li>
                 <li className="li-style ">Booking Schedule</li>
                 <li className="li-style ">Account Settings</li>
-                <li className="li-style ">List Vehicle</li>
+                <li className="li-style ">List vehicle</li>
                 <li className="flex flex-col justify-center items-center gap-4">
                   {user ? (
                     <button
