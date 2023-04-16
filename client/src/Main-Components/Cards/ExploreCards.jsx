@@ -1,6 +1,6 @@
 import React from "react";
 
-const PopularCard = () => {
+const ExploreCards = (props) => {
   return (
     <div>
       <div className="!z-5 shadow-lg relative flex flex-col rounded-[20px] max-w-[300px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 w-full 3xl:p-![18px] undefined">
@@ -35,9 +35,9 @@ const PopularCard = () => {
           </div>
           <div className="m-5 flex items-center justify-between px-1 md:items-start">
             <div className="mb-2">
-              <p className="text-lg font-bold text-navy-700"> Mercedez Benz </p>
+              <p className="text-lg font-bold text-navy-700">{props.vehicleName}</p>
               <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2">
-                By Esthera Jackson{" "}
+                Posted by : {props.postedBy}
               </p>
             </div>
             <div className="flex flex-row-reverse md:mt-2 lg:mt-0">
@@ -47,7 +47,7 @@ const PopularCard = () => {
           <div className="flex m-5 items-center justify-between md:items-center lg:justify-between ">
             <div className="flex">
               <p className="!mb-0 text-sm font-bold text-brand-500">
-                $259 per day
+                Rs {props.vehiclePrice} per day
               </p>
             </div>
             <button
@@ -63,4 +63,4 @@ const PopularCard = () => {
   );
 };
 
-export default PopularCard;
+export default ExploreCards;

@@ -4,6 +4,7 @@ import Login from './Components/Pages/Login'
 import Register from './Components/Pages/Register'
 import Home from './Components/Pages/Home'
 import ListVehicle from './Components/Pages/ListVehicle'
+import ExploreAll from './Components/Pages/ExploreAll'
 
 const router = createBrowserRouter(
   [
@@ -24,6 +25,10 @@ const router = createBrowserRouter(
     {
       path:"/listvehicle",
       element: <ListVehicle />,
+    },
+    {
+      path: "explore",
+      element: <ExploreAll />
     }
   ]
 )

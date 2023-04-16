@@ -9,6 +9,7 @@ router.route("/register").post(registerValidation,validationMiddleware,register)
 
 //route for login
 router.route("/login").post(loginValidation,validationMiddleware,login);
+// router.route("/login").post(login);
 
 //route for logout
 router.route("/logout").post(logout);

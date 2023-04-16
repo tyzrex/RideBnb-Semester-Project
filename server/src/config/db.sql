@@ -1,32 +1,32 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 create table customer(
-    customer_id serial primary key,
-    customername varchar(50) not null,
-    password varchar(50) not null,
-    email varchar(50) not null,
+    customer_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    customername varchar(100) not null,
+    password varchar(100) not null,
+    email varchar(100) not null,
     created_at timestamp default now(),
     updated_at timestamp default now(),
-    phone_number varchar(50) not null,
-    address varchar(50) not null,
-    role varchar(50) not null DEFAULT 'customer'
+    phone_number varchar(100) not null,
+    address varchar(100) not null,
+    role varchar(100) not null DEFAULT 'customer'
 );
 
 CREATE table vehicle_post(
     vehicle_post_id serial primary key,
-    customer_id int not null,
+    customer_id uuid not null,
     vehicle_name varchar(50) not null,
     vehicle_type varchar(50) not null,
     vehicle_brand varchar(50) not null,
-    vehicle_model varchar(50) not null,
     vehicle_year varchar(50) not null,
     vehicle_color varchar(50) not null,
-    vehicle_price varchar(50) not null,
-    vehicle_description varchar(50) not null,
-    vehicle_image varchar(50) not null,
+    vehicle_description text not null,
+    address varchar(50) not null,
+    vehicle_image text[],
     created_at timestamp default now(),
-    updated_at timestamp default now(),
     available boolean default true,
     price_per_day DECIMAL(10,2) not null,
-    foreign key (customer_id) references customer(customer_id)
+    foreign key (customer_id) references customer(customer_id) on delete cascade
 );
 
 

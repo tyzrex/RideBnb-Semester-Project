@@ -13,7 +13,6 @@ const Navbar = () => {
   };
 
   const { user, logoutUser } = useContext(AuthContext);
-  console.log(user);
   return (
     <div
       id="navbar"

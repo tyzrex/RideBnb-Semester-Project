@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import axios from "axios"; 
 import { toastError,toastSuccess } from "../Components/Toast/Toast";
 import { Navigate } from "react-router-dom";
+import axiosInstance from "../Instance/instance";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -9,7 +10,8 @@ export const AuthProvider = ({ children }) => {
 
     const loginUser = async (data,subError,setSubError) => {
         try {
-            const response = await axios.post("http://localhost:5000/auth/login", data);
+            // const response = await axios.post("http://localhost:5000/auth/login", data);
+            const response = await axiosInstance.post("/auth/login", data);
             setUser(response.data);
             toastSuccess("Login Successful Redirecting...");
             setTimeout(() => {
@@ -30,7 +32,8 @@ export const AuthProvider = ({ children }) => {
 
 
     const logoutUser = async (data) => {
-        await axios.post('http://localhost:5000/auth/logout')
+        // await axios.post('http://localhost:5000/auth/logout')
+        await axiosInstance.post('/auth/logout')
         setUser("")
         window.location.replace('/')
         localStorage.removeItem("user")
