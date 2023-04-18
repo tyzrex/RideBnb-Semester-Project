@@ -22,7 +22,7 @@ CREATE table vehicle_post(
     vehicle_color varchar(50) not null,
     vehicle_description text not null,
     address varchar(50) not null,
-    vehicle_image text[],
+    vehicle_image VARCHAR(100) not null,
     created_at timestamp default now(),
     available boolean default true,
     price_per_day DECIMAL(10,2) not null,
