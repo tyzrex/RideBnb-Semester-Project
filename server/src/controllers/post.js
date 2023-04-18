@@ -14,7 +14,7 @@ export const post = async (req, res) => {
     vehicleColor,
     pricePerDay,
     vehicleDescription,
-    vehicleImage,
+    vehiclefile,
   } = req.body;
   const user = req.user;
   const { customer_id } = user;
@@ -30,7 +30,7 @@ export const post = async (req, res) => {
         vehicleColor,
         pricePerDay,
         vehicleDescription,
-        vehicleImage,
+        vehiclefile,
         customer_id,
       ]
     );
