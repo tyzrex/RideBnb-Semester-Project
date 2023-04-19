@@ -26,7 +26,6 @@ export const register = async (req,res)=> {
 
 export const login = async (req, res) => {
     const { name, password } = req.body;
-    console.log(req.cookies.session_token);
     try {
       const user = await pool.query(
         "SELECT * FROM customer WHERE customername = $1",
@@ -51,39 +50,39 @@ export const login = async (req, res) => {
     }
   }
 
-// export const logout = async (req, res) =>{
-//     res.clearCookie("access_token", {
-//         sameSite: "none",
-//         secure: true,
+export const logout = async (req, res) =>{
+    res.clearCookie("access_token", {
+        sameSite: "none",
+        secure: true,
+    });
+    res.status(200).json("Logged out");
+};
+
+// export const logout = async(req, res) => {
+//   const token = req.cookies.session_token;
+//   console.log(token);
+//   // Verify and decode the token
+//   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+//     if (err) {
+//       // Handle invalid or expired token
+//       return res.status(401).json({
+//         message: 'Invalid or expired token'
+//       });
+//     }
+
+//     // Delete the JWT token cookie
+//     res.clearCookie('session_token', {
+//       httpOnly: true,
+//       sameSite: 'strict'
 //     });
-//     res.status(200).json("Logged out");
-// };
 
-export const logout = async(req, res) => {
-  const token = req.cookies.session_token;
-  console.log(token);
-  // Verify and decode the token
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      // Handle invalid or expired token
-      return res.status(401).json({
-        message: 'Invalid or expired token'
-      });
-    }
+//     // Send a response with success message
+//     res.status(200).json({
+//       message: 'Successfully logged out'
+//     });
+//   });
 
-    // Delete the JWT token cookie
-    res.clearCookie('session_token', {
-      httpOnly: true,
-      sameSite: 'strict'
-    });
-
-    // Send a response with success message
-    res.status(200).json({
-      message: 'Successfully logged out'
-    });
-  });
-
-}
+// }
 
 export const getAllUsers = async (req,res) => {
     const user = await pool.query("SELECT * FROM customer");

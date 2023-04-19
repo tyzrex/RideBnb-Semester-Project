@@ -15,12 +15,16 @@ export const post = async (req, res) => {
     pricePerDay,
     vehicleDescription,
     vehiclefile,
+    listingType,
+    features,
+    numberPlate,
   } = req.body;
+  console.log(req.body);
   const user = req.user;
   const { customer_id } = user;
   try {
     const newPost = await pool.query(
-      "INSERT INTO vehicle_post (vehicle_name, vehicle_type, vehicle_year ,vehicle_brand, address,vehicle_color, price_per_day , vehicle_description, vehicle_image, customer_id) VALUES ($1, $2, $3,$4,$5,$6,$7,$8,$9,$10) RETURNING *",
+      "INSERT INTO vehicle_post (vehicle_name, vehicle_type, vehicle_year ,vehicle_brand, address,vehicle_color, price_per_day , vehicle_description, vehicle_image, customer_id, vehicle_listing_type, vehicle_features, vehicle_number) VALUES ($1, $2, $3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING *",
       [
         vehicleName,
         vehicleType,
@@ -32,6 +36,9 @@ export const post = async (req, res) => {
         vehicleDescription,
         vehiclefile,
         customer_id,
+        listingType,
+        features,
+        numberPlate,
       ]
     );
     res.status(200).json("Vehicle posted");
@@ -44,20 +51,6 @@ export const post = async (req, res) => {
   }
 };
 
-// export const getPosts = async (req, res) => {
-//   try {
-//     const posts = await pool.query("SELECT vehicle_post.*, customer.customername FROM vehicle_post INNER JOIN customer ON vehicle_post.customer_id = customer.customer_id");
-//     res.status(200).json(posts.rows);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(401).json({
-//       success: false,
-//       message: err.message,
-//     });
-//   }
-// }
-
-// Route to get posts with pagination
 // Route to get posts with pagination
 export const getPosts = async (req, res) => {
   try {
@@ -84,9 +77,11 @@ export const getPosts = async (req, res) => {
 
 export const getPost = async (req, res) => {
   const { id } = req.params;
+  console.log(id);
   try {
     const post = await pool.query(
-      "SELECT * FROM vehicle_post WHERE vehicle_id = $1",
+      // "SELECT * FROM vehicle_post WHERE vehicle_post_id = $1",
+      `SELECT vehicle_post.*, customer.customername,customer.email FROM vehicle_post INNER JOIN customer ON vehicle_post.customer_id = customer.customer_id WHERE vehicle_post_id = $1`,
       [id]
     );
     res.status(200).json(post.rows[0]);
