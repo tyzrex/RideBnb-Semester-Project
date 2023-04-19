@@ -1,7 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import axios from "axios"; 
 import { toastError,toastSuccess } from "../Components/Toast/Toast";
-import { Navigate } from "react-router-dom";
 import axiosInstance from "../Instance/instance";
 export const AuthContext = createContext();
 

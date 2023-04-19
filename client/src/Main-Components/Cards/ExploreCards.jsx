@@ -7,7 +7,7 @@ const ExploreCards = (props) => {
         <div className="h-full w-full">
           <div className="relative w-full">
             <img
-              src="https://images.pexels.com/photos/136872/pexels-photo-136872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src={`../../../Images/${props.vehicleImage}`}
               className="mb-2 h-[250px] object-cover w-full rounded-t-xl"
               alt=""
             />

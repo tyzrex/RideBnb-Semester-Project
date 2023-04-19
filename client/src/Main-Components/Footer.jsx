@@ -34,10 +34,10 @@ const Footer = () => {
         <h4 className="font-semibold text-black">Stay up to date</h4>
 
         <form>
-          <div className="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-white rounded-md p-2">
+          <div className="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-white rounded-md">
             <div className="w-full">
               <label htmlFor="hero-input" className="sr-only">Search</label>
-              <input type="text" id="hero-input" name="hero-input" className="py-3 px-4 block w-full shadow-sm border rounded-md focus:z-10" placeholder="Enter your email"/>
+              <input type="text" id="hero-input" name="hero-input" className="py-3 px-5 block w-full shadow-sm border rounded-md focus:z-10" placeholder="Enter your email"/>
             </div>
             <a className="w-full sm:w-auto whitespace-nowrap inline-flex justify-center items-center gap-x-3 text-center bg-black button-hover text-white rounded-xl py-3 px-4" href="#">
               Subscribe

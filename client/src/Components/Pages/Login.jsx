@@ -4,7 +4,6 @@ import { ToastContainer } from "react-toastify";
 import { toastSuccess, toastError } from "../Toast/Toast";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const Login = () => {
   const [data, setData] = useState({

@@ -13,16 +13,17 @@ const Navbar = () => {
   };
 
   const { user, logoutUser } = useContext(AuthContext);
+
   return (
     <div
       id="navbar"
-      className="transition-all duration-300 ease-in-out flex relative z-[20] justify-center items-center w-screen bg-white text-black py-5"
+      className="transition-all duration-300 ease-in-out flex relative z-[20] justify-center items-center w-screen bg-white text-black py-6"
     >
       <div className="lg:max-w-[1300px] max-w-[95%] flex justify-center w-full items-center">
         <div className="flex justify-between items-center w-full">
-          <div className="logo p-[1rem]">
+          <div className="logo">
             <Link to="/">
-              <h1 className="text-xl">
+              <h1 className="text-3xl">
                 Ride<span className="font-bold">Bnb</span>
               </h1>
             </Link>
@@ -31,7 +32,9 @@ const Navbar = () => {
             <div className="lg:flex gap-4 cursor-pointer hidden">
               <div className="li-style ">Dashboard</div>
               <div className="li-style ">Booking Schedule</div>
+              <Link to={`/editprofile/3`}>
               <div className="li-style ">Account Settings</div>
+              </Link>
               <Link to="/listvehicle">
                 <div className="li-style ">List Vehicle</div>
               </Link>
