@@ -51,7 +51,7 @@ export const login = async (req, res) => {
   }
 
 export const logout = async (req, res) =>{
-    res.clearCookie("access_token", {
+    res.clearCookie("session_token", {
         sameSite: "none",
         secure: true,
     });
@@ -83,12 +83,3 @@ export const logout = async (req, res) =>{
 //   });
 
 // }
-
-export const getAllUsers = async (req,res) => {
-    const user = await pool.query("SELECT * FROM customer");
-    res.status(200).json(user.rows);
-};
-
-
-
-

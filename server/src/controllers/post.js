@@ -75,6 +75,21 @@ export const getPosts = async (req, res) => {
   }
 };
 
+export const getPostByType = async (req, res) => {
+  const { type } = req.params;
+  console.log(type);
+  try {
+    const { rows } = await pool.query(
+      `SELECT vehicle_post.*, customer.customername FROM vehicle_post INNER JOIN customer ON vehicle_post.customer_id = customer.customer_id WHERE vehicle_listing_type = $1 ORDER BY vehicle_post.created_at DESC`,
+      [type]
+    );
+    res.status(200).json(rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+};
+
 export const getPost = async (req, res) => {
   const { id } = req.params;
   console.log(id);
