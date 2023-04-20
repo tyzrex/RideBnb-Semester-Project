@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import Navbar from "../../Main-Components/Navbar";
 import { toastError, toastSuccess } from "../Toast/Toast";
 import axiosInstance from "../../Instance/instance";
 import ListHero from "../../Main-Components/ListHero";
 import Footer from "../../Main-Components/Footer";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import validation from "../../validation/ListValidation";
 
 const ListVehicle = () => {
+  const fileInputRef = useRef(null);
+
   const [file, setFile] = useState({
     preview: "",
     data: "",
   });
+
   const [data, setData] = useState({
     vehicleName: "",
     vehicleBrand: "",
@@ -25,7 +29,22 @@ const ListVehicle = () => {
     listingType: "",
     features: "",
   });
-  console.log(data);
+
+  const [postError, setPostError] = useState({
+    vehicleName: "",
+    vehicleBrand: "",
+    vehicleColor: "",
+    address: "",
+    pricePerDay: "",
+    vehicleMakeYear: "",
+    vehicleType: "",
+    vehicleDescription: "",
+    vehiclefile: "",
+    numberPlate: "",
+    listingType: "",
+    features: "",
+  });
+
   const uploadfile = async () => {
     let formData = new FormData();
     formData.append("file", file.data);
@@ -36,90 +55,102 @@ const ListVehicle = () => {
     console.log(response);
   };
 
-  const handleVehicleType = (e) => {
-    setData({
-      ...data,
+  const validateData = useCallback(
+    (name, value) => {
+      return validation({ ...data, [name]: value });
+    },
+    [data]
+  );
+
+  const handleChange = useCallback(
+    (e) => {
+      const { name, value } = e.target;
+      setData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+      setPostError((prevErrors) => ({
+        ...prevErrors,
+        [name]: validateData(name, value)[name],
+      }));
+    },
+    [validateData]
+  );
+
+  const handleVehicleType = useCallback((e) => {
+    setData((prevData) => ({
+      ...prevData,
       vehicleType: e.target.value,
-    });
-  };
+    }));
+    setPostError((prevErrors) => ({
+      ...prevErrors,
+      vehicleType: "",
+    }));
+  }, []);
 
-  const handleListingType = (e) => {
-    setData({
-      ...data,
+  const handleListingType = useCallback((e) => {
+    setData((prevData) => ({
+      ...prevData,
       listingType: e.target.value,
-    });
-  };
+    }));
+    setPostError((prevErrors) => ({
+      ...prevErrors,
+      listingType: "",
+    }));
+  }, []);
 
-  const handleChange = (e) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handlefileChange = (e) => {
-    setData({
-      ...data,
-      vehiclefile: e.target.files[0].name,
-    });
-    const image = {
-      preview: URL.createObjectURL(e.target.files[0]),
-      data: e.target.files[0],
-    };
-    setFile(image);
-  };
-  console.log(data);
-
-  const handleSubmitfile = async (e) => {
-    e.preventDefault();
-    const file = await uploadfile();
-    console.log(file);
-  };
-
-  const [postError, setPostError] = useState({});
-
-  const validate = () => {
-    let error = {};
-    if (!data.vehicleName) {
-      error.vehicleName = "Vehicle Name is required";
-    }
-    if (!data.vehicleBrand) {
-      error.vehicleBrand = "Vehicle Brand is required";
-    }
-    if (!data.vehicleColor) {
-      error.vehicleColor = "Vehicle Color is required";
-    }
-    //check if price is a number
-    if (!data.pricePerDay) {
-      error.pricePerDay = "Price is required";
-    }
-    if (!data.vehicleMakeYear) {
-      error.vehicleMakeYear = "Vehicle Make Year is required";
-    }
-    if (!data.vehicleType) {
-      error.vehicleType = "Vehicle Type is required";
-    }
-    if (!data.vehicleDescription) {
-      error.vehicleDescription = "Vehicle Description is required";
-    }
-    if (!data.vehiclefile) {
-      error.vehiclefile = "Vehicle file is required";
-    }
-    setPostError(error);
-    return error;
-  };
+  const handlefileChange = useCallback(
+    (e) => {
+      const file = e.target.files[0];
+      const name = file.name;
+      setData((prevData) => ({
+        ...prevData,
+        vehiclefile: name,
+      }));
+      if (!file) {
+        toastError("Please select a file");
+      }
+      setFile({
+        preview: URL.createObjectURL(file),
+        data: file,
+      });
+    },
+    [validateData]
+  );
 
   const handleSubmit = async (e) => {
     console.log("submit");
     e.preventDefault();
-    const error = validate();
-    console.log(error);
+    const error = validation(data);
+    setPostError({
+      vehicleName: error.vehicleName,
+      vehicleBrand: error.vehicleBrand,
+      vehicleColor: error.vehicleColor,
+      address: error.address,
+      pricePerDay: error.pricePerDay,
+      vehicleMakeYear: error.vehicleMakeYear,
+      vehicleType: error.vehicleType,
+      vehicleDescription: error.vehicleDescription,
+      numberPlate: error.numberPlate,
+      listingType: error.listingType,
+      features: error.features,
+      vehiclefile: error.vehiclefile,
+    });
+
     if (Object.keys(error).length === 0) {
       // const res = await axios.post("http://localhost:5000/post/listvehicle", data) ;
-      const res = await axiosInstance.post("/post/listvehicle", data);
-      uploadfile();
-      console.log(res);
-      toastSuccess("Vehicle Listed Successfully");
+      try {
+        const res = await axiosInstance.post("/post/listvehicle", data);
+        uploadfile();
+        console.log(res);
+        toastSuccess("Vehicle Listed Successfully");
+      } catch (error) {
+        if (error.response.status === 422) {
+          const errors = error.response.data.errors;
+          const errorMessage = errors.map((error) => error.msg).join(" & ");
+          toastError(errorMessage);
+        }
+      }
     } else {
       toastError("Fill all fields");
     }
@@ -157,10 +188,13 @@ const ListVehicle = () => {
                   type="text"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
                 />
+                {postError.vehicleName && (
+                  <p className="text-red-500">{postError.vehicleName}</p>
+                )}
               </div>
 
               <div>
-                <label className="" htmlFor="emailAddress">
+                <label className="" htmlFor="Brand">
                   Vehicle Brand
                 </label>
                 <input
@@ -170,10 +204,13 @@ const ListVehicle = () => {
                   type="text"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
                 />
+                {postError.vehicleBrand && (
+                  <p className="text-red-500">{postError.vehicleBrand}</p>
+                )}
               </div>
 
               <div>
-                <label className="" htmlFor="password">
+                <label className="" htmlFor="color">
                   Vehicle Color
                 </label>
                 <input
@@ -183,6 +220,9 @@ const ListVehicle = () => {
                   type="text"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
                 />
+                {postError.vehicleColor && (
+                  <p className="text-red-500">{postError.vehicleColor}</p>
+                )}
               </div>
 
               <div>
@@ -196,6 +236,9 @@ const ListVehicle = () => {
                   type="text"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
                 />
+                {postError.pricePerDay && (
+                  <p className="text-red-500">{postError.pricePerDay}</p>
+                )}
               </div>
 
               <div>
@@ -209,6 +252,9 @@ const ListVehicle = () => {
                   type="text"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
                 />
+                {postError.numberPlate && (
+                  <p className="text-red-500">{postError.numberPlate}</p>
+                )}
               </div>
 
               <div>
@@ -222,6 +268,9 @@ const ListVehicle = () => {
                   type="text"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
                 />
+                {postError.address && (
+                  <p className="text-red-500">{postError.address}</p>
+                )}
               </div>
 
               <div>
@@ -235,6 +284,9 @@ const ListVehicle = () => {
                   type="text"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
                 />
+                {postError.vehicleMakeYear && (
+                  <p className="text-red-500">{postError.vehicleMakeYear}</p>
+                )}
               </div>
 
               <div>
@@ -250,6 +302,9 @@ const ListVehicle = () => {
                   <option>Car</option>
                   <option>Bike</option>
                 </select>
+                {postError.vehicleType && (
+                  <p className="text-red-500">{postError.vehicleType}</p>
+                )}
               </div>
 
               <div>
@@ -265,6 +320,9 @@ const ListVehicle = () => {
                   <option>Rent</option>
                   <option>Sell</option>
                 </select>
+                {postError.listingType && (
+                  <p className="text-red-500">{postError.listingType}</p>
+                )}
               </div>
 
               <div>
@@ -278,6 +336,9 @@ const ListVehicle = () => {
                   type="text"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
                 />
+                {postError.features && (
+                  <p className="text-red-500">{postError.features}</p>
+                )}
               </div>
 
               <div>
@@ -291,9 +352,12 @@ const ListVehicle = () => {
                   name="vehicleDescription"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
                 ></textarea>
+                {postError.vehicleDescription && (
+                  <p className="text-red-500">{postError.vehicleDescription}</p>
+                )}
               </div>
               <div>
-                <label className="">Vehicle Description</label>
+                <label className="">Vehicle Image</label>
                 <div className="mt-1 flex justify-center px-6 py-8 border-2 border-gray-300 border-dashed rounded-md">
                   <div className="space-y-1 text-center">
                     <svg
@@ -338,6 +402,9 @@ const ListVehicle = () => {
                     )}
                   </div>
                 </div>
+                {postError.vehiclefile && (
+                  <p className="text-red-500">{postError.vehiclefile}</p>
+                )}
               </div>
             </div>
             <ToastContainer />
