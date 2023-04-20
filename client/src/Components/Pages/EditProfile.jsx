@@ -1,48 +1,110 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../../Main-Components/Navbar";
 import Footer from "../../Main-Components/Footer";
 import { AuthContext } from "../../Context/AuthContext";
+import axiosInstance from "../../Instance/instance";
+import { toastSuccess } from "../Toast/Toast";
+import { ToastContainer } from "react-toastify";
 
 const EditProfile = () => {
-  
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+
+  const fetchUserData = async () => {
+    try {
+      const user = await axiosInstance.get("/user/getUserInfo");
+      console.log(user.data[0]);
+      // setUserData({
+      //   username: user.data[0].customername,
+      //   email: user.data[0].email,
+      //   password: user.data[0].password,
+      //   phone: user.data[0].phone_number,
+      //   address: user.data[0].address,
+      // })
+      setUsername(user.data[0].customername);
+      setEmail(user.data[0].email);
+      setNewPassword(user.data[0].password);
+      setPhone(user.data[0].phone_number);
+      setAddress(user.data[0].address);
+    } catch (err) {
+      if (err.response.status === 401) {
+        window.location.href = "/login";
+      }
+      console.log(err);
+    }
+  };
+
+  const submitHandler = async () => {
+    try {
+      const response = await axiosInstance.put("/user/editProfile", {
+        name: username,
+        email: email,
+        new_password: newPassword,
+        address: address,
+        phone: phone,
+      });
+      toastSuccess("Profile updated successfully");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitHandler();
+  };
+
+  const shouldFetch = useRef(true);
+  useEffect(() => {
+    if (shouldFetch.current) {
+      shouldFetch.current = false;
+      fetchUserData();
+    }
+  }, []);
 
   return (
     <div>
-        <Navbar />
-      <div class="lg:max-w-[1300px] px-4 py-10 max-w-[95%] lg:py-14 mx-auto w-screen">
-        <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
-          <div class="mb-8">
-            <h2 class="text-xl font-bold text-gray-800 dark:text-gray-200">
+      <Navbar />
+      <h1 className="text-3xl font-bold text-center mt-10">
+        Edit Your Personal Information
+      </h1>
+      <div className="lg:max-w-[1300px] px-4 py-10 max-w-[95%] lg:py-14 mb-10 mx-auto w-screen">
+        <div className="bg-white rounded-xl p-4 sm:p-7 dark:bg-slate-900">
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200">
               Profile
             </h2>
-            <p class="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-md text-gray-600 dark:text-gray-400">
               Manage your name, password and account settings.
             </p>
           </div>
 
           <form>
-            <div class="grid grid-cols-12 gap-4 sm:gap-6">
-              <div class="col-span-3">
-                <label class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200">
+            <div className="grid grid-cols-12 gap-4 sm:gap-6">
+              <div className="col-span-3">
+                <label className="inline-block text-md text-gray-800 mt-2.5 dark:text-gray-200">
                   Profile photo
                 </label>
               </div>
 
-              <div class="col-span-9">
-                <div class="flex items-center gap-5">
+              <div className="col-span-9">
+                <div className="flex items-center gap-5">
                   <img
-                    class="inline-block h-16 w-16 rounded-full ring-2 ring-white dark:ring-gray-800"
-                    src="../assets/img/160x160/img1.jpg"
+                    className="inline-block h-16 w-16 rounded-full ring-2 ring-white dark:ring-gray-800"
+                    src=""
                     alt="Image Description"
                   />
-                  <div class="flex gap-x-2">
+                  <div className="flex gap-x-2">
                     <div>
                       <button
                         type="button"
-                        class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+                        className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-md dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
                       >
                         <svg
-                          class="w-3 h-3"
+                          className="w-3 h-3"
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
                           height="16"
@@ -59,17 +121,17 @@ const EditProfile = () => {
                 </div>
               </div>
 
-              <div class="col-span-3">
+              <div className="col-span-3">
                 <label
-                  for="af-account-full-name"
-                  class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200"
+                  htmlFor="af-account-user-name"
+                  className="inline-block text-md text-gray-800 mt-2.5 dark:text-gray-200"
                 >
-                  Full name
+                  Username
                 </label>
-                <div class="hs-tooltip inline-block">
-                  <button type="button" class="hs-tooltip-toggle ml-1">
+                <div className="hs-tooltip inline-block">
+                  <button type="button" className="hs-tooltip-toggle ml-1">
                     <svg
-                      class="inline-block w-3 h-3 text-gray-400 dark:text-gray-600"
+                      className="inline-block w-3 h-3 text-gray-400 dark:text-gray-600"
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="16"
@@ -81,220 +143,128 @@ const EditProfile = () => {
                     </svg>
                   </button>
                   <span
-                    class="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible w-40 text-center z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded-md shadow-sm dark:bg-slate-700"
+                    className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible w-40 text-center z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded-md shadow-sm dark:bg-slate-700"
                     role="tooltip"
                   >
-                    Displayed on public forums, such as Preline
+                    Displayed on your public profile.
                   </span>
                 </div>
               </div>
 
-              <div class="col-span-9">
-                <div class="sm:flex">
+              <div className="col-span-9">
+                <div className="sm:flex">
                   <input
                     id="af-account-full-name"
                     type="text"
-                    class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                    placeholder="Maria"
-                  />
-                  <input
-                    type="text"
-                    class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                    placeholder="Boone"
+                    className="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-md relative focus:z-10"
+                    onChange={(e) => setUsername(e.target.value)}
+                    value={username}
                   />
                 </div>
               </div>
 
-              <div class="col-span-3">
+              <div className="col-span-3">
                 <label
-                  for="af-account-email"
-                  class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200"
+                  htmlFor="af-account-email"
+                  className="inline-block text-md text-gray-800 mt-2.5 dark:text-gray-200"
                 >
                   Email
                 </label>
               </div>
 
-              <div class="col-span-9">
+              <div className="col-span-9">
                 <input
                   id="af-account-email"
                   type="email"
-                  class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                  placeholder="maria@site.com"
+                  className="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-md rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
-              <div class="col-span-3">
+              <div className="col-span-3">
                 <label
-                  for="af-account-password"
-                  class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200"
+                  htmlFor="af-account-password"
+                  className="inline-block text-md text-gray-800 mt-2.5 dark:text-gray-200"
                 >
-                  Password
+                  New Password
                 </label>
               </div>
 
-              <div class="col-span-9">
-                <div class="space-y-2">
-                  <input
-                    id="af-account-password"
-                    type="text"
-                    class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                    placeholder="Enter current password"
-                  />
+              <div className="col-span-9">
+                <div className="space-y-2">
                   <input
                     type="text"
-                    class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                    className="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm rounded-lg text-md focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
                     placeholder="Enter new password"
+                    onChange={(e) => setNewPassword(e.target.value)}
                   />
                 </div>
               </div>
 
-              <div class="col-span-3">
-                <div class="inline-block">
+              <div className="col-span-3">
+                <div className="inline-block">
                   <label
-                    for="af-account-phone"
-                    class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200"
+                    htmlFor="af-account-phone"
+                    className="inline-block text-md text-gray-800 mt-2.5 dark:text-gray-200"
                   >
                     Phone
                   </label>
-                  <span class="text-sm text-gray-400 dark:text-gray-600">
-                    (Optional)
-                  </span>
                 </div>
               </div>
 
-              <div class="col-span-9">
-                <div class="sm:flex">
+              <div className="col-span-9">
+                <div className="sm:flex">
                   <input
                     id="af-account-phone"
                     type="text"
-                    class="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                    placeholder="+x(xxx)xxx-xx-xx"
+                    className="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-md relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                   />
-                  <select class="py-2 px-3 pr-9 block w-full sm:w-auto border-gray-200 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400">
-                    <option selected>Mobile</option>
-                    <option>Home</option>
-                    <option>Work</option>
-                    <option>Fax</option>
-                  </select>
-                </div>
-
-                <p class="mt-3">
-                  <a
-                    class="inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 hover:underline font-medium"
-                    href="../docs/index.html"
-                  >
-                    <svg
-                      class="w-3.5 h-3.5"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                      <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                    </svg>
-                    Add phone
-                  </a>
-                </p>
-              </div>
-
-              <div class="col-span-3">
-                <label
-                  for="af-account-gender-checkbox"
-                  class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200"
-                >
-                  Gender
-                </label>
-              </div>
-
-              <div class="col-span-9">
-                <div class="sm:flex">
-                  <label
-                    for="af-account-gender-checkbox"
-                    class=" py-2 px-3 block w-full border border-gray-200 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                  >
-                    <input
-                      type="radio"
-                      name="af-account-gender-checkbox"
-                      class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                      id="af-account-gender-checkbox"
-                      checked
-                    />
-                    <span class="text-sm text-gray-500 ml-3 dark:text-gray-400">
-                      Male
-                    </span>
-                  </label>
-
-                  <label
-                    for="af-account-gender-checkbox-female"
-                    class=" py-2 px-3 block w-full border border-gray-200 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                  >
-                    <input
-                      type="radio"
-                      name="af-account-gender-checkbox-female"
-                      class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                      id="af-account-gender-checkbox-female"
-                    />
-                    <span class="text-sm text-gray-500 ml-3 dark:text-gray-400">
-                      Female
-                    </span>
-                  </label>
-
-                  <label
-                    for="af-account-gender-checkbox-other"
-                    class=" py-2 px-3 block w-full border border-gray-200 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
-                  >
-                    <input
-                      type="radio"
-                      name="af-account-gender-checkbox-other"
-                      class="shrink-0 mt-0.5 border-gray-200 rounded-full text-blue-600 pointer-events-none focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-                      id="af-account-gender-checkbox-other"
-                    />
-                    <span class="text-sm text-gray-500 ml-3 dark:text-gray-400">
-                      Other
-                    </span>
-                  </label>
                 </div>
               </div>
 
-              <div class="col-span-3">
+              <div className="col-span-3">
                 <label
-                  for="af-account-bio"
-                  class="inline-block text-sm text-gray-800 mt-2.5 dark:text-gray-200"
+                  htmlFor="af-account-address"
+                  className="inline-block text-md text-gray-800 mt-2.5 dark:text-gray-200"
                 >
-                  BIO
+                  Address
                 </label>
               </div>
 
-              <div class="col-span-9">
-                <textarea
-                  id="af-account-bio"
-                  class="py-2 px-3 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+              <div className="col-span-9">
+                <input
+                  id="af-account-address"
+                  className="py-2 px-3 block w-full border-gray-200 rounded-lg text-md focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
                   rows="6"
-                  placeholder="Type your message..."
-                ></textarea>
+                  onChange={(e) => setAddress(e.target.value)}
+                  value={address}
+                ></input>
               </div>
             </div>
 
-            <div class="mt-5 flex justify-end gap-x-2">
+            <div className="mt-5 flex justify-end gap-x-2">
               <button
                 type="button"
-                class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+                className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-md dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
               >
                 Cancel
               </button>
               <button
                 type="button"
-                class="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+                onClick={handleSubmit}
+                className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold button-hover bg-black text-white"
               >
                 Save changes
               </button>
+              <ToastContainer />
             </div>
           </form>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
