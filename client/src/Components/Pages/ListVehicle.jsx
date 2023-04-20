@@ -140,7 +140,7 @@ const ListVehicle = () => {
       </div>
 
       <div>
-        <section className="bg-white w-screen mb-20 max-w-[95%] lg:max-w-[1300px] p-6 mx-auto text-black rounded-md dark:bg-gray-800 mt-5">
+        <section className="bg-white w-screen mb-20 max-w-[95%] xl:max-w-[1300px] p-6 mx-auto text-black rounded-md dark:bg-gray-800 mt-5">
           <h1 className="text-xl font-bold text-white capitalize dark:text-white">
             Account settings
           </h1>

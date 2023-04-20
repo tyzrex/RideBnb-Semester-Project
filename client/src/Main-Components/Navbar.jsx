@@ -19,24 +19,25 @@ const Navbar = () => {
       id="navbar"
       className="transition-all duration-300 ease-in-out flex relative z-[20] justify-center items-center w-screen bg-white text-black py-6"
     >
-      <div className="lg:max-w-[1300px] max-w-[95%] flex justify-center w-full items-center">
+      <div className="xl:max-w-[1300px] max-w-[95%] flex justify-center w-full items-center">
         <div className="flex justify-between items-center w-full">
           <div className="logo">
             <Link to="/">
               <h1 className="text-3xl">
-                Ride<span className="font-bold">Bnb</span>
+                Ride<span className="font-bold text-gray-500">Bnb</span>
               </h1>
             </Link>
           </div>
           <div className="menu-items">
-            <div className="lg:flex gap-4 cursor-pointer hidden">
-              <div className="li-style ">Dashboard</div>
-              <div className="li-style ">Booking Schedule</div>
+            <div className="lg:flex gap-4 cursor-pointer hidden ">
+              <div className="li-style font-medium ">Home</div>
+              <div className="li-style font-medium ">About</div>
+              <div className="li-style font-medium  ">Booking Schedule</div>
               <Link to={`/editprofile`}>
-                <div className="li-style ">Account Settings</div>
+                <div className="li-style font-medium  ">Settings</div>
               </Link>
               <Link to="/listvehicle">
-                <div className="li-style ">List Vehicle</div>
+                <div className="li-style font-medium ">List Vehicle</div>
               </Link>
             </div>
           </div>
@@ -181,10 +182,10 @@ const Navbar = () => {
               }
             >
               <ul className="flex flex-col justify-center items-center gap-4 cursor-pointer">
-                <li className="li-style ">Dashboard</li>
-                <li className="li-style ">Booking Schedule</li>
-                <li className="li-style ">Account Settings</li>
-                <li className="li-style ">List vehicle</li>
+                <li className="li-style font-medium ">Dashboard</li>
+                <li className="li-style font-medium ">Booking Schedule</li>
+                <li className="li-style font-medium ">Account Settings</li>
+                <li className="li-style font-medium ">List vehicle</li>
                 <li className="flex flex-col justify-center items-center gap-4">
                   {user ? (
                     <button

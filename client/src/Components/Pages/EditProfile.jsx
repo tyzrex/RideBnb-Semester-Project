@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../../Main-Components/Navbar";
 import Footer from "../../Main-Components/Footer";
-import { AuthContext } from "../../Context/AuthContext";
 import axiosInstance from "../../Instance/instance";
 import { toastSuccess } from "../Toast/Toast";
 import { ToastContainer } from "react-toastify";
@@ -71,7 +70,7 @@ const EditProfile = () => {
       <h1 className="text-3xl font-bold text-center mt-10">
         Edit Your Personal Information
       </h1>
-      <div className="lg:max-w-[1300px] px-4 py-10 max-w-[95%] lg:py-14 mb-10 mx-auto w-screen">
+      <div className="xl:max-w-[1300px] px-4 py-10 max-w-[95%] lg:py-14 mb-10 mx-auto w-screen">
         <div className="bg-white rounded-xl p-4 sm:p-7 dark:bg-slate-900">
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200">
@@ -101,6 +100,10 @@ const EditProfile = () => {
                     <div>
                       <button
                         type="button"
+                        //open file dialog
+                        onClick={() => {
+                          document.querySelector("input[type=file]").click();
+                        }}
                         className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-md dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
                       >
                         <svg
@@ -116,6 +119,7 @@ const EditProfile = () => {
                         </svg>
                         Upload photo
                       </button>
+                      <input type="file" className="hidden" />
                     </div>
                   </div>
                 </div>

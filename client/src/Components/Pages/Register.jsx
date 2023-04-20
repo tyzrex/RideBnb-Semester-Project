@@ -2,13 +2,20 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import regimage from "../../assets/register.jpg";
-import Animate from 'react-smooth'
-import {useNavigate} from 'react-router-dom'
+import Animate from "react-smooth";
+import { useNavigate } from "react-router-dom";
 import validate from "../../validation/RegisterValidation";
-import { toastError,toastSuccess } from "../Toast/Toast";
+import { toastError, toastSuccess } from "../Toast/Toast";
 
 const Register = () => {
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    password: "",
+    address: "",
+    phone: "",
+  });
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [data, setData] = useState({
     name: "",
@@ -18,8 +25,16 @@ const Register = () => {
     phone: "",
   });
 
-  const handleChange = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+  // const handleChange = (e) => {
+  //   setData({ ...data, [e.target.name]: e.target.value });
+  //   setErrors(validate({ ...data, [e.target.name]: e.target.value }));
+  // };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setData((prevData) => ({ ...prevData, [name]: value }));
+    const errors = validate({ ...data, [name]: value });
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: errors[name] }));
   };
 
   const notify = () => {
@@ -28,33 +43,41 @@ const Register = () => {
   //handle submit for button click
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const errors = validate(data);
-    if (errors) {
-      setErrors(errors);
-    }
-    if (Object.keys(errors).length === 0) {
+    const error = validate(data);
+    setErrors({
+      name: error.name,
+      email: error.email,
+      password: error.password,
+      address: error.address,
+      phone: error.phone,
+    });
+    console.log(error);
+    if (Object.keys(error).length === 0) {
       try {
         const res = await axios.post(
           "http://localhost:5000/auth/register",
           data
         );
         console.log(res);
-        notify();
-        // setTimeout(() => {
-        //   navigate("/login");
-        // }, 5000);
+        setLoading(false);
+        setTimeout(() => {
+          notify();
+        }, 1000);
+        setTimeout(() => {
+          navigate("/login");
+        }, 4000);
       } catch (error) {
         if (error.response.status === 422) {
           const errors = error.response.data.errors;
-          const errorMessage = errors.map((error) => error.msg).join(' & ');
-          toastError(errorMessage);  
-        }
-        else{
-          toastError(error)
+          const errorMessage = errors.map((error) => error.msg).join(" & ");
+          toastError(errorMessage);
+        } else {
+          toastError(error);
         }
       }
     }
   };
+
   return (
     <div>
       <div>
@@ -62,11 +85,11 @@ const Register = () => {
           <div className="lg:grid min-h-screen lg:min-h-screen lg:grid-cols-12">
             <aside className="relative block h-64 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
               <Animate to="1" from="0" attributeName="opacity">
-              <img
-                alt="Pattern"
-                src={regimage}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
+                <img
+                  alt="Pattern"
+                  src={regimage}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
               </Animate>
             </aside>
 
@@ -111,6 +134,7 @@ const Register = () => {
                       className="mt-1 p-2 w-full rounded-md border text-black border-gray-300 bg-main-fg text-sm shadow-sm"
                       aria-required="true"
                     />
+
                     {errors.name && (
                       <p className="text-red-500 text-xs italic">
                         {errors.name}
@@ -199,12 +223,28 @@ const Register = () => {
                   </div>
 
                   <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                    <button
-                      onClick={handleSubmit}
-                      className="inline-block bg-black hover:bg-emerald-700 shrink-0 rounded-md border border-none bg-custom-green px-12 py-3 text-sm font-medium text-white transition hover:text-white focus:outline-none focus:ring"
-                    >
-                      Create an account
-                    </button>
+                    {loading ? (
+                      <button
+                        onClick={handleSubmit}
+                        className="inline-block bg-black hover:bg-emerald-700 shrink-0 rounded-md border border-none bg-custom-green px-12 py-3 text-sm font-medium text-white transition hover:text-white focus:outline-none focus:ring"
+                      >
+                        Create an account
+                      </button>
+                    ) : (
+                      <>
+                        <button
+                          type="button"
+                          class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent text-white font-semibold bg-black"
+                        >
+                          <span
+                            class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full"
+                            role="status"
+                            aria-label="loading"
+                          ></span>
+                          <span>Creating Account</span>
+                        </button>
+                      </>
+                    )}
                     <ToastContainer />
                     <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                       Already have an account?

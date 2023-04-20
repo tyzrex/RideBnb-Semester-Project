@@ -18,7 +18,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
   return (
     <div className="flex justify-center h-auto items-center w-screen">
       <div className="w-full flex h-auto flex-col justify-center items-center">
-        <div className="md:w-[70%] max-w-[1300px] w-[100%] relative shadow-2xl">
+        <div className="md:w-[95%] xl:max-w-[1300px] w-[100%] relative shadow-2xl">
           <div className="bg-white xl:w-[30%] w-[100%] rounded-t-md flex justify-around h-[50px] items-center absolute -translate-y-[50px]">
             <div>
               <button
