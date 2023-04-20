@@ -23,18 +23,18 @@ const ListVehicle = () => {
     vehiclefile: "",
     numberPlate: "",
     listingType: "",
-    features: ""
+    features: "",
   });
-  console.log(data)
+  console.log(data);
   const uploadfile = async () => {
-    let formData = new FormData()
-    formData.append('file', file.data)
-    const response = await fetch('http://localhost:5000/upload/uploadImage', {
-      method: 'POST',
+    let formData = new FormData();
+    formData.append("file", file.data);
+    const response = await fetch("http://localhost:5000/upload/uploadImage", {
+      method: "POST",
       body: formData,
-    })
-    console.log(response)
-  }
+    });
+    console.log(response);
+  };
 
   const handleVehicleType = (e) => {
     setData({
@@ -65,7 +65,7 @@ const ListVehicle = () => {
     const image = {
       preview: URL.createObjectURL(e.target.files[0]),
       data: e.target.files[0],
-    }
+    };
     setFile(image);
   };
   console.log(data);
@@ -109,7 +109,6 @@ const ListVehicle = () => {
     return error;
   };
 
-
   const handleSubmit = async (e) => {
     console.log("submit");
     e.preventDefault();
@@ -120,7 +119,7 @@ const ListVehicle = () => {
       const res = await axiosInstance.post("/post/listvehicle", data);
       uploadfile();
       console.log(res);
-      toastSuccess("Vehicle Listed Successfully")
+      toastSuccess("Vehicle Listed Successfully");
     } else {
       toastError("Fill all fields");
     }
@@ -129,13 +128,15 @@ const ListVehicle = () => {
   return (
     <div>
       <Navbar />
-      
+
       <div className="mt-16">
-      <ListHero />
+        <ListHero />
       </div>
 
       <div className="flex justify-center items-center mt-20 mb-10">
-        <h1 className="lg:text-5xl text-3xl font-bold text-gray-700">List Your Vehicle</h1>
+        <h1 className="lg:text-5xl text-3xl font-bold text-gray-700">
+          List Your Vehicle
+        </h1>
       </div>
 
       <div>
@@ -209,8 +210,6 @@ const ListVehicle = () => {
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
                 />
               </div>
-
-              
 
               <div>
                 <label className="" htmlFor="address">
@@ -329,11 +328,7 @@ const ListVehicle = () => {
 
                     {file.preview ? (
                       <div className="w-[400px] h-[250px] overflow-auto mb-4">
-                        <img
-                          src={file.preview}
-                          alt=""
-                          className=" mb-10"
-                        />
+                        <img src={file.preview} alt="" className=" mb-10" />
                       </div>
                     ) : (
                       <div>

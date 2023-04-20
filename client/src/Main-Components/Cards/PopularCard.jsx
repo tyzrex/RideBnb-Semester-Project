@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const PopularCard = () => {
+const ExploreCards = (props) => {
   return (
     <div>
       <div className="!z-5 shadow-lg relative flex flex-col rounded-[20px] max-w-[300px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 w-full 3xl:p-![18px] undefined">
         <div className="h-full w-full">
           <div className="relative w-full">
             <img
-              src="https://images.pexels.com/photos/136872/pexels-photo-136872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src={`../../../Images/${props.vehicleImage}`}
               className="mb-2 h-[250px] object-cover w-full rounded-t-xl"
               alt=""
             />
@@ -35,9 +36,14 @@ const PopularCard = () => {
           </div>
           <div className="m-5 flex items-center justify-between px-1 md:items-start">
             <div className="mb-2">
-              <p className="text-lg font-bold text-navy-700"> Mercedez Benz </p>
+              <p className="text-lg font-bold text-navy-700">
+                {props.vehicleName}
+              </p>
               <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2">
-                By Esthera Jackson{" "}
+                Posted by :{" "}
+                <span className="font-bold text-[#ff5a5f]">
+                  {props.postedBy}
+                </span>
               </p>
             </div>
             <div className="flex flex-row-reverse md:mt-2 lg:mt-0">
@@ -47,15 +53,14 @@ const PopularCard = () => {
           <div className="flex m-5 items-center justify-between md:items-center lg:justify-between ">
             <div className="flex">
               <p className="!mb-0 text-sm font-bold text-brand-500">
-                $259 per day
+                Rs {props.vehiclePrice} per day
               </p>
             </div>
-            <button
-              href=""
-              className="p-2 bg-main-accent text-white rounded-2xl border-2 border-black hover:text-black hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300"
-            >
-              Book
-            </button>
+            <Link to={`/explore/${props.postId}`}>
+              <button className="p-2 bg-main-accent text-white px-5 rounded-xl border-2 border-black hover:text-black hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300">
+                {props.buttonText}
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -63,4 +68,4 @@ const PopularCard = () => {
   );
 };
 
-export default PopularCard;
+export default ExploreCards;

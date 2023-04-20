@@ -30,15 +30,15 @@ const router = createBrowserRouter(
       element: <IsAuthenticated><ListVehicle/></IsAuthenticated>
     },
     {
-      path: "explore",
+      path: "/explore",
       element: <ExploreAll />
     },
     {
-      path: "explore/:id",
+      path: "/explore/:id",
       element: <PostDetails />
     },
     {
-      path: "editprofile/:id",
+      path: "/editprofile/",
       element: <EditProfile />
     }
   ]

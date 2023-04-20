@@ -7,16 +7,16 @@ const ListHero = () => {
         <div className="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
           <div>
             <h1 className="block text-4xl font-bold text-gray-800 sm:text-5xl text-center md:text-left lg:text-[3.5rem] lg:leading-tight dark:text-white">
-            Share the Ride and Fun on <span className="text-gray-400">RideBnb</span>
+              Share the Ride and Fun on{" "}
+              <span className="text-gray-400">RideBnb</span>
             </h1>
             <p className="mt-3 text-lg text-black lg:text-left text-center">
-            Got a car or bike sitting idle? List it and let others enjoy the ride while you earn extra cash.
+              Got a car or bike sitting idle? List it and let others enjoy the
+              ride while you earn extra cash.
             </p>
 
             <div className="mt-7 grid gap-3 w-full sm:inline-flex">
-              <button
-                className="inline-flex justify-center items-center gap-x-3 text-center bg-black button-hover border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none px-4 py-3"
-              >
+              <button className="inline-flex justify-center items-center gap-x-3 text-center bg-black button-hover border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none px-4 py-3">
                 View Listings
                 <svg
                   className="w-2.5 h-2.5"
@@ -40,7 +40,7 @@ const ListHero = () => {
                 Contact sales team
               </a>
             </div>
-            </div>
+          </div>
 
           <div className="relative ml-4 h-70 lg:mt-0 mt-8 md:h-96">
             <img

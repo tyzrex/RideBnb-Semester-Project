@@ -32,8 +32,8 @@ const Navbar = () => {
             <div className="lg:flex gap-4 cursor-pointer hidden">
               <div className="li-style ">Dashboard</div>
               <div className="li-style ">Booking Schedule</div>
-              <Link to={`/editprofile/3`}>
-              <div className="li-style ">Account Settings</div>
+              <Link to={`/editprofile`}>
+                <div className="li-style ">Account Settings</div>
               </Link>
               <Link to="/listvehicle">
                 <div className="li-style ">List Vehicle</div>

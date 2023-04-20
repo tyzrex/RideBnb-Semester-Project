@@ -22,6 +22,7 @@ CREATE table vehicle_post(
     vehicle_color varchar(50) not null,
     vehicle_description text not null,
     address varchar(50) not null,
+    vehicle_likes INT not null,
     vehicle_number varchar(50) not null,
     vehicle_listing_type varchar(50) not null,
     vehicle_features varchar(200) not null,

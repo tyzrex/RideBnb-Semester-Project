@@ -3,18 +3,17 @@ import { AiFillCar } from "react-icons/ai";
 import { RiMotorbikeFill } from "react-icons/ri";
 
 const HeroCard = ({ onCarClick, onBikeClick }) => {
+  const [vehicleChoice, setVehicleChoice] = useState("Car");
 
-  const [vehicleChoice , setVehicleChoice] = useState('Car')
-  
-  const handleBikeClick = () => { 
-    setVehicleChoice('Bike')
-    onBikeClick()
-  }
+  const handleBikeClick = () => {
+    setVehicleChoice("Bike");
+    onBikeClick();
+  };
 
   const handleCarClick = () => {
-    setVehicleChoice('Car')
-    onCarClick()
-  }
+    setVehicleChoice("Car");
+    onCarClick();
+  };
 
   return (
     <div className="flex justify-center h-auto items-center w-screen">
