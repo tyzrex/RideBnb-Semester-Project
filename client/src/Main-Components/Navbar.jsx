@@ -30,7 +30,9 @@ const Navbar = () => {
           </div>
           <div className="menu-items">
             <div className="lg:flex gap-4 cursor-pointer hidden ">
-              <div className="li-style font-medium ">Home</div>
+              <Link to="/">
+                <div className="li-style font-medium ">Home</div>
+              </Link>
               <div className="li-style font-medium ">About</div>
               <div className="li-style font-medium  ">Booking Schedule</div>
               <Link to={`/editprofile`}>

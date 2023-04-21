@@ -40,8 +40,8 @@ const FAQ = () => {
                       <path
                         d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
                         stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
                       />
                     </svg>
                     <svg
@@ -55,8 +55,8 @@ const FAQ = () => {
                       <path
                         d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11"
                         stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
                       />
                     </svg>
                   </button>
@@ -98,8 +98,8 @@ const FAQ = () => {
                       <path
                         d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
                         stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
                       />
                     </svg>
                     <svg
@@ -113,8 +113,8 @@ const FAQ = () => {
                       <path
                         d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11"
                         stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
                       />
                     </svg>
                   </button>
@@ -160,8 +160,8 @@ const FAQ = () => {
                       <path
                         d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
                         stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
                       />
                     </svg>
                     <svg
@@ -175,8 +175,8 @@ const FAQ = () => {
                       <path
                         d="M2 11L8.16086 5.31305C8.35239 5.13625 8.64761 5.13625 8.83914 5.31305L15 11"
                         stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
                       />
                     </svg>
                   </button>

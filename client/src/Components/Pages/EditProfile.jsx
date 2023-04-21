@@ -1,11 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import Navbar from "../../Main-Components/Navbar";
 import Footer from "../../Main-Components/Footer";
 import axiosInstance from "../../Instance/instance";
-import { toastSuccess } from "../Toast/Toast";
+import { toastError, toastSuccess } from "../Toast/Toast";
 import { ToastContainer } from "react-toastify";
 
+import { AuthContext } from "../../Context/AuthContext";
+
 const EditProfile = () => {
+  const { user, getUpdatedUser } = useContext(AuthContext);
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -16,13 +20,7 @@ const EditProfile = () => {
     try {
       const user = await axiosInstance.get("/user/getUserInfo");
       console.log(user.data[0]);
-      // setUserData({
-      //   username: user.data[0].customername,
-      //   email: user.data[0].email,
-      //   password: user.data[0].password,
-      //   phone: user.data[0].phone_number,
-      //   address: user.data[0].address,
-      // })
+
       setUsername(user.data[0].customername);
       setEmail(user.data[0].email);
       setNewPassword(user.data[0].password);
@@ -46,8 +44,17 @@ const EditProfile = () => {
         phone: phone,
       });
       toastSuccess("Profile updated successfully");
-    } catch (err) {
-      console.log(err);
+      getUpdatedUser();
+    } catch (error) {
+      if (error.response.status === 422) {
+        const errors = error.response.data.errors;
+        const errorMessage = errors.map((error) => error.msg).join(" & ");
+        toastError(errorMessage);
+      }
+      if (error.response.status === 403) {
+        toastError("Username already exists");
+      }
+      console.log(error);
     }
   };
 
@@ -56,11 +63,20 @@ const EditProfile = () => {
     submitHandler();
   };
 
+  const cancelSubmit = (e) => {
+    e.preventDefault();
+    window.location.href = "/";
+  };
+
   const shouldFetch = useRef(true);
   useEffect(() => {
     if (shouldFetch.current) {
       shouldFetch.current = false;
-      fetchUserData();
+      if (user) {
+        fetchUserData();
+      } else {
+        window.location.href = "/login";
+      }
     }
   }, []);
 
@@ -83,48 +99,6 @@ const EditProfile = () => {
 
           <form>
             <div className="grid grid-cols-12 gap-4 sm:gap-6">
-              <div className="col-span-3">
-                <label className="inline-block text-md text-gray-800 mt-2.5 dark:text-gray-200">
-                  Profile photo
-                </label>
-              </div>
-
-              <div className="col-span-9">
-                <div className="flex items-center gap-5">
-                  <img
-                    className="inline-block h-16 w-16 rounded-full ring-2 ring-white dark:ring-gray-800"
-                    src=""
-                    alt="Image Description"
-                  />
-                  <div className="flex gap-x-2">
-                    <div>
-                      <button
-                        type="button"
-                        //open file dialog
-                        onClick={() => {
-                          document.querySelector("input[type=file]").click();
-                        }}
-                        className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-md dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
-                      >
-                        <svg
-                          className="w-3 h-3"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          viewBox="0 0 16 16"
-                        >
-                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                          <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z" />
-                        </svg>
-                        Upload photo
-                      </button>
-                      <input type="file" className="hidden" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <div className="col-span-3">
                 <label
                   htmlFor="af-account-user-name"
@@ -248,10 +222,10 @@ const EditProfile = () => {
                 ></input>
               </div>
             </div>
-
             <div className="mt-5 flex justify-end gap-x-2">
               <button
                 type="button"
+                onClick={cancelSubmit}
                 className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-md dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
               >
                 Cancel

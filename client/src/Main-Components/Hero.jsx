@@ -20,7 +20,7 @@ const Hero = () => {
 
   return (
     <div
-      className={` relative delay-500 transition-all h-auto text-black bg-white border-t border-t-gray-600 flex`}
+      className={`relative delay-500 transition-all h-auto text-black bg-white flex`}
     >
       <div
         className="absolute transition-all duration-1000 ease-in-out w-full h-full object-cover"
