@@ -8,10 +8,15 @@ import { SiBrandfolder } from "react-icons/si";
 import { AiFillCar } from "react-icons/ai";
 import { TbBike } from "react-icons/tb";
 import { MdOutlineMergeType } from "react-icons/md";
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:3000");
 
 const PostDetails = () => {
   const [post, setPost] = useState({});
   const id = window.location.pathname.split("/")[2];
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
 
   const fetchPost = async () => {
     try {
@@ -23,16 +28,66 @@ const PostDetails = () => {
     }
   };
 
+  const createSocketConnection = () => {
+    socket.on("connect", () => {
+      console.log("Connected to socket.io server");
+    });
+
+    socket.emit("joinRoom", id);
+
+    socket.on("newComment", (comment) => {
+      setComments((prevState) => [...prevState, comment]);
+    });
+
+    socket.on("comments", (comments) => {
+      setComments(comments);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  };
+
+  const getComments = async () => {
+    try {
+      const response = await axiosInstance.get(`/comment/getComments/${id}`);
+      setComments(response.data);
+      console.log(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (newComment.trim() === "") return;
+
+    try {
+      const data = {
+        vehicle_post_id: id,
+        comment: newComment,
+      };
+      const response = await axiosInstance.post("/comment/createComment", data);
+      setNewComment("");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleComment = (e) => {
+    e.preventDefault();
+    createComment();
+  };
+
   const shouldFetch = useRef(true);
   useEffect(() => {
     if (shouldFetch.current) {
       shouldFetch.current = false;
+      getComments();
+      createSocketConnection();
       fetchPost();
     }
   }, []);
-
-  const featuresArray = post.vehicle_features?.split(" ");
-  console.log(featuresArray);
 
   return (
     <div>
@@ -99,6 +154,26 @@ const PostDetails = () => {
           </div>
           <div></div>
         </div>
+      </div>
+
+      <div className="flex justify-center items-center flex-col py-10 gap-5 bg-emerald-200">
+        <h2>Comments</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Add a comment"
+            value={newComment}
+            onChange={(event) => setNewComment(event.target.value)}
+          />
+          <button type="submit">Post</button>
+        </form>
+        <ul>
+          {comments.map((comment) => (
+            <li className="text-black" key={comment.comment_id}>
+              {comment.comment_text}
+            </li>
+          ))}
+        </ul>
       </div>
 
       <Footer />

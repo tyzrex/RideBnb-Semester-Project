@@ -2,9 +2,13 @@ import express from "express";
 const router = express.Router();
 import { post, getPosts, getPost, getPostByType } from "../controllers/post.js";
 import { isAuthenticated } from "../middleware/isAuthenticated.js";
+import { validateVehiclePost } from "../validation/validationList.js";
+import { validationMiddleware } from "../middleware/validationMiddleware.js";
 
 // post vehicle
-router.route("/listvehicle").post(isAuthenticated, post);
+router
+  .route("/listvehicle")
+  .post(isAuthenticated, validateVehiclePost(), validationMiddleware, post);
 
 //route for getting all posts
 router.route("/getposts").get(getPosts);

@@ -33,6 +33,17 @@ CREATE table vehicle_post(
     foreign key (customer_id) references customer(customer_id) on delete cascade
 );
 
+CREATE TABLE vehicle_post_comment (
+    comment_id SERIAL PRIMARY KEY,
+    vehicle_post_id INTEGER NOT NULL,
+    customer_id UUID NOT NULL,
+    comment_text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (vehicle_post_id) REFERENCES vehicle_post(vehicle_post_id) ON DELETE CASCADE,
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE
+);
+
+
 
 create table booking(
     booking_id serial primary key,

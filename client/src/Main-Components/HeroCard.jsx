@@ -4,19 +4,38 @@ import { RiCalendarEventFill, RiMotorbikeFill } from "react-icons/ri";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import axios from "axios";
-import axiosInstance from "../Instance/instance";
+import axiosInstance, { axiosBase } from "../Instance/instance";
+import { Link } from "react-router-dom";
+import SearchItem from "./Cards/SearchCards";
 
 const HeroCard = ({ onCarClick, onBikeClick }) => {
   const [vehicleChoice, setVehicleChoice] = useState("Car");
-
   const [datePicker, setDatePicker] = useState(false);
   const [data, setData] = useState({
     location: "",
     checkIn: "",
     checkOut: "",
     vehicleType: "Car",
+    listingType: "All",
   });
+
+  const [searchData, setSearchData] = useState([]);
+
+  const searchVehicle = async () => {
+    try {
+      const response = await axiosBase.get(
+        `http://localhost:5000/search/searchVehicle`,
+        { params: data }
+      );
+      setSearchData(response.data);
+      console.log(response.data);
+      console.log(typeof response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(searchData);
 
   console.log(data);
 
@@ -72,19 +91,6 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
       checkIn: convertDate(selectionRange.startDate),
       checkOut: convertDate(selectionRange.endDate),
     }));
-  };
-
-  const searchVehicle = async () => {
-    try {
-      console.log(data);
-      const response = await axiosInstance.post(
-        "http://localhost:5000/search/searchVehicle",
-        data
-      );
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (
@@ -191,12 +197,14 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
           </div>
 
           <div className="md:absolute md:right-[5%] flex items-center justify-center -translate-y-1/2">
-            <button
-              onClick={searchVehicle}
-              className="bg-black px-10 py-4 text-white rounded-lg "
-            >
-              Find
-            </button>
+            <Link to="/search" state={data}>
+              <button
+                // onClick={searchVehicle}
+                className="bg-black px-10 py-4 text-white rounded-lg "
+              >
+                Find
+              </button>
+            </Link>
           </div>
         </div>
       </div>

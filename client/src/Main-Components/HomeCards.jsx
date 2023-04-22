@@ -24,10 +24,10 @@ const HomeCards = () => {
     }
   };
 
-  const shouldFetch = useRef(true);
+  const shouldFetch = useRef(false);
   useEffect(() => {
-    if (shouldFetch.current) {
-      shouldFetch.current = false;
+    if (!shouldFetch.current) {
+      shouldFetch.current = true;
       getPosts("Sell");
       getPosts("Rent");
     }
