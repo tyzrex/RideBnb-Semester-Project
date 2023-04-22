@@ -1,11 +1,13 @@
 import "./list.css";
 import Navbar from "../../Main-Components/Navbar";
-import { useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import { DateRange } from "react-date-range";
 import Footer from "../../Main-Components/Footer";
 import SearchItem from "../../Main-Components/Cards/SearchCards";
 import { axiosBase } from "../../Instance/instance";
+import empty from "../../assets/empty.jpg";
+import wow from "../../assets/wow.jpg";
 
 const List = () => {
   const prevState = useLocation();
@@ -49,10 +51,17 @@ const List = () => {
   };
 
   const [data, setData] = useState({
-    location: prevState.state.location,
-    checkIn: prevState.state.checkIn,
-    checkOut: prevState.state.checkOut,
-    vehicleType: prevState.state.vehicleType,
+    // location: prevState.state.location,
+    // checkIn: prevState.state.checkIn,
+    // checkOut: prevState.state.checkOut,
+    // vehicleType: prevState.state.vehicleType,
+    // listingType: "All",
+    location: prevState?.state?.location || "",
+    checkIn: prevState?.state?.checkIn || "",
+    checkOut: prevState?.state?.checkOut || "",
+    vehicleType: prevState?.state?.vehicleType || "Car",
+    minPrice: "",
+    maxPrice: "",
     listingType: "All",
   });
 
@@ -63,29 +72,47 @@ const List = () => {
         { params: data }
       );
       setSearchData(response.data);
+      if (!prevState.state) {
+        prevState.state = response.data;
+      }
       console.log(response.data);
-      console.log(typeof response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log(searchData);
+  // console.log(searchData);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   searchVehicle();
+  // };
+
+  // console.log(data);
 
   const shouldFetch = useRef(true);
   useEffect(() => {
     if (shouldFetch.current) {
       shouldFetch.current = false;
-      searchVehicle();
+      if (prevState.state) {
+        searchVehicle();
+      }
     }
   }, []);
 
   return (
     <div>
       <Navbar />
-      <h1 className="text-4xl pt-3 pb-6 font-bold text-center mt-10">
-        Search Results for {prevState.state.location}
-      </h1>
+      {prevState.state ? (
+        <>
+          <h1 className="text-4xl pt-3 pb-6 font-bold text-center mt-10">
+            Search Results for {prevState.state.vehicleType} in{" "}
+            {prevState.state.location}
+          </h1>
+        </>
+      ) : (
+        <></>
+      )}
       <div className="flex justify-center mt-[20px] mb-10">
         <div className="w-[100%] max-w-[95%] xl:max-w-[1300px] flex-col flex xl:flex-row justify-center gap-[20px]">
           <div className="h-full">
@@ -98,9 +125,10 @@ const List = () => {
                 <input
                   type="text"
                   className="rounded-md border p-2"
-                  placeholder="Enter the Location"
-                  value={data.location}
+                  placeholder="Enter Location"
                   onChange={handleChange}
+                  value={data.location}
+                  name="location"
                 />
               </div>
               <div className="flex flex-col mb-[5px]">
@@ -179,22 +207,22 @@ const List = () => {
                 <label className="text-[16px] pt-3 font-medium">Options</label>
                 <div className="p-[10px]">
                   <div className="flex justify-between mb-[10px] items-center text-black text-[12px]">
-                    <span className="text-lg">
-                      Min price <small>per night</small>
-                    </span>
+                    <span className="text-lg">Min price</span>
                     <input type="number" className="w-[100px] border p-2" />
                   </div>
                   <div className="flex justify-between mb-[10px] items-center text-black text-[12px]">
-                    <span className="text-lg">
-                      Max price <small>per night</small>
-                    </span>
+                    <span className="text-lg">Max price</span>
                     <input type="number" className="w-[100px] border p-2" />
                   </div>
                   <div className="flex justify-between mb-[10px] items-center text-black text-[12px]">
                     <span className="text-lg">Vehicle Type</span>
-                    <select className="border p-2 w-[100px] bg-white">
-                      <option value="car">Car</option>
-                      <option value="bike">Bike</option>
+                    <select
+                      className="border p-2 w-[100px] bg-white"
+                      name="vehicleType"
+                      onChange={handleChange}
+                    >
+                      <option value="Car">Car</option>
+                      <option value="Bike">Bike</option>
                     </select>
                   </div>
 
@@ -207,28 +235,57 @@ const List = () => {
                   </div>
                 </div>
               </div>
-              <button className="button-hover bg-black text-white p-3 rounded-md">
-                Search
-              </button>
+              <Link
+                to={`/search/${data.location}/${data.vehicleType}`}
+                state={data}
+                onClick={searchVehicle}
+              >
+                <button
+                  // onClick={handleSubmit}
+                  className="button-hover bg-black text-white p-3 rounded-md"
+                >
+                  Search
+                </button>
+              </Link>
             </div>
           </div>
           <div className="flex-[3]">
-            {searchData.map((item) => (
-              <SearchItem
-                key={item.vehicle_post_id}
-                vehicle_name={item.vehicle_name}
-                vehicle_type={item.vehicle_type}
-                vehicle_price={item.vehicle_price}
-                vehicle_image={item.vehicle_image}
-                vehicle_location={item.vehicle_location}
-                vehicle_listing_type={item.vehicle_listing_type}
-                address={item.address}
-                vehicle_color={item.vehicle_color}
-                vehicle_brand={item.vehicle_brand}
-                posted_by={item.customername}
-                price_per_day={item.price_per_day}
-              />
-            ))}
+            {prevState.state ? (
+              searchData.map((item) => (
+                <SearchItem
+                  key={item.vehicle_post_id}
+                  vehicle_name={item.vehicle_name}
+                  vehicle_type={item.vehicle_type}
+                  vehicle_price={item.vehicle_price}
+                  vehicle_image={item.vehicle_image}
+                  vehicle_location={item.vehicle_location}
+                  vehicle_listing_type={item.vehicle_listing_type}
+                  address={item.address}
+                  vehicle_color={item.vehicle_color}
+                  vehicle_brand={item.vehicle_brand}
+                  posted_by={item.customername}
+                  price_per_day={item.price_per_day}
+                />
+              ))
+            ) : (
+              <>
+                <div className="flex-col flex justify-center items-center">
+                  <h1 className="text-3xl  py-6 font-bold top-[10px] text-black">
+                    Wow Such Empty Try Searching for Vehicles
+                  </h1>
+                  <img
+                    src={empty}
+                    alt="empty"
+                    className="w-[100%] object-cover"
+                  />
+                </div>
+              </>
+            )}
+            {searchData.length === 0 && (
+              <div className="h-full flex text-center justify-center items-center">
+                <img src={wow} alt="empty" className="w-[100%] object-cover " />
+              </div>
+            )}
           </div>
         </div>
       </div>

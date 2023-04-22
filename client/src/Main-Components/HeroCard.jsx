@@ -197,11 +197,12 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
           </div>
 
           <div className="md:absolute md:right-[5%] flex items-center justify-center -translate-y-1/2">
-            <Link to="/search" state={data}>
-              <button
-                // onClick={searchVehicle}
-                className="bg-black px-10 py-4 text-white rounded-lg "
-              >
+            <Link
+              to={`/search/${data.location}/${data.vehicleType}`}
+              state={data}
+              onClick={searchVehicle}
+            >
+              <button className="bg-black px-10 py-4 text-white rounded-lg ">
                 Find
               </button>
             </Link>
