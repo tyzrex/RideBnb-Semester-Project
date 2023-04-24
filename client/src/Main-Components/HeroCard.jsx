@@ -7,6 +7,9 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import axiosInstance, { axiosBase } from "../Instance/instance";
 import { Link } from "react-router-dom";
 import SearchItem from "./Cards/SearchCards";
+import { TbLocation } from "react-icons/tb";
+import { BsCalendarRange } from "react-icons/bs";
+import { BsCardChecklist } from "react-icons/bs";
 
 const HeroCard = ({ onCarClick, onBikeClick }) => {
   const [vehicleChoice, setVehicleChoice] = useState("Car");
@@ -97,7 +100,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
     <div className="flex justify-center h-auto items-center w-screen">
       <div className="w-full flex h-auto flex-col justify-center items-center">
         <div className="md:w-[95%] xl:max-w-[1300px] w-[100%] relative ">
-          <div className="bg-white xl:w-[30%] w-[100%] rounded-t-md flex justify-around h-[50px] items-center absolute -translate-y-[50px]">
+          {/* <div className="bg-white xl:w-[30%] w-[100%] rounded-t-md flex justify-around h-[50px] items-center absolute -translate-y-[50px]">
             <div>
               <button
                 onClick={handleCarClick}
@@ -116,24 +119,38 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
                 <h1>Rent a bike</h1>
               </button>
             </div>
-          </div>
+          </div> */}
 
-          <div className="bg-white p-10 lg:p-16 rounded-b-2xl lg:rounded-tr-md">
-            <div className="grid content-center md:grid-cols-2 xl:grid-cols-4 md:gap-5 ">
+          <div className="bg-white p-10 lg:p-16 rounded-3xl">
+            <div className="grid content-center md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-5 ">
               <div>
-                <label className="text-gray-500">Preferred Location</label>
-                <input
-                  type="text"
-                  placeholder="Location"
-                  className="w-full border-2 border-gray-300 bg-white rounded-lg p-2 mb-4"
-                  onChange={handleChange}
-                  id="location"
-                  name="location"
-                />
+                <div className="flex gap-3 items-center">
+                  <TbLocation className="text-3xl text-gray-500" />
+                  <label className="text-black text-2xl font-bold">
+                    {" "}
+                    Location
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Preferred Location"
+                    className="w-full border-none text-gray-500 bg-white rounded-lg p-2  placeholder:text-gray-400 text-2xl font-medium py focus:outline-none"
+                    onChange={handleChange}
+                    id="location"
+                    name="location"
+                  />
+                </div>
               </div>
 
               <div>
-                <label className="text-gray-500">Check In</label>
+                <div className="flex gap-3 items-center">
+                  <BsCalendarRange className="text-3xl text-gray-500" />
+                  <label className="text-black text-2xl font-bold">
+                    {" "}
+                    Check In
+                  </label>
+                </div>
                 <input
                   onClick={handleDatePicker}
                   type="text"
@@ -141,7 +158,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
                   value={data.checkIn}
                   onChange={handleChange}
                   placeholder="Pick a date"
-                  className="w-full border-2 text-gray-500 border-gray-300 bg-white rounded-lg p-2 mb-4 cursor-pointer"
+                  className="w-full border-none text-gray-500 bg-white rounded-lg p-2  placeholder:text-gray-400 text-2xl font-medium py focus:outline-none"
                   name="checkIn"
                 />
                 {datePicker && (
@@ -168,7 +185,13 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
               </div>
 
               <div>
-                <label className="text-gray-500">Check Out</label>
+                <div className="flex gap-3 items-center">
+                  <BsCalendarRange className="text-3xl text-gray-500" />
+                  <label className="text-black text-2xl font-bold">
+                    {" "}
+                    Check Out
+                  </label>
+                </div>
                 <input
                   onClick={handleDatePicker}
                   type="text"
@@ -176,18 +199,24 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
                   value={data.checkOut}
                   onChange={handleChange}
                   placeholder="Pick a date"
-                  className="w-full border-2 text-gray-500 border-gray-300 bg-white rounded-lg p-2 mb-4 cursor-pointer"
+                  className="w-full border-none text-gray-500 bg-white rounded-lg p-2  placeholder:text-gray-400 text-2xl font-medium py focus:outline-none"
                   id="checkOut"
                   name="checkOut"
                 />
               </div>
 
               <div className="flex flex-col">
-                <label className=" text-gray-500">Vehicle type</label>
+                <div className="flex gap-3 items-center">
+                  <BsCardChecklist className="text-3xl text-gray-500" />
+                  <label className="text-black text-2xl font-bold">
+                    {" "}
+                    Vehicle Type
+                  </label>
+                </div>
                 <select
                   id="hs-select-label"
                   onChange={handleChange}
-                  className=" text-gray-500 border-2 border-gray-300 bg-white rounded-lg p-2 mb-4"
+                  className="w-full border-none text-gray-500 bg-white rounded-lg p-1  placeholder:text-gray-400 text-2xl font-medium py focus:outline-none"
                   name="vehicleType"
                 >
                   <option>{vehicleChoice}</option>
@@ -202,7 +231,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
               state={data}
               onClick={searchVehicle}
             >
-              <button className="bg-black px-10 py-4 text-white rounded-lg ">
+              <button className="bg-black px-10 py-4 text-white text-xl font-bold rounded-lg ">
                 Find
               </button>
             </Link>

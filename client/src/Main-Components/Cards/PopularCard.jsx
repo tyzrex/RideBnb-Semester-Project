@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 const ExploreCards = (props) => {
   return (
     <div>
-      <div className="!z-5 shadow-lg relative flex flex-col rounded-[20px] max-w-[300px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 w-full 3xl:p-![18px] undefined">
+      <div className="!z-5 hover:scale-105 transition-all duration-300 hover:shadow-xl shadow-lg relative flex flex-col rounded-[20px] max-w-[300px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 w-full 3xl:p-![18px] undefined">
         <div className="h-full w-full">
           <div className="relative w-full">
             <img
               src={`../../../Images/${props.vehicleImage}`}
-              className="mb-2 h-[250px] object-cover w-full rounded-t-xl"
+              className="mb-2 h-[250px] object-cover w-full rounded-t-xl transition-transform duration-500 ease-in-out"
               alt=""
             />
             <button className="absolute top-3 right-3 flex items-center justify-center rounded-full bg-white p-2 text-brand-500 hover:cursor-pointer">

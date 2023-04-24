@@ -1,4 +1,10 @@
-import React, { useRef, useState, useEffect, useParams } from "react";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useParams,
+  useContext,
+} from "react";
 import Navbar from "../../Main-Components/Navbar";
 import Footer from "../../Main-Components/Footer";
 import axiosInstance from "../../Instance/instance";
@@ -9,6 +15,9 @@ import { AiFillCar } from "react-icons/ai";
 import { TbBike } from "react-icons/tb";
 import { MdOutlineMergeType } from "react-icons/md";
 import { io } from "socket.io-client";
+import("./list.css");
+import Comment from "./Comment";
+import { AuthContext } from "../../Context/AuthContext";
 
 const socket = io("http://localhost:3000");
 
@@ -17,6 +26,7 @@ const PostDetails = () => {
   const id = window.location.pathname.split("/")[2];
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const { user } = useContext(AuthContext);
 
   const fetchPost = async () => {
     try {
@@ -74,10 +84,19 @@ const PostDetails = () => {
     }
   };
 
-  const handleComment = (e) => {
-    e.preventDefault();
-    createComment();
-  };
+  function convertDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    // Format the date components as two-digit strings
+    const formattedMonth = String(month).padStart(2, "0");
+    const formattedDay = String(day).padStart(2, "0");
+
+    // Return the formatted date string
+    return `${formattedMonth}/${formattedDay}/${year}`;
+  }
 
   const shouldFetch = useRef(true);
   useEffect(() => {
@@ -156,26 +175,48 @@ const PostDetails = () => {
         </div>
       </div>
 
-      <div className="flex justify-center items-center flex-col py-10 gap-5 bg-emerald-200">
-        <h2>Comments</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Add a comment"
-            value={newComment}
-            onChange={(event) => setNewComment(event.target.value)}
-          />
-          <button type="submit">Post</button>
-        </form>
-        <ul>
-          {comments.map((comment) => (
-            <li className="text-black" key={comment.comment_id}>
-              {comment.comment_text}
-            </li>
-          ))}
-        </ul>
+      <div>
+        <div className="max-w-[1300px] mx-auto ">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
+              Discussion (20)
+            </h2>
+          </div>
+          <form className="mb-6" onSubmit={handleSubmit}>
+            <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+              <label htmlFor="comment" className="sr-only">
+                Your comment
+              </label>
+              <textarea
+                id="comment"
+                rows="6"
+                className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                placeholder="Write a comment..."
+                value={newComment}
+                onChange={(event) => setNewComment(event.target.value)}
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="inline-flex bg-black items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+            >
+              Post comment
+            </button>
+          </form>
+          <div className="flex flex-col">
+            {comments.map((comment) => (
+              <Comment
+                className="text-black"
+                key={comment.comment_id}
+                comment={comment.comment_text}
+                author={comment.customer_name}
+                date={convertDate(comment.created_at)}
+              />
+            ))}
+          </div>
+        </div>
       </div>
-
       <Footer />
     </div>
   );

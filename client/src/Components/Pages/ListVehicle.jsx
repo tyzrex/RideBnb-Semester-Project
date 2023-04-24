@@ -186,7 +186,7 @@ const ListVehicle = () => {
                   name="vehicleName"
                   id="vehicleName"
                   type="text"
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
+                  className="block w-full px-4 py-3 mt-2 text-gray-700 bg-white border border-gray-300 rounded-[12px] "
                 />
                 {postError.vehicleName && (
                   <p className="text-red-500">{postError.vehicleName}</p>
@@ -202,7 +202,7 @@ const ListVehicle = () => {
                   name="vehicleBrand"
                   id="vehicleBrand"
                   type="text"
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
+                  className="block w-full px-4 py-3 mt-2 text-gray-700 bg-white border border-gray-300 rounded-[12px] "
                 />
                 {postError.vehicleBrand && (
                   <p className="text-red-500">{postError.vehicleBrand}</p>
@@ -218,7 +218,7 @@ const ListVehicle = () => {
                   name="vehicleColor"
                   id="vehicleColor"
                   type="text"
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
+                  className="block w-full px-4 py-3 mt-2 text-gray-700 bg-white border border-gray-300 rounded-[12px] "
                 />
                 {postError.vehicleColor && (
                   <p className="text-red-500">{postError.vehicleColor}</p>
@@ -234,7 +234,7 @@ const ListVehicle = () => {
                   name="pricePerDay"
                   id="pricePerDay"
                   type="text"
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
+                  className="block w-full px-4 py-3 mt-2 text-gray-700 bg-white border border-gray-300 rounded-[12px] "
                 />
                 {postError.pricePerDay && (
                   <p className="text-red-500">{postError.pricePerDay}</p>
@@ -250,7 +250,7 @@ const ListVehicle = () => {
                   name="numberPlate"
                   id="numberPlate"
                   type="text"
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
+                  className="block w-full px-4 py-3 mt-2 text-gray-700 bg-white border border-gray-300 rounded-[12px] "
                 />
                 {postError.numberPlate && (
                   <p className="text-red-500">{postError.numberPlate}</p>
@@ -266,7 +266,7 @@ const ListVehicle = () => {
                   name="address"
                   id="address"
                   type="text"
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
+                  className="block w-full px-4 py-3 mt-2 text-gray-700 bg-white border border-gray-300 rounded-[12px] "
                 />
                 {postError.address && (
                   <p className="text-red-500">{postError.address}</p>
@@ -282,7 +282,7 @@ const ListVehicle = () => {
                   name="vehicleMakeYear"
                   id="vehicleMakeYear"
                   type="text"
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
+                  className="block w-full px-4 py-3 mt-2 text-gray-700 bg-white border border-gray-300 rounded-[12px] "
                 />
                 {postError.vehicleMakeYear && (
                   <p className="text-red-500">{postError.vehicleMakeYear}</p>
@@ -294,7 +294,7 @@ const ListVehicle = () => {
                   Vehicle Type
                 </label>
                 <select
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
+                  className="block w-full px-4 py-3 mt-2 text-gray-700 bg-white border border-gray-300 rounded-[12px] "
                   name="vehicleType"
                   onChange={handleVehicleType}
                 >
@@ -312,7 +312,7 @@ const ListVehicle = () => {
                   Listing Type
                 </label>
                 <select
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
+                  className="block w-full px-4 py-3 mt-2 text-gray-700 bg-white border border-gray-300 rounded-[12px] "
                   name="listingType"
                   onChange={handleListingType}
                 >
@@ -334,7 +334,7 @@ const ListVehicle = () => {
                   name="features"
                   id="features"
                   type="text"
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
+                  className="block w-full px-4 py-3 mt-2 text-gray-700 bg-white border border-gray-300 rounded-[12px] "
                 />
                 {postError.features && (
                   <p className="text-red-500">{postError.features}</p>
@@ -350,7 +350,7 @@ const ListVehicle = () => {
                   type="textarea"
                   onChange={handleChange}
                   name="vehicleDescription"
-                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md"
+                  className="block w-full px-4 py-3 mt-2 text-gray-700 bg-white border border-gray-300 rounded-[12px] "
                 ></textarea>
                 {postError.vehicleDescription && (
                   <p className="text-red-500">{postError.vehicleDescription}</p>
