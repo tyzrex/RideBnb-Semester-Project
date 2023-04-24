@@ -41,6 +41,10 @@ const io = new Server(server, {
   },
 });
 
+app.get("/", (req, res) => {
+  res.json("Hello world");
+});
+
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
