@@ -4,14 +4,17 @@ import io from "../../server.js";
 export const createComment = async (req, res) => {
   const user = req.user;
   const { customer_id } = user;
+  const { customername } = user;
   const { vehicle_post_id, comment } = req.body;
   try {
     const res = await pool.query(
-      "INSERT INTO vehicle_post_comment (vehicle_post_id, customer_id, comment_text) VALUES ($1, $2, $3) RETURNING *;",
-      [vehicle_post_id, customer_id, comment]
+      "INSERT INTO vehicle_post_comment (vehicle_post_id, customer_id, comment_text,customer_name) VALUES ($1, $2, $3,$4) RETURNING *;",
+      [vehicle_post_id, customer_id, comment, customername]
     );
 
     const newComment = res.rows[0];
+    newComment.customername = customername;
+    console.log(newComment);
 
     // Emit the newComment event to notify connected clients
     io.emit("newComment", newComment);
