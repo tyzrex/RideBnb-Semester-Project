@@ -44,15 +44,12 @@ CREATE TABLE vehicle_post_comment (
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE
 );
 
-
-
 create table booking(
     booking_id serial primary key,
     customer_id int not null,
     vehicle_post_id int not null,
     total_cost DECIMAL(10,2) not null,
     booking_status varchar(50) not null,
-    payment_status varchar(50) not null,
     created_at timestamp default now(),
     start_date date not null,
     end_date date not null,

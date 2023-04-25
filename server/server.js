@@ -8,6 +8,7 @@ import UploadRoute from "./src/routes/multerImage.js";
 import UserRoute from "./src/routes/users.js";
 import SearchRoute from "./src/routes/search.js";
 import CommentRoute from "./src/routes/comments.js";
+import BookingRoute from "./src/routes/booking.js";
 import http from "http";
 import { Server } from "socket.io";
 
@@ -33,6 +34,7 @@ app.use("/upload", UploadRoute);
 app.use("/user", UserRoute);
 app.use("/search", SearchRoute);
 app.use("/comment", CommentRoute);
+app.use("/booking", BookingRoute);
 
 const io = new Server(server, {
   cors: {

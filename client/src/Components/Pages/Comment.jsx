@@ -1,6 +1,25 @@
 import React from "react";
 
 const Comment = (props) => {
+  const stars = () => {
+    let stars = [];
+    for (let i = 0; i < props.stars; i++) {
+      stars.push(
+        <span key={i} className="text-yellow-400">
+          ★
+        </span>
+      );
+    }
+    for (let i = 0; i < 5 - props.stars; i++) {
+      stars.push(
+        <span key={i} className="text-gray-400">
+          ★
+        </span>
+      );
+    }
+    return stars;
+  };
+
   return (
     <div>
       <article className="p-6 mb-6 text-base bg-white border rounded-lg dark:bg-gray-900">
@@ -10,12 +29,12 @@ const Comment = (props) => {
               {props.author}
             </p>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              <time pubdate datetime="2022-02-08" title="February 8th, 2022">
-                {props.date}
-              </time>
+              <time>{props.date}</time>
             </p>
           </div>
-          <button>Delete</button>
+          <div className="flex justify-center items-center gap-2 text-3xl cursor-pointer">
+            {stars()}
+          </div>
         </footer>
         <p className="text-gray-500 dark:text-gray-400">{props.comment}</p>
       </article>

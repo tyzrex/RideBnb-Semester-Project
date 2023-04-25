@@ -5,6 +5,7 @@ import HomeCards from "../../Main-Components/HomeCards";
 import Footer from "../../Main-Components/Footer";
 import FAQ from "../../Main-Components/FAQ";
 import ExperimentHero from "../../Main-Components/experimentHero";
+import LogoCloud from "../../Main-Components/LogoCloud";
 import("preline");
 
 const Home = () => {

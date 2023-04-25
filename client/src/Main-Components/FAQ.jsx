@@ -4,8 +4,8 @@ import CarArt from "../assets/car.png";
 
 const FAQ = () => {
   return (
-    <div>
-      <div className="flex justify-center items-center h-auto w-screen max-w-[95%] xl:max-w-[1300px] mx-auto">
+    <div className="">
+      <div className="flex justify-center items-center h-auto w-screen max-w-[95%] xl:max-w-[1300px] mx-auto mt-[200px] sm:mt-[160px] md:mt-[120px] lg:my-16">
         {/* <img src={CarArt} alt="car" className="absolute left-0 -z-0" /> */}
         <div className="z-10">
           <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">

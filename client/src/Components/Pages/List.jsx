@@ -1,6 +1,12 @@
 import "./list.css";
 import Navbar from "../../Main-Components/Navbar";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  useLocation,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import { DateRange } from "react-date-range";
 import Footer from "../../Main-Components/Footer";
@@ -13,6 +19,9 @@ const List = () => {
   const prevState = useLocation();
   const [searchData, setSearchData] = useState([]);
   const [datePicker, setDatePicker] = useState(false);
+  const [searchParams, setsearchParams] = useSearchParams();
+
+  const [error, setError] = useState(false);
 
   const handleDatePicker = () => {
     setDatePicker(!datePicker);
@@ -56,7 +65,7 @@ const List = () => {
     // checkOut: prevState.state.checkOut,
     // vehicleType: prevState.state.vehicleType,
     // listingType: "All",
-    location: prevState?.state?.location || "",
+    location: prevState?.state?.location || searchParams.get("location") || "",
     checkIn: prevState?.state?.checkIn || "",
     checkOut: prevState?.state?.checkOut || "",
     vehicleType: prevState?.state?.vehicleType || "Car",
@@ -77,6 +86,10 @@ const List = () => {
       }
       console.log(response.data);
     } catch (error) {
+      if (error.response.status === 404) {
+        setSearchData([]);
+        console.log("No vehicles found");
+      }
       console.log(error);
     }
   };
@@ -94,7 +107,7 @@ const List = () => {
   useEffect(() => {
     if (shouldFetch.current) {
       shouldFetch.current = false;
-      if (prevState.state) {
+      if (prevState.state || searchParams.get("location")) {
         searchVehicle();
       }
     }
@@ -107,7 +120,7 @@ const List = () => {
         <>
           <h1 className="text-4xl pt-3 pb-6 font-bold text-center mt-10">
             Search Results for {prevState.state.vehicleType} in{" "}
-            {prevState.state.location}
+            {prevState.state.location || searchParams.get("location")}
           </h1>
         </>
       ) : (
@@ -132,26 +145,6 @@ const List = () => {
                 />
               </div>
               <div className="flex flex-col mb-[5px]">
-                {/* <label className="text-black font-medium">
-                  Check-in / Check-out Date
-                </label>
-                <span
-                  className="rounded-md border p-2 cursor-pointer h-[40px] flex items-center"
-                  onClick={() => setOpenDate(!openDate)}
-                >
-                  {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
-                    date[0].endDate,
-                    "MM/dd/yyyy"
-                  )}`}
-                </span>
-                {openDate && (
-                  <DateRange
-                    onChange={(item) => setDate([item.selection])}
-                    minDate={new Date()}
-                    ranges={date}
-                    rangeColors={["black"]}
-                  />
-                )} */}
                 <div>
                   <label className="text-gray-500">Check In</label>
                   <input
@@ -236,7 +229,7 @@ const List = () => {
                 </div>
               </div>
               <Link
-                to={`/search/${data.location}/${data.vehicleType}`}
+                to={`/search?location=${data.location}&vehicleType=${data.vehicleType}`}
                 state={data}
                 onClick={searchVehicle}
               >
@@ -250,7 +243,7 @@ const List = () => {
             </div>
           </div>
           <div className="flex-[3]">
-            {prevState.state ? (
+            {prevState.state || searchParams ? (
               searchData.map((item) => (
                 <SearchItem
                   key={item.vehicle_post_id}
@@ -283,7 +276,11 @@ const List = () => {
             )}
             {searchData.length === 0 && (
               <div className="h-full flex text-center justify-center items-center">
-                <img src={wow} alt="empty" className="w-[100%] object-cover " />
+                <img
+                  src={wow}
+                  alt="empty"
+                  className="max-w-[95%] lg:w-[100%] object-cover "
+                />
               </div>
             )}
           </div>

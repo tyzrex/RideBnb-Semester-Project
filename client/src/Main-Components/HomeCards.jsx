@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import PopularCard from "./Cards/PopularCard";
 import { axiosBase } from "../Instance/instance";
+import LogoCloud from "./LogoCloud";
 
 const HomeCards = () => {
   const [sellPost, setSellPost] = useState([]);
@@ -33,10 +34,12 @@ const HomeCards = () => {
     }
   }, []);
 
+  //
+
   return (
-    <div className="w-screen mx-auto mt-[240px] py-[100px] lg:mt-0 lg:py-[150px] h-auto bg-[#f8f8f8]">
-      <div className="w-full max-w-[95%] xl:max-w-[1300px] mx-auto flex flex-col gap-10 justify-center items-center">
-        <div>
+    <div className=" w-screen mx-auto h-auto bg-[#f8f8f8] ">
+      <div className="w-full max-w-[95%] xl:max-w-[1300px] mx-auto flex flex-col gap-10 justify-center items-center ">
+        <div className=" mt-[300px] mt:mb-[150px] lg:mt-[130px]">
           <div className="flex justify-center w-full items-center">
             <div className="max-w-[95%] flex justify-between w-full xl:max-w-[1300px]">
               <h1 className="text-3xl font-bold">Popular Rent Choices</h1>
@@ -64,7 +67,7 @@ const HomeCards = () => {
           </div>
         </div>
 
-        <div>
+        <div className="mb-[180px] md:mb-[150px] lg:mb-[130px]">
           <div className="flex justify-center w-full items-center">
             <div className="max-w-[95%] flex justify-between w-full xl:max-w-[1300px]">
               <h1 className="text-3xl font-bold">Popular Sell Choices</h1>
@@ -91,6 +94,9 @@ const HomeCards = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="absolute z-[2] -translate-y-[50%] self-end w-full">
+        <LogoCloud />
       </div>
     </div>
   );

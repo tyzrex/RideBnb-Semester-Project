@@ -6,6 +6,7 @@ export const createComment = async (req, res) => {
   const { customer_id } = user;
   const { customername } = user;
   const { vehicle_post_id, comment } = req.body;
+  const { rating } = req.body;
   try {
     const res = await pool.query(
       "INSERT INTO vehicle_post_comment (vehicle_post_id, customer_id, comment_text,customer_name) VALUES ($1, $2, $3,$4) RETURNING *;",
@@ -14,6 +15,7 @@ export const createComment = async (req, res) => {
 
     const newComment = res.rows[0];
     newComment.customername = customername;
+    newComment.rating = rating;
     console.log(newComment);
 
     // Emit the newComment event to notify connected clients

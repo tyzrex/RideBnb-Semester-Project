@@ -109,3 +109,48 @@ export const getPost = async (req, res) => {
     });
   }
 };
+
+export const rateVehicle = async (req, res) => {
+  const { rating, vehicle_post_id } = req.body;
+  const customer_id = req.user.customer_id;
+  console.log(req.body);
+  try {
+    const result = await pool.query(
+      "INSERT INTO vehicle_post_rating(customer_id, vehicle_post_id, rating_value) VALUES ($1, $2, $3) RETURNING *",
+      [customer_id, vehicle_post_id, rating]
+    );
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const getRating = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(
+      "SELECT AVG(rating_value) FROM vehicle_post_rating WHERE vehicle_post_id = $1",
+      [id]
+    );
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const getRatingByUser = async (req, res) => {
+  const { id } = req.params;
+  const customer_id = req.user.customer_id;
+  try {
+    const result = await pool.query(
+      "SELECT * FROM vehicle_post_rating WHERE vehicle_post_id = $1 AND customer_id = $2",
+      [id, customer_id]
+    );
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};

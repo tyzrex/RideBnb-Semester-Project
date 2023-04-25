@@ -43,6 +43,7 @@ const ExperimentHero = () => {
           />
         </div>
       </div>
+
       <div className="absolute z-[2] translate-y-[50%] self-end w-full">
         <HeroCard onCarClick={handleCarClick} onBikeClick={handleBikeClick} />
       </div>
