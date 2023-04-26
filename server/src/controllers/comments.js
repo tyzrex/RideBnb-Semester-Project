@@ -9,8 +9,8 @@ export const createComment = async (req, res) => {
   const { rating } = req.body;
   try {
     const res = await pool.query(
-      "INSERT INTO vehicle_post_comment (vehicle_post_id, customer_id, comment_text,customer_name) VALUES ($1, $2, $3,$4) RETURNING *;",
-      [vehicle_post_id, customer_id, comment, customername]
+      "INSERT INTO vehicle_post_comment (vehicle_post_id, customer_id, comment_text,customer_name,rating) VALUES ($1, $2, $3,$4,$5) RETURNING *;",
+      [vehicle_post_id, customer_id, comment, customername, rating]
     );
 
     const newComment = res.rows[0];

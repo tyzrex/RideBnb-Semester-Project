@@ -123,24 +123,9 @@ const PostDetails = () => {
     }));
   };
 
-  const submitReview = async () => {
-    try {
-      const data = {
-        vehicle_post_id: id,
-        rating: rating,
-      };
-      const response = await axiosInstance.post("/post/ratevehicle", data);
-      setRating(0);
-      setRated(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (newComment.trim() === "") return;
-    submitReview();
     try {
       const data = {
         vehicle_post_id: id,
@@ -148,11 +133,16 @@ const PostDetails = () => {
         rating: rating,
       };
       const response = await axiosInstance.post("/comment/createComment", data);
-
-      setNewComment("");
+      resetInputFields();
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const resetInputFields = () => {
+    setNewComment("");
+    setRated(false);
+    setRating(0);
   };
 
   const handleRatingClick = (e) => {

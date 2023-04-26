@@ -40,6 +40,7 @@ CREATE TABLE vehicle_post_comment (
     comment_text TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     customer_name VARCHAR(100) NOT NULL,
+    rating int not null,
     FOREIGN KEY (vehicle_post_id) REFERENCES vehicle_post(vehicle_post_id) ON DELETE CASCADE,
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE
 );
