@@ -39,8 +39,10 @@ const List = () => {
     const year = newDate.getFullYear();
     const month = `0${newDate.getMonth() + 1}`.slice(-2);
     const day = newDate.getDate();
+
     return `${year}-${month}-${day}`;
   };
+
   const handleSelect = (ranges) => {
     selectionRange.startDate = ranges.selection.startDate;
     selectionRange.endDate = ranges.selection.endDate;

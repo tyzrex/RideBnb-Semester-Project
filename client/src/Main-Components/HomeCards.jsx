@@ -7,8 +7,6 @@ const HomeCards = () => {
   const [sellPost, setSellPost] = useState([]);
   const [rentPost, setRentPost] = useState([]);
 
-  console.log(rentPost);
-
   const getPosts = async (listingType) => {
     try {
       const response = await axiosBase.get(

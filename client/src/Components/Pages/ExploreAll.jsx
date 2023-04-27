@@ -12,7 +12,7 @@ const ExploreAll = () => {
 
   const getPosts = async (page) => {
     try {
-      const limit = 10;
+      const limit = 2;
       const response = await axios.get(
         `http://localhost:5000/post/getPosts?page=${page}&limit=${limit}`
       );

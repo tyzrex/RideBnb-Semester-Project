@@ -2,9 +2,12 @@ import pool from "../config/database.js";
 
 export const createBooking = async (req, res) => {
   try {
-    const { vehicle_post_id, start_date, end_date, total_price } = req.body;
-    const numDays = Math.ceil(
-      (new Date(end_date) - new Date(start_date)) / (1000 * 60 * 60 * 24)
+    const { vehicle_post_id, checkIn, checkOut, total_price } = req.body;
+    console.log(req.body);
+    const numDays = Math.abs(
+      Math.ceil(
+        (new Date(checkIn) - new Date(checkOut)) / (1000 * 60 * 60 * 24)
+      )
     );
     const total_cost = numDays * total_price;
     const queryText = `
@@ -15,8 +18,8 @@ export const createBooking = async (req, res) => {
     const values = [
       vehicle_post_id,
       req.user.customer_id,
-      start_date,
-      end_date,
+      checkIn,
+      checkOut,
       total_cost,
       total_price,
     ];
@@ -43,13 +46,14 @@ const getBookings = async (req, res) => {
 };
 
 const getBookingById = async (req, res) => {
-  const { id } = req.params;
+  const user = req.user;
+  const { customer_id } = user;
   try {
     const queryText = `
         SELECT * FROM booking
-        WHERE booking_id = $1
+        WHERE customer_id = $1
         `;
-    const { rows } = await pool.query(queryText, [req.params.id]);
+    const { rows } = await pool.query(queryText, customer_id);
     if (rows.length === 0) {
       return res.status(404).json({ message: "Booking not found" });
     }

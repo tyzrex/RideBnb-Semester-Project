@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export async function isBooked(req, res, next) {
-  const { vehicle_post_id, start_date, end_date } = req.body;
+  const { vehicle_post_id, checkIn, checkOut } = req.body;
   try {
     // Check if the vehicle post has already been booked for the specified dates
     const queryText = `
@@ -14,7 +14,7 @@ export async function isBooked(req, res, next) {
              (end_date >= $2 AND end_date <= $3) OR
              (start_date <= $2 AND end_date >= $3))
     `;
-    const values = [vehicle_post_id, start_date, end_date];
+    const values = [vehicle_post_id, checkIn, checkOut];
     const { rows } = await pool.query(queryText, values);
 
     if (rows.length > 0) {

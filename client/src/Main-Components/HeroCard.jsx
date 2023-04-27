@@ -31,8 +31,6 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
         { params: data }
       );
       setSearchData(response.data);
-      console.log(response.data);
-      console.log(typeof response.data);
     } catch (error) {
       console.log(error);
     }

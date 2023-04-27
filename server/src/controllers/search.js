@@ -22,8 +22,10 @@ export const searchVehicle = async (req, res) => {
         AND vp.vehicle_type = $2
         AND vp.available = true
         AND b.booking_id IS NULL
+        AND b.start_date NOT BETWEEN $3 AND $4
+        AND b.end_date NOT BETWEEN $3 AND $4
     `;
-    const values = [`%${location}%`, vehicleType];
+    const values = [`%${location}%`, vehicleType, checkIn, checkOut];
     const { rows } = await pool.query(query, values);
     if (rows.length === 0) {
       return res.status(404).json({ message: "No vehicles found" });

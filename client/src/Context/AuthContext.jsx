@@ -44,6 +44,15 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const getUser = async () => {
+    try {
+      const res = await axiosInstance.get("/user/getUser");
+      setUser(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);

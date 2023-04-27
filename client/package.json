@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --port 5173"
   },
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -20,6 +20,7 @@
     "react-date-range": "^1.4.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
+    "react-loading-skeleton": "^3.2.1",
     "react-router-dom": "^6.9.0",
     "react-smooth": "^2.0.2",
     "react-tailwindcss-datepicker": "^1.5.1",

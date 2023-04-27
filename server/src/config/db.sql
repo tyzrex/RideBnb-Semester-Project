@@ -52,8 +52,8 @@ create table booking(
     total_cost DECIMAL(10,2) not null,
     booking_status varchar(50) not null,
     created_at timestamp default now(),
-    start_date date not null,
-    end_date date not null,
+    start_date varchar(12) not null,
+    end_date varchar(12) not null,
     total_price DECIMAL(10,2) not null,
     foreign key (customer_id) references customer(customer_id),
     foreign key (vehicle_post_id) references vehicle_post(vehicle_post_id)
