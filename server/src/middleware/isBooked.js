@@ -8,11 +8,10 @@ export async function isBooked(req, res, next) {
   try {
     // Check if the vehicle post has already been booked for the specified dates
     const queryText = `
-      SELECT * FROM booking
-      WHERE vehicle_post_id = $1 AND
-            ((start_date >= $2 AND start_date <= $3) OR
-             (end_date >= $2 AND end_date <= $3) OR
-             (start_date <= $2 AND end_date >= $3))
+      SELECT *
+      FROM booking
+      WHERE vehicle_post_id = $1
+        AND (start_date::date, end_date::date) OVERLAPS ($2::date, $3::date)
     `;
     const values = [vehicle_post_id, checkIn, checkOut];
     const { rows } = await pool.query(queryText, values);

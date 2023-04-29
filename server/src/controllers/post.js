@@ -81,7 +81,22 @@ export const getPostByType = async (req, res) => {
   console.log(type);
   try {
     const { rows } = await pool.query(
-      `SELECT vehicle_post.*, customer.customername FROM vehicle_post INNER JOIN customer ON vehicle_post.customer_id = customer.customer_id WHERE vehicle_listing_type = $1 ORDER BY vehicle_post.created_at DESC`,
+      `SELECT
+      vp.vehicle_post_id,
+      vp.vehicle_name,
+      vp.price_per_day,
+      vp.vehicle_image,
+      vp.address,
+      customer.customername,r.avg_rating 
+      FROM vehicle_post vp
+      INNER JOIN customer ON vp.customer_id = customer.customer_id 
+      LEFT JOIN (
+        SELECT vehicle_post_id, AVG(rating) AS avg_rating
+        FROM vehicle_post_comment
+        GROUP BY vehicle_post_id
+      ) r ON vp.vehicle_post_id = r.vehicle_post_id
+      WHERE vehicle_listing_type = $1  
+      ORDER BY vp.created_at DESC `,
       [type]
     );
     res.status(200).json(rows);
@@ -97,7 +112,20 @@ export const getPost = async (req, res) => {
   try {
     const post = await pool.query(
       // "SELECT * FROM vehicle_post WHERE vehicle_post_id = $1",
-      `SELECT vehicle_post.*, customer.customername,customer.email FROM vehicle_post INNER JOIN customer ON vehicle_post.customer_id = customer.customer_id WHERE vehicle_post_id = $1`,
+      `SELECT 
+        vp.*, 
+        c.customername, 
+        c.email, 
+        COALESCE(r.avg_rating, 0) AS avg_rating
+      FROM vehicle_post vp
+      JOIN customer c ON vp.customer_id = c.customer_id
+      LEFT JOIN (
+        SELECT vehicle_post_id, AVG(rating) AS avg_rating
+        FROM vehicle_post_comment
+        GROUP BY vehicle_post_id
+      ) r ON vp.vehicle_post_id = r.vehicle_post_id
+      WHERE vp.vehicle_post_id = $1;
+      `,
       [id]
     );
     if (post.rows.length === 0) {

@@ -31,33 +31,18 @@ export const createBooking = async (req, res) => {
   }
 };
 
-const getBookings = async (req, res) => {
-  try {
-    const queryText = `
-        SELECT * FROM booking
-        WHERE customer_id = $1
-        `;
-    const { rows } = await pool.query(queryText, [req.user.customer_id]);
-    return res.status(200).json(rows);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal Server Error" });
-  }
-};
-
-const getBookingById = async (req, res) => {
+export const getBookingById = async (req, res) => {
   const user = req.user;
   const { customer_id } = user;
   try {
-    const queryText = `
-        SELECT * FROM booking
-        WHERE customer_id = $1
-        `;
-    const { rows } = await pool.query(queryText, customer_id);
+    const { rows } = await pool.query(
+      ` SELECT *,vp.* FROM booking b INNER JOIN vehicle_post vp ON vp.vehicle_post_id = b.vehicle_post_id WHERE b.customer_id = $1`,
+      [customer_id]
+    );
     if (rows.length === 0) {
       return res.status(404).json({ message: "Booking not found" });
     }
-    return res.status(200).json(rows[0]);
+    return res.status(200).json(rows);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal Server Error" });
