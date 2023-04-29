@@ -34,6 +34,7 @@ const ExploreAll = () => {
 
   useEffect(() => {
     getPosts(currentPage);
+    window.scrollTo(0, 0);
   }, [currentPage]);
 
   const handlePrevClick = () => {

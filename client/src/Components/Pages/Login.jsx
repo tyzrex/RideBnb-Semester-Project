@@ -1,5 +1,5 @@
 import React from "react";
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import { ToastContainer } from "react-toastify";
 import { toastSuccess, toastError } from "../Toast/Toast";
 import { AuthContext } from "../../Context/AuthContext";
@@ -19,7 +19,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const {user,loginUser} = useContext(AuthContext);
+  const { user, loginUser } = useContext(AuthContext);
 
   const [loginError, setLoginError] = useState({});
   const [subError, setSubError] = useState({});
@@ -35,21 +35,20 @@ const Login = () => {
     setLoginError(error);
     return error;
   };
-  
+
   const handleSubmit = async (e) => {
     console.log("submit");
     e.preventDefault();
     const error = validate();
     if (Object.keys(error).length === 0) {
-      loginUser(data,subError,setSubError);
+      loginUser(data, subError, setSubError);
     } else {
       toastError("Fill all fields");
     }
   };
 
-
   return (
-       <div>
+    <div>
       <section className="bg-main-bg">
         <div className="lg:grid min-h-screen lg:min-h-screen lg:grid-cols-12">
           <aside className="relative block h-[30vh] lg:order-first lg:col-span-5 lg:h-full xl:col-span-6">
@@ -70,7 +69,7 @@ const Login = () => {
                 Login to your account to continue.
               </p>
 
-              <form action="#" className="mt-8 gap-6">
+              <form onSubmit={handleSubmit} className="mt-8 gap-6">
                 <div className="flex flex-col gap-6 justify-center">
                   <div>
                     <div className="py-2">
@@ -107,7 +106,10 @@ const Login = () => {
                   </div>
 
                   <div className=" flex flex-col items-center gap-4">
-                    <button onClick={handleSubmit} className="inline-block bg-main-text hover:bg-white  hover:border-2 hover:border-gray-500 hover:text-black shrink-0 rounded-md border  px-12 py-3 text-sm font-medium text-white transition">
+                    <button
+                      type="submit"
+                      className="inline-block bg-main-text hover:bg-white  hover:border-2 hover:border-gray-500 hover:text-black shrink-0 rounded-md border  px-12 py-3 text-sm font-medium text-white transition"
+                    >
                       Login
                     </button>
                     <ToastContainer />
@@ -128,7 +130,8 @@ const Login = () => {
           </main>
         </div>
       </section>
-    </div>  );
+    </div>
+  );
 };
 
 export default Login;

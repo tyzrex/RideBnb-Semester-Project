@@ -3,7 +3,7 @@ import "aos/dist/aos.css";
 import HeroCard from "./HeroCard";
 import { useEffect, useState } from "react";
 import Animate from "react-smooth";
-import BikeImg from "../assets/herobike.jpg";
+import BikeImg from "../assets/cbr.png";
 import CarImg from "../assets/herocar.jpg";
 
 const Hero = () => {

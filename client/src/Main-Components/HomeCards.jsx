@@ -23,8 +23,6 @@ const HomeCards = () => {
     }
   };
 
-  console.log(sellPost);
-
   const shouldFetch = useRef(false);
   useEffect(() => {
     if (!shouldFetch.current) {
@@ -33,8 +31,6 @@ const HomeCards = () => {
       getPosts("Rent");
     }
   }, []);
-
-  //
 
   return (
     <div className=" w-screen mx-auto h-auto bg-[#f8f8f8] ">
@@ -69,7 +65,7 @@ const HomeCards = () => {
           </div>
         </div>
 
-        <div className="mb-[180px] md:mb-[150px] lg:mb-[130px]">
+        <div className="mb-[250px] md:mb-[180px] lg:mb-[130px]">
           <div className="flex justify-center w-full items-center">
             <div className="max-w-[90%] flex justify-between w-full xl:max-w-[1200px]">
               <h1 className="text-3xl font-bold">Popular Sell Choices</h1>

@@ -3,7 +3,7 @@ import "aos/dist/aos.css";
 import HeroCard from "./HeroCard";
 import { useEffect, useState } from "react";
 import Animate from "react-smooth";
-import BikeImg from "../assets/bikebmw.png";
+import BikeImg from "../assets/cbr2.png";
 import CarImg from "../assets/bmwclear.png";
 
 const ExperimentHero = () => {
@@ -35,12 +35,26 @@ const ExperimentHero = () => {
             </div>
           </div>
         </Animate>
-        <div>
-          <img
-            src={backgroundImage}
-            alt="background"
-            className="object-cover"
-          />
+        <div className="">
+          {backgroundImage === CarImg ? (
+            <div>
+              <img
+                src={backgroundImage}
+                alt="background"
+                className="object-cover"
+              />
+            </div>
+          ) : (
+            <Animate to="1" from="0" attributeName="opacity">
+              <div>
+                <img
+                  src={backgroundImage}
+                  alt="background"
+                  className="object-cover h-[500px]"
+                />
+              </div>
+            </Animate>
+          )}
         </div>
       </div>
 

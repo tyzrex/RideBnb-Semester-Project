@@ -37,9 +37,9 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
     }
   };
 
-  console.log(searchData);
+  // console.log(searchData);
 
-  console.log(data);
+  // console.log(data);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -99,14 +99,14 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
     <div className="flex justify-center h-auto items-center w-screen">
       <div className="w-full flex h-auto flex-col justify-center items-center">
         <div className="w-[90%]  xl:max-w-[1200px]  xl:w-[100%] relative ">
-          {/* <div className="bg-white xl:w-[30%] w-[100%] rounded-t-md flex justify-around h-[50px] items-center absolute -translate-y-[50px]">
+          <div className="bg-white xl:w-[30%] w-[100%] rounded-t-3xl flex justify-around h-[50px] items-center absolute -translate-y-[50px]">
             <div>
               <button
                 onClick={handleCarClick}
                 className="flex justify-center items-center gap-1"
               >
                 <AiFillCar className="text-2xl" />
-                <h1>Rent a car</h1>
+                <h1 className="">Rent a car</h1>
               </button>
             </div>
             <div>
@@ -118,9 +118,9 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
                 <h1>Rent a bike</h1>
               </button>
             </div>
-          </div> */}
+          </div>
 
-          <div className="bg-white p-12 md:p-10 lg:p-12 shadow-2xl rounded-3xl">
+          <div className="bg-white p-12 md:p-10 lg:p-12 shadow-2xl xl:rounded-tr-3xl rounded-b-3xl">
             <div className="grid content-center md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-5 ">
               <div>
                 <div className="flex gap-3 items-center">

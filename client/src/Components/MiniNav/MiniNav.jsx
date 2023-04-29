@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const MiniNav = () => {
   const pagelocation = window.location.pathname;
   return (
-    <div className="mt-5 mb-20 mx-auto max-w-[90%] xl:max-w-[1200px] w-screen">
+    <div className="mt-10 mb-10 mx-auto max-w-[90%] xl:max-w-[1200px] w-screen">
       <div>
         <div className="flex justify-between items-center">
           <div>

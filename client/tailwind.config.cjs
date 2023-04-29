@@ -17,6 +17,9 @@ module.exports = {
         "main-accent": "#000000",
         "gray-accent": "#b1b5c3",
       },
+      screens: {
+        xs: "425px",
+      },
     },
   },
   plugins: [require("preline/plugin")],

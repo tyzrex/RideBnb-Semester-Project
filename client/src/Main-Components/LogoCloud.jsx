@@ -11,7 +11,7 @@ const LogoCloud = () => {
 
   return (
     <div className="">
-      <div className="mx-auto rounded-3xl py-5 px-4 w-full max-w-[90%] xl:max-w-[1200px] bg-black">
+      <div className="mx-auto rounded-3xl py-5 px-4 w-full max-w-[90%] xl:max-w-[1200px] border border-gray-200 bg-white">
         <div className="grid grid-cols-6 lg:grid-cols-5 gap-y-10 gap-x-2">
           {images.map((image, index) => (
             <div

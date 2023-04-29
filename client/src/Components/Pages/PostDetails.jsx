@@ -233,11 +233,11 @@ const PostDetails = () => {
           <DetailLoading />
         </div>
       ) : (
-        <div className="lg:max-w-[1200px] max-w-[90%] gap-6 w-screen mx-auto mt-5 mb-20 flex flex-col justify-center ">
+        <div className="lg:max-w-[1200px] max-w-[90%] gap-6 w-screen mx-auto mt-10 mb-20 flex flex-col justify-center ">
           <div>
             <div className="flex-col flex gap-6 xl:flex-row justify-between items-center">
               <div>
-                <button className="border-[2px] font-semibold  border-gray-300 rounded-full py-[10px] px-4 text-black hover:border-black text-sm hover:bg-black hover:text-white transition-all duration-300 ease-in-out">
+                <button className="border-[2px]  font-semibold  border-gray-300 rounded-full py-[10px] px-4 text-black hover:border-black text-sm hover:bg-black hover:text-white transition-all duration-300 ease-in-out">
                   <Link
                     to="/"
                     className="flex justify-center items-center gap-2"
