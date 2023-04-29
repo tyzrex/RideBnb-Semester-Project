@@ -308,7 +308,7 @@ const ListVehicle = () => {
                     id="pricePerDay"
                     type="text"
                     className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
-                    placeholder="e.g. Toyota Corolla"
+                    placeholder="e.g. 9000"
                   />
                   {postError.pricePerDay && (
                     <p className="text-red-500">{postError.pricePerDay}</p>
@@ -328,7 +328,7 @@ const ListVehicle = () => {
                     id="numberPlate"
                     type="text"
                     className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
-                    placeholder="e.g. Toyota Corolla"
+                    placeholder="e.g. Ga 1 Jha"
                   />
                   {postError.numberPlate && (
                     <p className="text-red-500">{postError.numberPlate}</p>
@@ -348,75 +348,76 @@ const ListVehicle = () => {
                     id="address"
                     type="text"
                     className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
-                    placeholder="e.g. Toyota Corolla"
+                    placeholder="e.g. Kathmandu"
                   />
                   {postError.address && (
                     <p className="text-red-500">{postError.address}</p>
                   )}
                 </div>
 
-                <div>
-                  <label
-                    className="text-gray-400 font-semibold text-sm"
-                    htmlFor="makeyear"
-                  >
-                    Vehicle Make Year
-                  </label>
-                  <input
-                    onChange={handleChange}
-                    name="vehicleMakeYear"
-                    id="vehicleMakeYear"
-                    type="text"
-                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
-                    placeholder="e.g. Toyota Corolla"
-                  />
-                  {postError.vehicleMakeYear && (
-                    <p className="text-red-500">{postError.vehicleMakeYear}</p>
-                  )}
-                </div>
+                <div className="flex flex-col justify-start gap-5 lg:flex-row w-full">
+                  <div>
+                    <label
+                      className="text-gray-400 font-semibold text-sm"
+                      htmlFor="makeyear"
+                    >
+                      Vehicle Make Year
+                    </label>
+                    <input
+                      onChange={handleChange}
+                      name="vehicleMakeYear"
+                      id="vehicleMakeYear"
+                      type="text"
+                      className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
+                      placeholder="e.g. 2019"
+                    />
+                    {postError.vehicleMakeYear && (
+                      <p className="text-red-500">
+                        {postError.vehicleMakeYear}
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <label
+                      className="text-gray-400 font-semibold text-sm"
+                      htmlFor="vehicleType"
+                    >
+                      Vehicle Type
+                    </label>
+                    <select
+                      className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
+                      name="vehicleType"
+                      onChange={handleVehicleType}
+                    >
+                      <option>Vehicle Type</option>
+                      <option>Car</option>
+                      <option>Bike</option>
+                    </select>
+                    {postError.vehicleType && (
+                      <p className="text-red-500">{postError.vehicleType}</p>
+                    )}
+                  </div>
 
-                <div>
-                  <label
-                    className="text-gray-400 font-semibold text-sm"
-                    htmlFor="vehicleType"
-                  >
-                    Vehicle Type
-                  </label>
-                  <select
-                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
-                    placeholder="e.g. Toyota Corolla"
-                    name="vehicleType"
-                    onChange={handleVehicleType}
-                  >
-                    <option>Select Vehicle Type</option>
-                    <option>Car</option>
-                    <option>Bike</option>
-                  </select>
-                  {postError.vehicleType && (
-                    <p className="text-red-500">{postError.vehicleType}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label
-                    className="text-gray-400 font-semibold text-sm"
-                    htmlFor="listingType"
-                  >
-                    Listing Type
-                  </label>
-                  <select
-                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
-                    placeholder="e.g. Toyota Corolla"
-                    name="listingType"
-                    onChange={handleListingType}
-                  >
-                    <option>Select Listing Type</option>
-                    <option>Rent</option>
-                    <option>Sell</option>
-                  </select>
-                  {postError.listingType && (
-                    <p className="text-red-500">{postError.listingType}</p>
-                  )}
+                  <div>
+                    <label
+                      className="text-gray-400 font-semibold text-sm"
+                      htmlFor="listingType"
+                    >
+                      Listing Type
+                    </label>
+                    <select
+                      className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
+                      name="listingType"
+                      onChange={handleListingType}
+                    >
+                      <option>Listing Type</option>
+                      <option>Rent</option>
+                      <option>Sell</option>
+                    </select>
+                    {postError.listingType && (
+                      <p className="text-red-500">{postError.listingType}</p>
+                    )}
+                  </div>
                 </div>
 
                 <div>
@@ -475,8 +476,8 @@ const ListVehicle = () => {
           </section>
         </div>
 
-        <div className="max-w-[40%] hidden lg:block">
-          <div className="grid w-full">
+        <div className="max-w-[40%] hidden lg:block ">
+          <div className="grid w-full sticky top-10">
             <h1 className="text-[24px] mb-10 font-semibold text-gray-800">
               Preview
             </h1>

@@ -50,7 +50,7 @@ const ExperimentHero = () => {
                 <img
                   src={backgroundImage}
                   alt="background"
-                  className="object-cover h-[500px]"
+                  className="object-cover xl:h-[485px]"
                 />
               </div>
             </Animate>

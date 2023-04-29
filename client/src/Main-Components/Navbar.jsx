@@ -144,34 +144,34 @@ const Navbar = () => {
           <div
             className={
               !nav
-                ? `absolute top-24 left-0 flex justify-center items-center py-5 bg-white w-screen opacity-100 transition-all ease-in-out duration-1000 `
+                ? `absolute top-20 left-0 flex justify-start z-10  rounded-b-3xl py-5 bg-white w-screen opacity-100 transition-all ease-in-out duration-1000 `
                 : `bg-transparent opacity-0 absolute w-screen left-0 -top-[800px] transition-all duration-1000 ease-in-out`
             }
           >
-            <ul className="flex flex-col justify-center items-center gap-4 cursor-pointer">
-              <li className=" font-medium ">Dashboard</li>
-              <li className=" font-medium ">Booking Schedule</li>
-              <li className=" font-medium ">Account Settings</li>
-              <li className=" font-medium ">List vehicle</li>
-              <li className="flex flex-col justify-center items-center gap-4">
+            <ul className="flex flex-col mx-8 gap-4 cursor-pointer w-full">
+              <div className="flex flex-col gap-4 border-b w-full border-b-gray-200">
+                <li className=" font-medium ">Home</li>
+                <li className=" font-medium mb-3">About</li>
+              </div>
+              <div className="flex flex-col gap-4 border-b w-full border-b-gray-200">
+                <li className=" font-medium ">Dashboard</li>
+                <li className=" font-medium mb-3">List Your Vehicle</li>
+              </div>
+              <li className="flex flex-col gap-4">
                 {user ? (
-                  <button
+                  <li
+                    className="flex flex-col justify-center items-center gap-4"
                     onClick={logoutUser}
-                    className="bg-custom-green button-hover bg-black text-white p-4 rounded-xl"
                   >
-                    Logout
-                  </button>
+                    Log out
+                  </li>
                 ) : (
-                  <div className="flex flex-col justify-center items-center gap-4">
+                  <div className="flex flex-col gap-4">
                     <Link to="/register">
-                      <button className="p-[1rem] hover-underline-animation ">
-                        Register
-                      </button>
+                      <li className=" font-medium ">Register</li>
                     </Link>
                     <Link to="/login">
-                      <button className="p-[1rem] bg-main-accent text-white rounded-md border-2 border-black hover:text-black hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300 ">
-                        Log In
-                      </button>
+                      <li className="font-medium">Log in</li>
                     </Link>
                   </div>
                 )}
