@@ -3,7 +3,7 @@ import React from "react";
 const ListHero = () => {
   return (
     <div className="flex justify-center items-center w-screen">
-      <div className="xl:max-w-[1300px] max-w-[95%] w-full mx-auto">
+      <div className="xl:max-w-[1200px] max-w-[90%] w-full mx-auto">
         <div className="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
           <div>
             <h1 className="block text-4xl font-bold text-gray-800 sm:text-5xl text-center md:text-left lg:text-[3.5rem] lg:leading-tight dark:text-white">

@@ -4,11 +4,15 @@ import { Link } from "react-router-dom";
 const ExploreCards = (props) => {
   return (
     <div>
-      <div className="!z-5 hover:scale-105 transition-all duration-300 hover:shadow-xl shadow-lg relative flex flex-col rounded-[20px] sm:max-w-[600px] sm:w-[600px] lg:max-w-[300px] lg:w-[290px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 3xl:p-![18px] undefined">
+      <div className="!z-5 hover:scale-105 transition-all duration-300 hover:shadow-xl shadow-lg relative flex flex-col rounded-[20px] w-[350px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 3xl:p-![18px] undefined">
         <div className="h-full w-full">
           <div className="relative w-full">
             <img
-              src={`../../../Images/${props.vehicleImage}`}
+              src={
+                props.vehicleImage.length > 0
+                  ? props.vehicleImage
+                  : "https://via.placeholder.com/350"
+              }
               className="mb-2 h-[250px] object-cover w-full rounded-t-xl transition-transform duration-500 ease-in-out"
               alt=""
             />
@@ -37,32 +41,25 @@ const ExploreCards = (props) => {
           <div className="m-5 flex items-center justify-between px-1 md:items-start">
             <div className="mb-2">
               <p className="text-lg font-bold text-navy-700">
-                {props?.vehicleName}
+                {props.vehicleName.length === 0
+                  ? "Vehicle Name"
+                  : props.vehicleName}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2">
                 Posted by :{" "}
-                <span className="font-bold text-[#ff5a5f]">
+                <span className="font-bold text-blue-500">
                   {props.postedBy}
                 </span>
               </p>
-              <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2">
-                Location :{" "}
-                <span className="font-bold">{props.vehicleLocation}</span>
-              </p>
             </div>
             <div className="flex flex-row-reverse md:mt-2 lg:mt-0">
-              <h1>
-                {props.vehicleRating === null
-                  ? "No Rating"
-                  : parseFloat(props.vehicleRating).toFixed(1)}{" "}
-                ⭐
-              </h1>
+              <h1>4.5 ⭐</h1>
             </div>
           </div>
           <div className="flex m-5 items-center justify-between md:items-center lg:justify-between ">
             <div className="flex">
               <p className="!mb-0 text-sm font-bold text-brand-500">
-                Rs {props.vehiclePrice} per day
+                Rs {props.price.length === 0 ? "0" : props.vehiclePrice} per day
               </p>
             </div>
             <Link to={`/explore/${props.postId}`}>

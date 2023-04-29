@@ -10,10 +10,12 @@ import {
   IsAuthenticated,
   RidirectRegister,
 } from "./PrivateRoute/IsAuthenticated";
+import ExperimentList from "./Components/Pages/experimentList";
 import PostDetails from "./Components/Pages/PostDetails";
 import EditProfile from "./Components/Pages/EditProfile";
 import ErrorPage from "./error/404";
 import About from "./Components/Pages/About";
+import Mybookings from "./Components/Pages/Mybookings";
 
 const router = createBrowserRouter([
   {
@@ -51,7 +53,7 @@ const router = createBrowserRouter([
     element: <PostDetails />,
   },
   {
-    path: "/editprofile/",
+    path: "/editprofile/:id",
     element: (
       <IsAuthenticated>
         <EditProfile />
@@ -75,6 +77,14 @@ const router = createBrowserRouter([
   {
     path: "/search/:location/:vehicleType",
     element: <List />,
+  },
+  {
+    path: "/myBookings",
+    element: <Mybookings />,
+  },
+  {
+    path: "/experimentList",
+    element: <ExperimentList />,
   },
 ]);
 

@@ -52,7 +52,7 @@ const ExploreAll = () => {
       </div>
 
       <div className="pb-20">
-        <div className="w-screen gap-5 grid justify-items-center content-center xl:grid-cols-4 md:grid-cols-2 grid-cols-1 mx-auto max-w-[95%] xl:max-w-[1300px] mt-20">
+        <div className="w-screen gap-5 grid justify-items-center content-center xl:grid-cols-4 md:grid-cols-2 grid-cols-1 mx-auto max-w-[90%] xl:max-w-[1200px] mt-20">
           {posts.map((item) => (
             <ExploreCards
               key={item.vehicle_post_id}

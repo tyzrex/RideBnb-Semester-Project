@@ -5,11 +5,11 @@ import CarArt from "../assets/car.png";
 const FAQ = () => {
   return (
     <div className="">
-      <div className="flex justify-center items-center h-auto w-screen max-w-[95%] xl:max-w-[1300px] mx-auto mt-[200px] sm:mt-[160px] md:mt-[120px] lg:my-16">
+      <div className="flex justify-center items-center h-auto w-screen max-w-[90%] xl:max-w-[1200px] mx-auto mt-[200px] sm:mt-[160px] md:mt-[120px] lg:my-16">
         {/* <img src={CarArt} alt="car" className="absolute left-0 -z-0" /> */}
         <div className="z-10">
           <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-            <div className="max-w-[1300px] mx-auto text-center mb-10 lg:mb-14">
+            <div className="max-w-[1200px] mx-auto text-center mb-10 lg:mb-14">
               <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
                 Your questions, answered
               </h2>
@@ -18,7 +18,7 @@ const FAQ = () => {
               </p>
             </div>
 
-            <div className="max-w-[1300px] mx-auto">
+            <div className="max-w-[1200px] mx-auto">
               <div className="hs-accordion-group bg-white shadow-2xl rounded-xl">
                 <div
                   className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05] active"

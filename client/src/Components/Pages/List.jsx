@@ -14,6 +14,7 @@ import SearchItem from "../../Main-Components/Cards/SearchCards";
 import { axiosBase } from "../../Instance/instance";
 import empty from "../../assets/empty.jpg";
 import wow from "../../assets/wow.jpg";
+import MiniNav from "../MiniNav/MiniNav";
 
 const List = () => {
   const prevState = useLocation();
@@ -118,9 +119,10 @@ const List = () => {
   return (
     <div>
       <Navbar />
+      <MiniNav />
       {prevState.state ? (
         <>
-          <h1 className="text-4xl pt-3 pb-6 font-bold text-center mt-10">
+          <h1 className="text-4xl -mt-10 pb-6 font-bold text-center">
             Search Results for {prevState.state.vehicleType} in{" "}
             {prevState.state.location || searchParams.get("location")}
           </h1>
@@ -128,10 +130,10 @@ const List = () => {
       ) : (
         <></>
       )}
-      <div className="flex justify-center mt-[20px] mb-10">
-        <div className="w-[100%] max-w-[95%] xl:max-w-[1300px] flex-col flex xl:flex-row justify-center gap-[20px]">
+      <div className="flex justify-center max-w-[90%] xl:max-w-[1200px] mx-auto w-screen mt-[20px] mb-10">
+        <div className="w-full flex-col flex xl:flex-row justify-center gap-[20px]">
           <div className="h-full">
-            <div className="xl:flex-1 pb-5 w-screen max-w-[95%] mx-auto xl:w-full bg-white shadow-xl px-8 py-2 lg:p-5 rounded-md ">
+            <div className="xl:flex-1 pb-5 w-screen max-w-[90%] mx-auto xl:mx-0 xl:w-full bg-white border border-gray-200 px-8 py-2 lg:p-5 rounded-2xl ">
               <h1 className="text-2xl py-6 font-bold top-[10px] text-black">
                 Search for Vehicles
               </h1>
@@ -246,9 +248,10 @@ const List = () => {
           </div>
           <div className="flex-[3]">
             {prevState.state || searchParams ? (
-              searchData.map((item) => (
+              searchData.map((item, index) => (
                 <SearchItem
-                  key={item.vehicle_post_id}
+                  key={index}
+                  vehicle_id={item.vehicle_post_id}
                   vehicle_name={item.vehicle_name}
                   vehicle_type={item.vehicle_type}
                   vehicle_price={item.vehicle_price}
@@ -260,6 +263,8 @@ const List = () => {
                   vehicle_brand={item.vehicle_brand}
                   posted_by={item.customername}
                   price_per_day={item.price_per_day}
+                  checkIn={data.checkIn}
+                  checkOut={data.checkOut}
                 />
               ))
             ) : (
@@ -281,7 +286,7 @@ const List = () => {
                 <img
                   src={wow}
                   alt="empty"
-                  className="max-w-[95%] lg:w-[100%] object-cover "
+                  className="max-w-[90%] lg:w-[100%] object-cover "
                 />
               </div>
             )}

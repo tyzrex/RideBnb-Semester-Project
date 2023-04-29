@@ -10,6 +10,7 @@ import SearchItem from "./Cards/SearchCards";
 import { TbLocation } from "react-icons/tb";
 import { BsCalendarRange } from "react-icons/bs";
 import { BsCardChecklist } from "react-icons/bs";
+import { DateRange } from "react-date-range";
 
 const HeroCard = ({ onCarClick, onBikeClick }) => {
   const [vehicleChoice, setVehicleChoice] = useState("Car");
@@ -97,7 +98,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
   return (
     <div className="flex justify-center h-auto items-center w-screen">
       <div className="w-full flex h-auto flex-col justify-center items-center">
-        <div className="md:w-[95%]  xl:max-w-[1300px]  w-[100%] relative ">
+        <div className="w-[90%]  xl:max-w-[1200px]  xl:w-[100%] relative ">
           {/* <div className="bg-white xl:w-[30%] w-[100%] rounded-t-md flex justify-around h-[50px] items-center absolute -translate-y-[50px]">
             <div>
               <button
@@ -159,27 +160,6 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
                   className="w-full border-none text-gray-500 bg-white rounded-lg p-2  placeholder:text-gray-400 text-2xl font-medium py focus:outline-none"
                   name="checkIn"
                 />
-                {datePicker && (
-                  <div className="absolute">
-                    <DateRangePicker
-                      className=""
-                      ranges={[selectionRange]}
-                      rangeColors={["#000000"]}
-                      onChange={handleSelect}
-                      minDate={new Date()}
-                      footerContent={
-                        <div className="flex justify-center items-center">
-                          <button
-                            onClick={handleDatePicker}
-                            className="bg-black text-white px-4 py-2 rounded-lg"
-                          >
-                            Close
-                          </button>
-                        </div>
-                      }
-                    />
-                  </div>
-                )}
               </div>
 
               <div>
@@ -201,6 +181,27 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
                   id="checkOut"
                   name="checkOut"
                 />
+                {datePicker && (
+                  <div className="absolute">
+                    <DateRange
+                      className=""
+                      ranges={[selectionRange]}
+                      rangeColors={["#000000"]}
+                      onChange={handleSelect}
+                      minDate={new Date()}
+                      footerContent={
+                        <div className="flex justify-center items-center">
+                          <button
+                            onClick={handleDatePicker}
+                            className="bg-black text-white px-4 py-2 rounded-lg"
+                          >
+                            Close
+                          </button>
+                        </div>
+                      }
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-col">
@@ -225,7 +226,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
 
           <div className="md:absolute md:right-[5%] flex items-center justify-center -translate-y-1/2">
             <Link
-              to={`/search/${data.location}/${data.vehicleType}`}
+              to={`/search?location=${data.location}&vehicleType=${data.vehicleType}`}
               state={data}
               onClick={searchVehicle}
             >

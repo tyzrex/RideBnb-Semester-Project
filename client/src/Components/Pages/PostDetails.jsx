@@ -11,7 +11,7 @@ import { io } from "socket.io-client";
 import("./list.css");
 import Comment from "./Comment";
 import { DateRange } from "react-date-range";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FiShare } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
 import {
@@ -36,13 +36,13 @@ const PostDetails = () => {
 
   const pagelocation = window.location.pathname.split("/");
 
-  console.log(pagelocation);
   const navigate = useNavigate();
+  const prevState = useLocation().state;
 
   const [data, setData] = useState({
     vehicle_post_id: id,
-    checkIn: "",
-    checkOut: "",
+    checkIn: prevState?.checkIn || "",
+    checkOut: prevState?.checkOut || "",
     total_price: 100,
   });
 
@@ -170,6 +170,7 @@ const PostDetails = () => {
 
   const stars = [];
   for (let i = 1; i <= 5; i++) {
+    let j = i;
     if (i <= rating) {
       stars.push(
         <span
@@ -189,7 +190,6 @@ const PostDetails = () => {
       );
     }
   }
-  console.log(data);
 
   const handleBooking = async () => {
     try {
@@ -233,9 +233,9 @@ const PostDetails = () => {
           <DetailLoading />
         </div>
       ) : (
-        <div className="lg:max-w-[1300px] max-w-[95%] gap-6 w-screen mx-auto mt-5 mb-20 flex flex-col justify-center justify-items-center">
+        <div className="lg:max-w-[1200px] max-w-[90%] gap-6 w-screen mx-auto mt-5 mb-20 flex flex-col justify-center ">
           <div>
-            <div className="flex justify-between items-center">
+            <div className="flex-col flex gap-6 xl:flex-row justify-between items-center">
               <div>
                 <button className="border-[2px] font-semibold  border-gray-300 rounded-full py-[10px] px-4 text-black hover:border-black text-sm hover:bg-black hover:text-white transition-all duration-300 ease-in-out">
                   <Link
@@ -311,7 +311,7 @@ const PostDetails = () => {
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                 </svg>
                 <p className="ml-2 text-sm font-bold text-gray-900 dark:text-white">
-                  4.85
+                  {parseFloat(post.avg_rating).toFixed(1)}
                 </p>
                 <span className="w-1 h-1 mx-1.5 bg-gray-400 rounded-full dark:bg-gray-400"></span>
                 <a
@@ -521,7 +521,7 @@ const PostDetails = () => {
         <></>
       ) : (
         <div>
-          <div className="max-w-[95%] xl:max-w-[1300px] mx-auto ">
+          <div className="max-w-[90%] xl:max-w-[1200px] mx-auto ">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl lg:text-[24px] font-semibold text-gray-900 dark:text-white">
                 Add a review
@@ -553,10 +553,10 @@ const PostDetails = () => {
               </button>
             </form>
             <div className="flex flex-col">
-              {comments.map((comment) => (
+              {comments.map((comment, index) => (
                 <Comment
                   className="text-black"
-                  key={comment.comment_id}
+                  key={index}
                   comment={comment.comment_text}
                   author={comment.customer_name}
                   date={convertDate(comment.created_at)}

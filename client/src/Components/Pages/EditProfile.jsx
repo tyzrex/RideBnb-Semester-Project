@@ -86,7 +86,7 @@ const EditProfile = () => {
       <h1 className="text-3xl font-bold text-center mt-10">
         Edit Your Personal Information
       </h1>
-      <div className="xl:max-w-[1300px] px-4 py-10 max-w-[95%] lg:py-14 mb-10 mx-auto w-screen">
+      <div className="xl:max-w-[1200px] px-4 py-10 max-w-[90%] lg:py-14 mb-10 mx-auto w-screen">
         <div className="bg-white rounded-xl p-4 sm:p-7 dark:bg-slate-900">
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200">

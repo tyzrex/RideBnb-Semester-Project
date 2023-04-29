@@ -22,7 +22,7 @@ const ExperimentHero = () => {
     <div
       className={`delay-500 transition-all h-auto text-black bg-gray-200 flex`}
     >
-      <div className="w-full mx-auto xl:max-w-[1300px] max-w-[95%] z-[0] py-[350px] md:py-[200px] lg:pt-[50px] xl:pb-[120px] h-full mt-[-250px] md:mt-[-80px] lg:mt-[0px] lg:flex lg:justify-around lg:items-center md:grid grid gap-0 content-center justify-items-center md:justify-items-center md:content-center sm:content-center sm:justify-items-center">
+      <div className="w-full mx-auto xl:max-w-[1200px] max-w-[90%] z-[0] py-[350px] md:py-[200px] lg:pt-[50px] xl:pb-[120px] h-full mt-[-250px] md:mt-[-80px] lg:mt-[0px] lg:flex lg:justify-around lg:items-center md:grid grid gap-0 content-center justify-items-center md:justify-items-center md:content-center sm:content-center sm:justify-items-center">
         <Animate to="1" from="0" attributeName="opacity">
           <div className="flex flex-col justify-center items-center lg:items-start">
             <h1 className="md:text-5xl sm:text-5xl text-4xl z-10 font-semibold md:py-6 md:max-w-xl text-black lg:text-left text-center">

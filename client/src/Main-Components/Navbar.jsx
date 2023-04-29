@@ -18,9 +18,9 @@ const Navbar = () => {
   return (
     <div
       id="navbar"
-      className="transition-all duration-300 ease-in-out flex relative z-[20] justify-center items-center w-screen bg-white text-black py-6"
+      className="transition-all duration-300 ease-in-out flex relative z-[20] justify-center items-center w-screen bg-white text-black py-6 border-b"
     >
-      <div className="xl:max-w-[1300px] max-w-[95%] flex justify-center w-full items-center">
+      <div className="xl:max-w-[1200px] max-w-[90%] flex justify-center w-full items-center">
         <div className="flex justify-between items-center w-full">
           <div className="logo">
             <Link to="/">
@@ -36,7 +36,7 @@ const Navbar = () => {
                 <div className="font-medium ">Home</div>
               </Link>
               <div className=" font-medium ">About</div>
-              <div className=" font-medium  ">Booking Schedule</div>
+              <div className=" font-medium  ">My Bookings</div>
 
               <Link to="/listvehicle">
                 <div className=" font-medium bg-black text-white py-2 px-4 rounded-3xl">
@@ -78,7 +78,9 @@ const Navbar = () => {
                             </div>
                           </div>
                           <div className="mt-2 py-2 first:pt-0 last:pb-0">
-                            <Link to={`/editprofile`}>
+                            <Link
+                              to={`/editprofile/user_id=${user.customer_id}`}
+                            >
                               <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-green-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
                                 <IoSettingsOutline className="text-[16px]" />
                                 Settings

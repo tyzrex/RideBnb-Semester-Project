@@ -3,7 +3,7 @@ import React from "react";
 const LoadImage = () => {
   return (
     <div>
-      <div className="flex justify-center items-center h-48 bg-gray-300 rounded max-w-[95%] xl:w-[1300px] dark:bg-gray-700">
+      <div className="flex justify-center items-center h-48 bg-gray-300 rounded max-w-[90%] xl:w-[1200px] dark:bg-gray-700">
         <svg
           className="w-12 h-12 text-gray-200"
           xmlns="http://www.w3.org/2000/svg"

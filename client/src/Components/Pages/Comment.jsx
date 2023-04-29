@@ -2,22 +2,21 @@ import React from "react";
 
 const Comment = (props) => {
   const stars = () => {
-    let stars = [];
-    for (let i = 0; i < props.stars; i++) {
-      stars.push(
+    const yellowStars = Array(props.stars)
+      .fill()
+      .map((_, i) => (
         <span key={i} className="text-yellow-400">
           ★
         </span>
-      );
-    }
-    for (let i = 0; i < 5 - props.stars; i++) {
-      stars.push(
-        <span key={i} className="text-gray-400">
+      ));
+    const grayStars = Array(5 - props.stars)
+      .fill()
+      .map((_, i) => (
+        <span key={i + props.stars} className="text-gray-400">
           ★
         </span>
-      );
-    }
-    return stars;
+      ));
+    return [...yellowStars, ...grayStars];
   };
 
   return (
