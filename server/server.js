@@ -19,7 +19,6 @@ const port = 5000;
 app.use(
   cors({
     origin: ["http://localhost:5173"],
-    origin: ["http://localhost:3000"],
     credentials: true,
   })
 );
@@ -45,7 +44,7 @@ const io = new Server(server, {
 });
 
 app.get("/", (req, res) => {
-  res.json("Hello world");
+  res.send("Hello World!");
 });
 
 io.on("connection", (socket) => {
@@ -56,8 +55,12 @@ io.on("connection", (socket) => {
     console.log(`User with ID: ${socket.id} joined room: ${data}`);
   });
 
-  socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data);
+  socket.on("sendNotification", ({ senderName, receiverName, type }) => {
+    const receiver = receiverName;
+    io.to(receiver.socketId).emit("getNotification", {
+      senderName,
+      type,
+    });
   });
 
   socket.on("disconnect", () => {

@@ -239,7 +239,7 @@ const List = () => {
               >
                 <button
                   // onClick={handleSubmit}
-                  className="button-hover bg-black text-white p-3 rounded-md"
+                  className="button-transition hover:bg-black bg-blue-500 font-semibold text-white p-3 rounded-full"
                 >
                   Search
                 </button>

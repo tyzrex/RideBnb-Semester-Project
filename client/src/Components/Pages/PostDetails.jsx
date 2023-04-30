@@ -107,6 +107,10 @@ const PostDetails = () => {
       setComments((prevState) => [...prevState, comment]);
     });
 
+    socket.on("getNotification", (data) => {
+      console.log(data);
+    });
+
     socket.on("comments", (comments) => {
       setComments(comments);
     });
@@ -200,6 +204,14 @@ const PostDetails = () => {
     }
   };
 
+  const defaultProps = {
+    center: {
+      lat: 10.99835602,
+      lng: 77.01502627,
+    },
+    zoom: 11,
+  };
+
   const convertDate = (date) => {
     const newDate = new Date(date);
     const year = newDate.getFullYear();
@@ -219,11 +231,31 @@ const PostDetails = () => {
     }
   }, []);
 
+  const sendNotification = async () => {
+    const data = {
+      title: "New Notification",
+      body: "I want to book your vehicle",
+      id: id,
+    };
+    try {
+      const response = await axiosInstance.post("/comment/notifyUsers", data);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
       <div className="border-b">
         <Navbar />
       </div>
+      <button
+        onClick={sendNotification}
+        className="bg-black p-4 rounded-3xl text-white"
+      >
+        Send Notification
+      </button>
       {/* <h1 className="text-center text-4xl font-bold text-black mt-10">
         {" "}
         Post Details{" "}

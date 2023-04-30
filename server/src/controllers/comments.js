@@ -27,6 +27,24 @@ export const createComment = async (req, res) => {
   }
 };
 
+export const notifyUsers = async (req, res) => {
+  const user = req.user;
+  const { customer_id } = user;
+  const { customername } = user;
+  const data = req.body;
+  const { id } = data;
+
+  //find the user you want to send notification to
+  const { rows } = await pool.query(
+    "SELECT customer_id FROM vehicle_post WHERE vehicle_post_id = $1;",
+    [id]
+  );
+
+  io.to(rows[0].customer_id).emit("getNotification", {
+    data,
+  });
+};
+
 export const getComments = async (req, res) => {
   try {
     const { id } = req.params;
