@@ -11,6 +11,7 @@ import { TbLocation } from "react-icons/tb";
 import { BsCalendarRange } from "react-icons/bs";
 import { BsCardChecklist } from "react-icons/bs";
 import { DateRange } from "react-date-range";
+import { FcCalendar, FcList, FcPlanner } from "react-icons/fc";
 
 const HeroCard = ({ onCarClick, onBikeClick }) => {
   const [vehicleChoice, setVehicleChoice] = useState("Car");
@@ -96,10 +97,10 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
   };
 
   return (
-    <div className="flex justify-center h-auto items-center w-screen">
+    <div className="flex justify-center h-auto items-center w-screen ">
       <div className="w-full flex h-auto flex-col justify-center items-center">
         <div className="w-[90%]  xl:max-w-[1200px]  xl:w-[100%] relative ">
-          <div className="bg-white xl:w-[30%] w-[100%] rounded-t-3xl flex justify-around h-[50px] items-center absolute -translate-y-[50px]">
+          {/* <div className="bg-white xl:w-[30%] w-[100%] rounded-t-3xl flex justify-around h-[50px] items-center absolute -translate-y-[50px]">
             <div>
               <button
                 onClick={handleCarClick}
@@ -118,13 +119,13 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
                 <h1>Rent a bike</h1>
               </button>
             </div>
-          </div>
+          </div> */}
 
-          <div className="bg-white p-12 md:p-10 lg:p-12 shadow-2xl xl:rounded-tr-3xl rounded-b-3xl">
+          <div className="bg-white p-12 md:p-10 lg:p-12 shadow-2xl xl:rounded-3xl">
             <div className="grid content-center md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-5 ">
               <div>
                 <div className="flex gap-3 items-center">
-                  <TbLocation className="text-3xl text-gray-500" />
+                  <TbLocation className="text-3xl text-yellow-500" />
                   <label className="text-black text-2xl font-bold">
                     {" "}
                     Location
@@ -144,7 +145,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
 
               <div>
                 <div className="flex gap-3 items-center">
-                  <BsCalendarRange className="text-3xl text-gray-500" />
+                  <FcCalendar className="text-3xl text-gray-500" />
                   <label className="text-black text-2xl font-bold">
                     {" "}
                     Check In
@@ -164,7 +165,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
 
               <div>
                 <div className="flex gap-3 items-center">
-                  <BsCalendarRange className="text-3xl text-gray-500" />
+                  <FcPlanner className="text-3xl text-gray-500" />
                   <label className="text-black text-2xl font-bold">
                     {" "}
                     Check Out
@@ -206,7 +207,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
 
               <div className="flex flex-col">
                 <div className="flex gap-3 items-center">
-                  <BsCardChecklist className="text-3xl text-gray-500" />
+                  <FcList className="text-3xl text-gray-500" />
                   <label className="text-black text-2xl font-bold">
                     {" "}
                     Vehicle Type

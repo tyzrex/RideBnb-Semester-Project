@@ -1,7 +1,7 @@
 import React from "react";
-import {AiFillCar} from "react-icons/ai";
-import {FaMotorcycle} from "react-icons/fa";
-import {BiMap} from "react-icons/bi";
+import { AiFillCar } from "react-icons/ai";
+import { FaMotorcycle } from "react-icons/fa";
+import { BiMap } from "react-icons/bi";
 
 const ExploreHero = () => {
   return (
@@ -18,7 +18,7 @@ const ExploreHero = () => {
 
         <div className="mx-auto max-w-3xl grid grid-cols-12 gap-6 lg:gap-8">
           <div className="col-span-6 sm:col-span-4 text-center">
-            <AiFillCar className="mx-auto h-auto w-7 md:w-9 text-gray-800 dark:text-gray-200"/>
+            <AiFillCar className="mx-auto h-auto w-7 md:w-9 text-gray-800 dark:text-gray-200" />
             <div className="mt-2 sm:mt-6">
               <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
                 Cars
@@ -27,7 +27,7 @@ const ExploreHero = () => {
           </div>
 
           <div className="col-span-6 sm:col-span-4 text-center">
-          <FaMotorcycle className="mx-auto h-auto w-7 md:w-9 text-gray-800 dark:text-gray-200"/>
+            <FaMotorcycle className="mx-auto h-auto w-7 md:w-9 text-gray-800 dark:text-gray-200" />
             <div className="mt-2 sm:mt-6">
               <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
                 Motorcycles
@@ -36,7 +36,7 @@ const ExploreHero = () => {
           </div>
 
           <div className="col-span-6 col-start-4 sm:col-span-4 text-center">
-          <BiMap className="mx-auto h-auto w-7 md:w-9 text-gray-800 dark:text-gray-200"/>
+            <BiMap className="mx-auto h-auto w-7 md:w-9 text-gray-800 dark:text-gray-200" />
             <div className="mt-2 sm:mt-6">
               <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
                 Destination
@@ -44,9 +44,7 @@ const ExploreHero = () => {
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
   );
 };

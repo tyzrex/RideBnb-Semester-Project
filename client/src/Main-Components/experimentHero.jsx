@@ -29,7 +29,7 @@ const ExperimentHero = () => {
               Discover your perfect ride, hit the road with Confidence
             </h1>
             <div className="">
-              <button className="bg-black animate-[bounceIn_1s_ease-in-out] hover:bg-white transition-all ease-in-out duration-500 w-[200px] rounded-md font-bold my-6 mx-auto py-3 text-white hover:text-black ">
+              <button className="bg-black animate-[bounceIn_1s_ease-in-out] hover:bg-white transition-all ease-in-out duration-500 w-[200px] rounded-full font-bold my-6 mx-auto py-3 text-white hover:text-black ">
                 Join Today
               </button>
             </div>

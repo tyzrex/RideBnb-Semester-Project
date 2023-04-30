@@ -1,84 +1,83 @@
 .listContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .listWrapper {
-    width: 100%;
-    max-width: 1024px;
-    display: flex;
-    gap: 20px;
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  gap: 20px;
 }
 
 .listSearch {
-    flex: 1;
-    background-color: black;
-    padding: 10px;
-    border-radius: 10px;
-    position: sticky;
-    top: 10px;
-    height: max-content;
+  flex: 1;
+  background-color: black;
+  padding: 10px;
+  border-radius: 10px;
+  position: sticky;
+  top: 10px;
+  height: max-content;
 }
 
 .lsTitle {
-    font-size: 20px;
+  font-size: 20px;
 
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .lsItem {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
 }
 
-.lsItem>label {
-    font-size: 12px;
+.lsItem > label {
+  font-size: 12px;
 }
 
-.lsItem>input {
-    height: 30px;
-    border: none;
-    padding: 5px;
+.lsItem > input {
+  height: 30px;
+  border: none;
+  padding: 5px;
 }
 
-.lsItem>span {
-
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+.lsItem > span {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .lsOptions {
-    padding: 10px;
+  padding: 10px;
 }
 
 .lsOptionItem {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    color: white;
-    font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: white;
+  font-size: 12px;
 }
 
 .lsOptionInput {
-    width: 50px;
+  width: 50px;
 }
 
-.listSearch>button {
-    padding: 10px;
-    background-color: #0071c2;
-    color: white;
-    border: none;
-    width: 100%;
-    font-weight: 500;
-    cursor: pointer;
+.listSearch > button {
+  padding: 10px;
+  background-color: #0071c2;
+  color: white;
+  border: none;
+  width: 100%;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .listResult {
-    flex: 3;
+  flex: 3;
 }
 
 /* .card {
@@ -103,7 +102,7 @@
 }
 
 .title::after {
-  content: '';
+  content: "";
   width: 8ch;
   height: 1px;
   position: absolute;
@@ -141,7 +140,7 @@
 }
 
 .comment-react button:after {
-  content: '';
+  content: "";
   width: 40px;
   height: 40px;
   position: absolute;
@@ -216,7 +215,7 @@
 }
 
 .comment-container .user .user-pic:after {
-  content: '';
+  content: "";
   width: 9px;
   height: 9px;
   position: absolute;

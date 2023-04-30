@@ -7,12 +7,12 @@ import car7 from "../assets/car7.png";
 import mercedez from "../assets/mercedez.png";
 
 const LogoCloud = () => {
-  const images = [car3, car4, car5, car7, mercedez];
+  const images = [car3, car4, car5, car7, mercedez, car2];
 
   return (
     <div className="">
       <div className="mx-auto rounded-3xl py-5 px-4 w-full max-w-[90%] xl:max-w-[1200px] border border-gray-200 bg-white">
-        <div className="grid grid-cols-6 lg:grid-cols-5 gap-y-10 gap-x-2">
+        <div className="grid grid-cols-6 lg:grid-cols-6 gap-y-10 gap-x-2">
           {images.map((image, index) => (
             <div
               key={index}
@@ -22,7 +22,7 @@ const LogoCloud = () => {
                 src={image}
                 key={index}
                 className="max-w-[80px] filter "
-                alt="mercedes benz car logo png brand image"
+                alt="mercedes benz car logo png brand image "
               />
             </div>
           ))}
