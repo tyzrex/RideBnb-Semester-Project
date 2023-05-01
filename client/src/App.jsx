@@ -16,7 +16,7 @@ import EditProfile from "./Components/Pages/EditProfile";
 import ErrorPage from "./error/404";
 import About from "./Components/Pages/About";
 import Mybookings from "./Components/Pages/Mybookings";
-
+import Messenger from "./Components/Messenger/Messenger";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -85,6 +85,10 @@ const router = createBrowserRouter([
   {
     path: "/experimentList",
     element: <ExperimentList />,
+  },
+  {
+    path: "/messenger",
+    element: <Messenger />,
   },
 ]);
 

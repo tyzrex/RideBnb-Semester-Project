@@ -21,8 +21,7 @@ import {
   AiFillCar,
 } from "react-icons/ai";
 import DetailLoading from "./LoadingDetails";
-
-const socket = io("http://localhost:3000");
+// const socket = io("http://localhost:3000");
 
 const PostDetails = () => {
   const [post, setPost] = useState({});
@@ -33,6 +32,8 @@ const PostDetails = () => {
   const [rating, setRating] = useState(0);
   const [rated, setRated] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const socket = useRef();
 
   const pagelocation = window.location.pathname.split("/");
 
@@ -45,6 +46,8 @@ const PostDetails = () => {
     checkOut: prevState?.checkOut || "",
     total_price: 100,
   });
+
+  console.log(comments);
 
   const selectionRange = {
     startDate: new Date(),
@@ -97,26 +100,16 @@ const PostDetails = () => {
   };
 
   const createSocketConnection = () => {
-    socket.on("connect", () => {
+    socket.current.on("connect", () => {
       console.log("Connected to socket.io server");
     });
 
-    socket.emit("joinRoom", id);
-
-    socket.on("newComment", (comment) => {
+    socket.current.on("newComment", (comment) => {
       setComments((prevState) => [...prevState, comment]);
     });
 
-    socket.on("getNotification", (data) => {
-      console.log(data);
-    });
-
-    socket.on("comments", (comments) => {
-      setComments(comments);
-    });
-
     return () => {
-      socket.disconnect();
+      socket.current.disconnect();
     };
   };
 
@@ -204,14 +197,6 @@ const PostDetails = () => {
     }
   };
 
-  const defaultProps = {
-    center: {
-      lat: 10.99835602,
-      lng: 77.01502627,
-    },
-    zoom: 11,
-  };
-
   const convertDate = (date) => {
     const newDate = new Date(date);
     const year = newDate.getFullYear();
@@ -225,37 +210,19 @@ const PostDetails = () => {
     if (shouldFetch.current) {
       window.scrollTo(0, 0);
       shouldFetch.current = false;
+      socket.current = io("http://localhost:3000");
       getComments();
       createSocketConnection();
       fetchPost();
     }
   }, []);
 
-  const sendNotification = async () => {
-    const data = {
-      title: "New Notification",
-      body: "I want to book your vehicle",
-      id: id,
-    };
-    try {
-      const response = await axiosInstance.post("/comment/notifyUsers", data);
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   return (
     <div>
       <div className="border-b">
         <Navbar />
       </div>
-      <button
-        onClick={sendNotification}
-        className="bg-black p-4 rounded-3xl text-white"
-      >
-        Send Notification
-      </button>
+
       {/* <h1 className="text-center text-4xl font-bold text-black mt-10">
         {" "}
         Post Details{" "}

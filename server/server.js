@@ -9,8 +9,10 @@ import UserRoute from "./src/routes/users.js";
 import SearchRoute from "./src/routes/search.js";
 import CommentRoute from "./src/routes/comments.js";
 import BookingRoute from "./src/routes/booking.js";
+import MessageRoute from "./src/routes/message.js";
 import http from "http";
 import { Server } from "socket.io";
+import { isAuthenticated } from "./src/middleware/isAuthenticated.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -35,6 +37,7 @@ app.use("/user", UserRoute);
 app.use("/search", SearchRoute);
 app.use("/comment", CommentRoute);
 app.use("/booking", BookingRoute);
+app.use("/chat", MessageRoute);
 
 const io = new Server(server, {
   cors: {
@@ -50,17 +53,17 @@ app.get("/", (req, res) => {
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("join_room", (data) => {
-    socket.join(data);
-    console.log(`User with ID: ${socket.id} joined room: ${data}`);
+  const bookingId = socket.handshake.query.booking_id;
+
+  socket.join(bookingId);
+
+  socket.on("newMessage", (message) => {
+    console.log(message);
+    io.to(bookingId).emit("newMessage", message);
   });
 
-  socket.on("sendNotification", ({ senderName, receiverName, type }) => {
-    const receiver = receiverName;
-    io.to(receiver.socketId).emit("getNotification", {
-      senderName,
-      type,
-    });
+  socket.on("online", (data) => {
+    io.to(bookingId).emit("online", data);
   });
 
   socket.on("disconnect", () => {
