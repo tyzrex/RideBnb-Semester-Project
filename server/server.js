@@ -54,16 +54,11 @@ io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
   const bookingId = socket.handshake.query.booking_id;
-
   socket.join(bookingId);
 
   socket.on("newMessage", (message) => {
     console.log(message);
     io.to(bookingId).emit("newMessage", message);
-  });
-
-  socket.on("online", (data) => {
-    io.to(bookingId).emit("online", data);
   });
 
   socket.on("disconnect", () => {

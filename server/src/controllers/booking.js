@@ -48,3 +48,24 @@ export const getBookingById = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+export const bookedByUser = async (req, res) => {
+  const { vehicle_post_id } = req.query;
+  const { customer_id } = req.user;
+
+  // check if the user has already booked the vehicle post
+
+  try {
+    const { rows } = await pool.query(
+      `SELECT * FROM booking WHERE vehicle_post_id = $1 AND customer_id = $2`,
+      [vehicle_post_id, customer_id]
+    );
+    if (rows.length > 0) {
+      return res.status(400).json({ message: "Booked" });
+    }
+    return res.status(200).json({ message: "Not booked" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};

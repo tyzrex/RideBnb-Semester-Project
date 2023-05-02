@@ -77,28 +77,35 @@ export const getPosts = async (req, res) => {
 };
 
 export const getPostByType = async (req, res) => {
-  const { type } = req.params;
-  console.log(type);
+  const { listingType, user_id } = req.query;
   try {
-    const { rows } = await pool.query(
-      `SELECT
-      vp.vehicle_post_id,
-      vp.vehicle_name,
-      vp.price_per_day,
-      vp.vehicle_image,
-      vp.address,
-      customer.customername,r.avg_rating 
-      FROM vehicle_post vp
-      INNER JOIN customer ON vp.customer_id = customer.customer_id 
-      LEFT JOIN (
-        SELECT vehicle_post_id, AVG(rating) AS avg_rating
-        FROM vehicle_post_comment
-        GROUP BY vehicle_post_id
-      ) r ON vp.vehicle_post_id = r.vehicle_post_id
-      WHERE vehicle_listing_type = $1  
-      ORDER BY vp.created_at DESC `,
-      [type]
-    );
+    let query = `SELECT
+    vp.vehicle_post_id,
+    vp.vehicle_name,
+    vp.price_per_day,
+    vp.vehicle_image,
+    vp.address,
+    customer.customername,
+    r.avg_rating 
+    FROM vehicle_post vp
+    INNER JOIN customer ON vp.customer_id = customer.customer_id 
+    LEFT JOIN (
+      SELECT vehicle_post_id, AVG(rating) AS avg_rating
+      FROM vehicle_post_comment
+      GROUP BY vehicle_post_id
+    ) r ON vp.vehicle_post_id = r.vehicle_post_id
+    WHERE vehicle_listing_type = $1`;
+
+    let params = [listingType];
+
+    if (user_id) {
+      query += ` AND vp.customer_id != $2`;
+      params.push(user_id);
+    }
+
+    query += ` ORDER BY vp.created_at DESC`;
+
+    const { rows } = await pool.query(query, params);
     res.status(200).json(rows);
   } catch (err) {
     console.error(err.message);

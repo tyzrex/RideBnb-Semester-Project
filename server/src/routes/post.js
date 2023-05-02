@@ -17,6 +17,6 @@ router.route("/getposts").get(getPosts);
 router.route("/getpost/:id").get(getPost);
 
 //route for getting posts by type
-router.route("/getpostbytype/:type").get(getPostByType);
+router.route("/getpostbytype").get(getPostByType);
 
 export default router;
