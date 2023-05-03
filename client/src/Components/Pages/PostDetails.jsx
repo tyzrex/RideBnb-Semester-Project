@@ -21,6 +21,8 @@ import {
   AiFillCar,
 } from "react-icons/ai";
 import DetailLoading from "./LoadingDetails";
+import { ToastContainer } from "react-toastify";
+import { toastError, toastSuccess } from "../Toast/Toast";
 // const socket = io("http://localhost:3000");
 
 const PostDetails = () => {
@@ -32,6 +34,7 @@ const PostDetails = () => {
   const [rating, setRating] = useState(0);
   const [rated, setRated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [booked, setBooked] = useState(false);
 
   const socket = useRef();
 
@@ -46,8 +49,6 @@ const PostDetails = () => {
     checkOut: prevState?.checkOut || "",
     total_price: 100,
   });
-
-  console.log(comments);
 
   const selectionRange = {
     startDate: new Date(),
@@ -108,6 +109,10 @@ const PostDetails = () => {
       setComments((prevState) => [...prevState, comment]);
     });
 
+    socket.current.on("disconnect", () => {
+      console.log("Disconnected from socket.io server");
+    });
+
     return () => {
       socket.current.disconnect();
     };
@@ -117,7 +122,6 @@ const PostDetails = () => {
     try {
       const response = await axiosInstance.get(`/comment/getComments/${id}`);
       setComments(response.data);
-      console.log(response.data);
     } catch (err) {
       console.log(err);
     }
@@ -192,8 +196,16 @@ const PostDetails = () => {
     try {
       const response = await axiosInstance.post("/booking/createBooking", data);
       console.log(response);
+      if (response.status === 201) {
+        setBooked(true);
+        toastSuccess("Booking Successful");
+      } else {
+        toastError("Booking Failed");
+        setBooked(false);
+      }
     } catch (err) {
       console.log(err);
+      toastError(err.response.data.message);
     }
   };
 
@@ -205,15 +217,38 @@ const PostDetails = () => {
     return `${year}-${month}-${day}`;
   };
 
+  const isBooked = async () => {
+    try {
+      const response = await axiosInstance.get(`/booking/bookedByUser`, {
+        params: {
+          vehicle_post_id: id,
+        },
+      });
+      if (response.status === 200) {
+        setBooked(false);
+      }
+    } catch (err) {
+      if (err.response.status === 400) {
+        setBooked(true);
+      }
+      console.log(err);
+    }
+  };
+
   const shouldFetch = useRef(true);
   useEffect(() => {
     if (shouldFetch.current) {
       window.scrollTo(0, 0);
-      shouldFetch.current = false;
-      socket.current = io("http://localhost:3000");
+      socket.current = io("http://localhost:3000", {
+        query: {
+          reciever_id: post?.customer_id,
+        },
+      });
+      isBooked();
       getComments();
       createSocketConnection();
       fetchPost();
+      shouldFetch.current = false;
     }
   }, []);
 
@@ -232,7 +267,7 @@ const PostDetails = () => {
           <DetailLoading />
         </div>
       ) : (
-        <div className="lg:max-w-[1200px] max-w-[90%] gap-6 w-screen mx-auto mt-10 mb-20 flex flex-col justify-center ">
+        <div className="xl:max-w-[1200px] max-w-[90%] gap-6 w-screen mx-auto mt-10 mb-20 flex flex-col justify-center ">
           <div>
             <div className="flex-col flex gap-6 xl:flex-row justify-between items-center">
               <div>
@@ -387,6 +422,10 @@ const PostDetails = () => {
                     voluptatibus voluptatum quidem quos quas nesciunt. Quisquam,
                     quae.
                   </h1>
+
+                  <button className="bg-blue-600 text-white px-5 py-2 rounded-xl mt-5">
+                    Contact Owner
+                  </button>
                 </div>
               </div>
             </div>
@@ -500,14 +539,33 @@ const PostDetails = () => {
                     </div>
                   </div>
 
+                  <div>
+                    {booked ? (
+                      <h1 className="text-[18px] flex justify-between items-center mt-5 font-semibold text-gray-500 mb-3">
+                        <span>Booking Status:</span>{" "}
+                        <span className="text-black">Booked</span>{" "}
+                      </h1>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+
                   <Link>
-                    <button
-                      // onClick={handleSubmit}
-                      onClick={handleBooking}
-                      className="button-hover bg-black w-full text-white p-3 rounded-md"
-                    >
-                      {post.vehicle_listing_type === "Rent" ? "Rent" : "Buy"}
-                    </button>
+                    {booked ? (
+                      <button
+                        disabled={true}
+                        className=" bg-green-500 w-full text-white p-3 rounded-md"
+                      >
+                        Booked
+                      </button>
+                    ) : (
+                      <button
+                        onClick={handleBooking}
+                        className="button-hover bg-black w-full text-white p-3 rounded-md"
+                      >
+                        {post.vehicle_listing_type === "Rent" ? "Rent" : "Buy"}
+                      </button>
+                    )}
                   </Link>
                 </div>
               </div>
@@ -566,6 +624,7 @@ const PostDetails = () => {
           </div>
         </div>
       )}
+      <ToastContainer />
       <Footer />
     </div>
   );

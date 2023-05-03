@@ -10,19 +10,18 @@ const Messenger = () => {
   const sender_id = user.customer_id;
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const [online, setOnline] = useState(false);
 
   console.log(messages);
 
   const socket = useRef();
   const shouldFetch = useRef(true);
 
-  const booking_id = 25;
+  const booking_id = 33;
 
   const handleSocketConnection = () => {
     socket.current = io("http://localhost:3000", {
       query: {
-        booking_id: 25,
+        booking_id: booking_id,
         sender_id: sender_id,
       },
     });
@@ -31,19 +30,8 @@ const Messenger = () => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
-    socket.current.on("online", (data) => {
-      if (data === sender_id) {
-        setOnline(true);
-      }
-    });
-
     socket.current.on("connect", () => {
       console.log("Connected");
-    });
-
-    socket.current.on("disconnect", () => {
-      setOnline(false);
-      console.log("Disconnected");
     });
   };
 
@@ -51,13 +39,17 @@ const Messenger = () => {
     e.preventDefault();
     console.log("Submitted");
     const data = {
-      message,
+      message_text: message,
       booking_id,
+      sender_id: user.customer_id,
+      sender_name: user.customername,
     };
-
+    socket.current.emit("newMessage", data);
+    setMessage("");
     try {
       const response = await axiosInstance.post("/chat/createMessage", data);
-      socket.current.emit("newMessage", response.data);
+      // socket.current.emit("newMessage", response.data);
+      console.log(response.data);
       console.log(messages);
     } catch (err) {
       console.log(err);
@@ -88,7 +80,6 @@ const Messenger = () => {
     if (shouldFetch.current) {
       handleSocketConnection();
       getComments();
-      socket.current.emit("online", sender_id);
       shouldFetch.current = false;
     }
   }, []);
@@ -113,35 +104,6 @@ const Messenger = () => {
                 <div className="h-full overflow-y-auto">
                   <div className="grid grid-cols-12 gap-y-2">
                     {message.sender_id === user.customer_id ? (
-                      <div className="col-start-1 col-end-8 p-3 rounded-lg">
-                        <div className="flex flex-row items-center">
-                          <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
-                            {message.sender_name[0]}
-                          </div>
-
-                          <div className="flex-col flex justify-center items-start gap-1">
-                            <div className="flex flex-col ml-5">
-                              <div className="text-sm font-semibold">
-                                {message.sender_name}
-                                {online ? (
-                                  <div className="text-xs text-green-500">
-                                    Online
-                                  </div>
-                                ) : (
-                                  <div className="text-xs text-gray-500">
-                                    Offline
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-
-                            <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
-                              <div>{message.message_text}</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
                       <div className="col-start-6 col-end-13 p-3 rounded-lg">
                         <div className="flex items-center justify-start flex-row-reverse">
                           <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
@@ -152,16 +114,26 @@ const Messenger = () => {
                             <div className="flex flex-col mr-5">
                               <div className="text-sm font-semibold">
                                 {message.sender_name}
+                              </div>
+                            </div>
+
+                            <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
+                              <div>{message.message_text}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="col-start-1 col-end-8 p-3 rounded-lg">
+                        <div className="flex flex-row items-center">
+                          <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                            {message.sender_name[0]}
+                          </div>
+
+                          <div className="flex-col flex justify-center items-start gap-1">
+                            <div className="flex flex-col ml-5">
+                              <div className="text-sm font-semibold">
                                 {message.sender_name}
-                                {online ? (
-                                  <div className="text-xs text-green-500">
-                                    Online
-                                  </div>
-                                ) : (
-                                  <div className="text-xs text-gray-500">
-                                    Offline
-                                  </div>
-                                )}
                               </div>
                             </div>
 

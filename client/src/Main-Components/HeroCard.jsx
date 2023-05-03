@@ -121,7 +121,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
             </div>
           </div> */}
 
-          <div className="bg-white p-12 md:p-10 lg:p-12 shadow-2xl xl:rounded-3xl">
+          <div className="bg-white p-12 md:p-10 lg:p-12 shadow-2xl  md:rounded-3xl">
             <div className="grid content-center md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-5 ">
               <div>
                 <div className="flex gap-3 items-center">

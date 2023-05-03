@@ -5,6 +5,7 @@ import { AiOutlineClose, AiOutlineHome } from "react-icons/ai";
 import { AuthContext } from "../Context/AuthContext";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FcAbout, FcHome, FcBookmark, FcAddImage } from "react-icons/fc";
+import RideBnb from "../assets/ridebnbv2.png";
 import("preline");
 
 const Navbar = () => {
@@ -19,7 +20,7 @@ const Navbar = () => {
     <div className="sticky top-0 bg-white z-10">
       <div
         id="navbar"
-        className="transition-all duration-300 ease-in-out flex relative z-[20] justify-center items-center w-screen bg-white text-black py-6 border-b"
+        className="transition-all duration-300 ease-in-out flex relative z-[20] justify-center items-center w-screen bg-[#fcfcfc] text-black py-6 border-b"
       >
         <div className="xl:max-w-[1200px] max-w-[90%] flex justify-center w-full items-center">
           <div className="flex justify-between items-center w-full">
@@ -29,6 +30,7 @@ const Navbar = () => {
                   <span className="font-semibold">Ride</span>
                   <span className="font-semibold">Bnb</span>
                 </h1>
+                {/* <img src={RideBnb} alt="logo" className="w-[200px]" /> */}
               </Link>
             </div>
 
@@ -65,8 +67,8 @@ const Navbar = () => {
                   </Link>
 
                   <Link to="/listvehicle">
-                    <div className=" font-medium flex items-center gap-2 py-2 bg-white border-2 hover:text-white hover:bg-black hover:border-black transition-all duration-300 ease-in-out text-[#23262f] px-4 rounded-full ">
-                      <FcAddImage className="text-xl" />2
+                    <div className=" font-medium flex items-center gap-2 py-2 bg-white border-2 hover:text-white hover:bg-black hover:border-black transition-all duration-300 ease-in-out text-black px-4 rounded-full ">
+                      <FcAddImage className="text-xl" />
                       <span>List Your Vehicle</span>
                     </div>
                   </Link>
@@ -83,7 +85,7 @@ const Navbar = () => {
                             type="button"
                             className="hs-dropdown-toggle border-none inline-flex justify-center items-center gap-2 rounded-md  font-medium bg-white text-gray-700 align-middle"
                           >
-                            <div className="relative inline-flex items-center p-2 justify-center w-12 h-12 overflow-hidden bg-green-500 rounded-full dark:bg-gray-600">
+                            <div className="relative inline-flex items-center p-2 justify-center w-12 h-12 overflow-hidden bg-black rounded-full dark:bg-gray-600">
                               <span className="font-medium text-white dark:text-gray-300">
                                 {user.customername[0]}
                                 {user.customername[1]}

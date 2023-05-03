@@ -122,7 +122,7 @@ const List = () => {
       <MiniNav />
       {prevState.state ? (
         <>
-          <h1 className="text-4xl -mt-10 pb-6 font-bold text-center">
+          <h1 className="text-4xl mt-10 pb-6 font-bold text-center">
             Search Results for {prevState.state.vehicleType} in{" "}
             {prevState.state.location || searchParams.get("location")}
           </h1>

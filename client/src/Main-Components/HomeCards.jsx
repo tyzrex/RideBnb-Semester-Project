@@ -1,17 +1,23 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import PopularCard from "./Cards/PopularCard";
 import { axiosBase } from "../Instance/instance";
 import LogoCloud from "./LogoCloud";
+import { AuthContext } from "../Context/AuthContext";
 
 const HomeCards = () => {
+  const { user } = useContext(AuthContext);
   const [sellPost, setSellPost] = useState([]);
   const [rentPost, setRentPost] = useState([]);
+  const user_id = user.customer_id;
 
   const getPosts = async (listingType) => {
     try {
-      const response = await axiosBase.get(
-        `/post/getpostbytype/${listingType}`
-      );
+      const response = await axiosBase.get(`/post/getpostbytype`, {
+        params: {
+          listingType: listingType,
+          user_id: user_id,
+        },
+      });
       if (listingType === "Sell") {
         setSellPost(response.data);
       }

@@ -35,7 +35,9 @@ const ExploreCards = (props) => {
           </div>
           <div className="m-5 flex items-center justify-between px-1 md:items-start">
             <div className="mb-2">
-              <p className="text-lg font-bold text-navy-700">{props.vehicleName}</p>
+              <p className="text-lg font-bold text-navy-700">
+                {props.vehicleName}
+              </p>
               <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2">
                 Posted by : {props.postedBy}
               </p>

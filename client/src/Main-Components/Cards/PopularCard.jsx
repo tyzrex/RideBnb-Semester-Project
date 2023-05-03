@@ -53,7 +53,7 @@ const ExploreCards = (props) => {
             <div className="flex flex-row-reverse md:mt-2 lg:mt-0">
               <h1>
                 {props.vehicleRating === null
-                  ? "No Rating"
+                  ? "❗"
                   : parseFloat(props.vehicleRating).toFixed(1)}{" "}
                 ⭐
               </h1>
@@ -66,7 +66,7 @@ const ExploreCards = (props) => {
               </p>
             </div>
             <Link to={`/explore/${props.postId}`}>
-              <button className="p-2 bg-main-accent text-white px-5 rounded-xl border-2 border-black hover:text-black hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300">
+              <button className="p-2 bg-main-accent font-semibold2 text-white px-5 rounded-xl border-2 border-black hover:text-black hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300">
                 {props.buttonText}
               </button>
             </Link>

@@ -4,6 +4,7 @@ import ExploreCards from "../../Main-Components/Cards/ExploreCards";
 import axios from "axios";
 import ExploreHero from "../../Main-Components/ExploreHero";
 import Footer from "../../Main-Components/Footer";
+import MiniNav from "../MiniNav/MiniNav";
 
 const ExploreAll = () => {
   const [posts, setPosts] = useState([]);
@@ -48,12 +49,13 @@ const ExploreAll = () => {
   return (
     <div>
       <Navbar />
+      <MiniNav />
       <div>
         <ExploreHero />
       </div>
 
       <div className="pb-20">
-        <div className="w-screen gap-5 grid justify-items-center content-center xl:grid-cols-4 md:grid-cols-2 grid-cols-1 mx-auto max-w-[90%] xl:max-w-[1200px] mt-20">
+        <div className="w-screen gap-5 grid justify-items-center content-center xl:grid-cols-4 md:grid-cols-2 grid-cols-1 mx-auto max-w-[90%] xl:max-w-[1200px] mt-10">
           {posts.map((item) => (
             <ExploreCards
               key={item.vehicle_post_id}

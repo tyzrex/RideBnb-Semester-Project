@@ -6,7 +6,7 @@ import { BiMap } from "react-icons/bi";
 const ExploreHero = () => {
   return (
     <div>
-      <div className="max-w-[85rem] px-4 pt-10 sm:px-6 lg:px-8 lg:pt-14 pb-2 mx-auto">
+      <div className="max-w-[85rem] px-4 pt-5 sm:px-6 lg:px-8 pb-2 mx-auto">
         <div className="mx-auto max-w-2xl mb-8 lg:mb-14 text-center">
           <h2 className="text-3xl lg:text-4xl text-gray-800 font-bold dark:text-gray-200">
             Your Ride is Waiting
