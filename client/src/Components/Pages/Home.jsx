@@ -4,16 +4,23 @@ import HomeCards from "../../Main-Components/HomeCards";
 import Footer from "../../Main-Components/Footer";
 import FAQ from "../../Main-Components/FAQ";
 import ExperimentHero from "../../Main-Components/experimentHero";
+import Hero from "../../Main-Components/Hero";
 import Album from "../../Main-Components/Album/Album";
+import HeroVideo from "../../assets/car.mp4";
+
 import("preline");
 
-const Home = () => {
+const Home = ({ socket }) => {
   return (
     <div>
-      <Navbar />
+      <Navbar socket={socket} />
+
       <ExperimentHero />
+
+      {/* <Hero /> */}
       <HomeCards />
-      <Album />
+
+      {/* <Album /> */}
       <FAQ />
       <Footer />
     </div>

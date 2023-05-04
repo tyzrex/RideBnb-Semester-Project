@@ -5,7 +5,7 @@ import { AiOutlineClose, AiOutlineHome } from "react-icons/ai";
 import { AuthContext } from "../Context/AuthContext";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FcAbout, FcHome, FcBookmark, FcAddImage } from "react-icons/fc";
-import RideBnb from "../assets/ridebnbv2.png";
+
 import("preline");
 
 const Navbar = () => {
@@ -17,14 +17,14 @@ const Navbar = () => {
   const { user, logoutUser } = useContext(AuthContext);
 
   return (
-    <div className="sticky top-0 bg-white z-10">
+    <div className="sticky top-0 bg-black z-10">
       <div
         id="navbar"
-        className="transition-all duration-300 ease-in-out flex relative z-[20] justify-center items-center w-screen bg-[#fcfcfc] text-black py-6 border-b"
+        className=" flex relative z-[20] justify-center items-center w-screen bg-[#fcfcfc] text-black py-6 border-b"
       >
         <div className="xl:max-w-[1200px] max-w-[90%] flex justify-center w-full items-center">
           <div className="flex justify-between items-center w-full">
-            <div className="logo">
+            <div className="logo flex justify-center items-center gap-4">
               <Link to="/">
                 <h1 className="text-3xl">
                   <span className="font-semibold">Ride</span>
@@ -32,6 +32,16 @@ const Navbar = () => {
                 </h1>
                 {/* <img src={RideBnb} alt="logo" className="w-[200px]" /> */}
               </Link>
+
+              {/* <div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Search by name or location"
+                    className="border-2 border-gray-300 border-none rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  />
+                </div> */}
+              {/* </div> */}
             </div>
 
             <div className="menu-items flex justify-center items-center gap-7 ">
@@ -39,27 +49,18 @@ const Navbar = () => {
                 <div className="hidden lg:flex justify-center items-center gap-8 cursor-pointer top-0 ">
                   <Link to="/">
                     <div className="flex items-center gap-2">
-                      <div>
-                        <FcHome className="text-xl" />
-                      </div>
                       <div className="font-medium text-[#23262f]">Home</div>
                     </div>
                   </Link>
 
                   <Link to="/about">
                     <div className="flex items-center gap-2">
-                      <div>
-                        <FcAbout className="text-xl" />
-                      </div>
                       <div className="font-medium text-[#23262f]">About</div>
                     </div>
                   </Link>
 
                   <Link to="/mybookings">
                     <div className="flex items-center gap-2">
-                      <div>
-                        <FcBookmark className="text-xl" />
-                      </div>
                       <div className="font-medium text-[#23262f]">
                         My Bookings
                       </div>
@@ -68,7 +69,6 @@ const Navbar = () => {
 
                   <Link to="/listvehicle">
                     <div className=" font-medium flex items-center gap-2 py-2 bg-white border-2 hover:text-white hover:bg-black hover:border-black transition-all duration-300 ease-in-out text-black px-4 rounded-full ">
-                      <FcAddImage className="text-xl" />
                       <span>List Your Vehicle</span>
                     </div>
                   </Link>

@@ -9,7 +9,7 @@ const MiniNav = () => {
       <div>
         <div className="flex justify-between items-center">
           <div>
-            <button className="border-[2px] font-semibold  border-gray-300 rounded-full py-[10px] px-4 text-black hover:border-black text-sm hover:bg-black hover:text-white transition-all duration-300 ease-in-out">
+            <button className="border-[2px] font-semibold  border-gray-300 rounded-full py-[10px] px-4 text-black hover:border-black text-sm hover:bg-black hover:text-white transition-colors duration-300 ease-in-out">
               <Link to="/" className="flex justify-center items-center gap-2">
                 <AiOutlineLeft />
                 <span>Go Home</span>

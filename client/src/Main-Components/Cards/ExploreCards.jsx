@@ -54,7 +54,7 @@ const ExploreCards = (props) => {
             </div>
             <button
               href=""
-              className="p-2 bg-main-accent text-white rounded-2xl border-2 border-black hover:text-black hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300"
+              className="p-2 bg-main-accent text-white rounded-2xl border-2 border-black hover:text-black hover:border-gray-500 hover:bg-white transition-transform ease-in-out duration-300"
             >
               Book
             </button>

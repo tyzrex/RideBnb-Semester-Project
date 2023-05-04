@@ -23,9 +23,8 @@ import {
 import DetailLoading from "./LoadingDetails";
 import { ToastContainer } from "react-toastify";
 import { toastError, toastSuccess } from "../Toast/Toast";
-// const socket = io("http://localhost:3000");
 
-const PostDetails = () => {
+const PostDetails = ({ socket }) => {
   const [post, setPost] = useState({});
   const id = window.location.pathname.split("/")[2];
   const [comments, setComments] = useState([]);
@@ -35,8 +34,7 @@ const PostDetails = () => {
   const [rated, setRated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [booked, setBooked] = useState(false);
-
-  const socket = useRef();
+  // const owner_id = post?.customer_id;
 
   const pagelocation = window.location.pathname.split("/");
 
@@ -100,22 +98,36 @@ const PostDetails = () => {
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const createSocketConnection = () => {
-    socket.current.on("connect", () => {
-      console.log("Connected to socket.io server");
-    });
+  // console.log(socket.current);
 
-    socket.current.on("newComment", (comment) => {
-      setComments((prevState) => [...prevState, comment]);
-    });
+  // const createSocketConnection = () => {
+  //   console.log(socket);
+  // socket.current.on("connect", () => {
+  //   console.log("Connected to socket.io server");
+  // });
+  // socket.on("newComment", (comment) => {
+  //   setComments((prevState) => [...prevState, comment]);
+  // });
+  // socket.current.on("notification", (data) => {
+  //   console.log(data);
+  // });
+  // socket.current.on("disconnect", () => {
+  //   console.log("Disconnected from socket.io server");
+  // });
+  // return () => {
+  //   socket.current.disconnect();
+  // };
+  // };
 
-    socket.current.on("disconnect", () => {
-      console.log("Disconnected from socket.io server");
-    });
-
-    return () => {
-      socket.current.disconnect();
-    };
+  const handleNotification = async () => {
+    try {
+      socket.current.emit("notification", {
+        message: "Hello World",
+        receiver_id: post?.customer_id,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const getComments = async () => {
@@ -147,6 +159,9 @@ const PostDetails = () => {
       };
       const response = await axiosInstance.post("/comment/createComment", data);
     } catch (err) {
+      if (err.response.status === 401) {
+        toastError("Please login to comment");
+      }
       console.log(err);
     }
   };
@@ -239,16 +254,26 @@ const PostDetails = () => {
   useEffect(() => {
     if (shouldFetch.current) {
       window.scrollTo(0, 0);
-      socket.current = io("http://localhost:3000", {
-        query: {
-          reciever_id: post?.customer_id,
-        },
-      });
+      // socket.current = io("http://localhost:3000", {
+      //   transports: ["websocket"],
+      //   query: {
+      //     reciever_id: post?.customer_id,
+      //   },
+      // });
+
       isBooked();
       getComments();
-      createSocketConnection();
+      // createSocketConnection();
       fetchPost();
       shouldFetch.current = false;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("newComment", (comment) => {
+        setComments((prevState) => [...prevState, comment]);
+      });
     }
   }, []);
 
@@ -423,7 +448,10 @@ const PostDetails = () => {
                     quae.
                   </h1>
 
-                  <button className="bg-blue-600 text-white px-5 py-2 rounded-xl mt-5">
+                  <button
+                    onClick={handleNotification}
+                    className="bg-blue-600 text-white px-5 py-2 rounded-xl mt-5"
+                  >
                     Contact Owner
                   </button>
                 </div>

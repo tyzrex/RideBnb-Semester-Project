@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ExploreCards = (props) => {
   return (
     <div>
-      <div className="!z-5 hover:scale-105 transition-all duration-300 hover:shadow-xl shadow-lg relative flex flex-col rounded-[20px] w-[350px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 3xl:p-![18px] undefined">
+      <div className="!z-5 hover:scale-105 transition-transform duration-300 hover:shadow-xl shadow-lg relative flex flex-col rounded-[20px] w-[350px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 3xl:p-![18px] undefined">
         <div className="h-full w-full">
           <div className="relative w-full">
             <img
