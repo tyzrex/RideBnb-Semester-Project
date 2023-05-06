@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
-import regimage from "../../assets/register.jpg";
+import regimage from "../../assets/reg.svg";
 import Animate from "react-smooth";
 import { useNavigate } from "react-router-dom";
 import validate from "../../validation/RegisterValidation";
 import { toastError, toastSuccess } from "../Toast/Toast";
+import Carsvg from "../../assets/carsvg.png";
 
 const Register = () => {
   const [errors, setErrors] = useState({
@@ -83,7 +84,7 @@ const Register = () => {
       <div>
         <section className="bg-main-bg">
           <div className="lg:grid min-h-screen lg:min-h-screen lg:grid-cols-12">
-            <aside className="relative block h-64 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
+            <aside className="relative block h-[60vh] lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
               <Animate to="1" from="0" attributeName="opacity">
                 <img
                   alt="Pattern"
@@ -93,173 +94,169 @@ const Register = () => {
               </Animate>
             </aside>
 
-            <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:py-12 lg:px-16 xl:col-span-6">
-              <div className="max-w-xl lg:max-w-3xl">
-                <a className="block text-main-accent" href="/">
-                  <span className="sr-only">Home</span>
-                  <svg
-                    className="h-8 sm:h-10"
-                    viewBox="0 0 28 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M0.41 10.3847C1.14777 7.4194 2.85643 4.7861 5.2639 2.90424C7.6714 1.02234 10.6393 0 13.695 0C16.7507 0 19.7186 1.02234 22.1261 2.90424C24.5336 4.7861 26.2422 7.4194 26.98 10.3847H25.78C23.7557 10.3549 21.7729 10.9599 20.11 12.1147C20.014 12.1842 19.9138 12.2477 19.81 12.3047H19.67C19.5662 12.2477 19.466 12.1842 19.37 12.1147C17.6924 10.9866 15.7166 10.3841 13.695 10.3841C11.6734 10.3841 9.6976 10.9866 8.02 12.1147C7.924 12.1842 7.8238 12.2477 7.72 12.3047H7.58C7.4762 12.2477 7.376 12.1842 7.28 12.1147C5.6171 10.9599 3.6343 10.3549 1.61 10.3847H0.41ZM23.62 16.6547C24.236 16.175 24.9995 15.924 25.78 15.9447H27.39V12.7347H25.78C24.4052 12.7181 23.0619 13.146 21.95 13.9547C21.3243 14.416 20.5674 14.6649 19.79 14.6649C19.0126 14.6649 18.2557 14.416 17.63 13.9547C16.4899 13.1611 15.1341 12.7356 13.745 12.7356C12.3559 12.7356 11.0001 13.1611 9.86 13.9547C9.2343 14.416 8.4774 14.6649 7.7 14.6649C6.9226 14.6649 6.1657 14.416 5.54 13.9547C4.4144 13.1356 3.0518 12.7072 1.66 12.7347H0V15.9447H1.61C2.39051 15.924 3.154 16.175 3.77 16.6547C4.908 17.4489 6.2623 17.8747 7.65 17.8747C9.0377 17.8747 10.392 17.4489 11.53 16.6547C12.1468 16.1765 12.9097 15.9257 13.69 15.9447C14.4708 15.9223 15.2348 16.1735 15.85 16.6547C16.9901 17.4484 18.3459 17.8738 19.735 17.8738C21.1241 17.8738 22.4799 17.4484 23.62 16.6547ZM23.62 22.3947C24.236 21.915 24.9995 21.664 25.78 21.6847H27.39V18.4747H25.78C24.4052 18.4581 23.0619 18.886 21.95 19.6947C21.3243 20.156 20.5674 20.4049 19.79 20.4049C19.0126 20.4049 18.2557 20.156 17.63 19.6947C16.4899 18.9011 15.1341 18.4757 13.745 18.4757C12.3559 18.4757 11.0001 18.9011 9.86 19.6947C9.2343 20.156 8.4774 20.4049 7.7 20.4049C6.9226 20.4049 6.1657 20.156 5.54 19.6947C4.4144 18.8757 3.0518 18.4472 1.66 18.4747H0V21.6847H1.61C2.39051 21.664 3.154 21.915 3.77 22.3947C4.908 23.1889 6.2623 23.6147 7.65 23.6147C9.0377 23.6147 10.392 23.1889 11.53 22.3947C12.1468 21.9165 12.9097 21.6657 13.69 21.6847C14.4708 21.6623 15.2348 21.9135 15.85 22.3947C16.9901 23.1884 18.3459 23.6138 19.735 23.6138C21.1241 23.6138 22.4799 23.1884 23.62 22.3947Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </a>
+            <Animate to="1" from="0" attributeName="opacity">
+              <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:py-12 lg:px-16 xl:col-span-6">
+                <div className="max-w-xl lg:max-w-3xl">
+                  <a className="block text-main-accent" href="/">
+                    <span className="sr-only">Home</span>
+                    <img
+                      className="h-12 w-auto"
+                      src={Carsvg}
+                      alt="Workflow"
+                    />{" "}
+                  </a>
 
-                <h1 className="mt-6 text-2xl font-bold text-main-text sm:text-3xl md:text-4xl">
-                  Welcome to Ride
-                  <span className="text-gray-500">Bnb</span>
-                </h1>
+                  <h1 className="mt-6 text-2xl font-bold text-main-text sm:text-3xl md:text-4xl">
+                    Welcome to Ride
+                    <span className="text-indigo-500">Bnb</span>
+                  </h1>
 
-                <p className="mt-4 leading-relaxed text-gray-500">
-                  So what are you waiting for? Register and unleash your
-                  creativity.
-                </p>
+                  <p className="mt-4 leading-relaxed text-gray-500">
+                    So what are you waiting for? Register and unleash your
+                    creativity.
+                  </p>
 
-                <form action="#" className="mt-8 grid grid-cols-6 gap-6">
-                  <div className="col-span-6 sm:col-span-3">
-                    <div className="py-2">
-                      <h1 className="text-main-text">Username</h1>
+                  <form action="#" className="mt-8 grid grid-cols-6 gap-6">
+                    <div className="col-span-6 sm:col-span-3">
+                      <div className="py-2">
+                        <h1 className="text-main-text">Username</h1>
+                      </div>
+
+                      <input
+                        onChange={handleChange}
+                        type="text"
+                        id="Username"
+                        name="name"
+                        className="mt-1 p-3 w-full rounded-full border text-black border-gray-300 bg-main-md text-sm shadow-sm"
+                        aria-required="true"
+                      />
+
+                      {errors.name && (
+                        <p className="text-red-500 text-xs italic">
+                          {errors.name}
+                        </p>
+                      )}
                     </div>
 
-                    <input
-                      onChange={handleChange}
-                      type="text"
-                      id="Username"
-                      name="name"
-                      className="mt-1 p-2 w-full rounded-md border text-black border-gray-300 bg-main-fg text-sm shadow-sm"
-                      aria-required="true"
-                    />
+                    <div className="col-span-6">
+                      <div className="py-2">
+                        <h1 className="text-main-text">Email</h1>
+                      </div>
 
-                    {errors.name && (
-                      <p className="text-red-500 text-xs italic">
-                        {errors.name}
-                      </p>
-                    )}
-                  </div>
+                      <input
+                        onChange={handleChange}
+                        type="email"
+                        id="Email"
+                        className="mt-1 p-3 w-full rounded-full border border-gray-300 bg-main-fg text-md text-black shadow-sm"
+                        name="email"
+                      />
 
-                  <div className="col-span-6">
-                    <div className="py-2">
-                      <h1 className="text-main-text">Email</h1>
+                      {errors.email && (
+                        <p className="text-red-500 text-xs italic">
+                          {errors.email}
+                        </p>
+                      )}
                     </div>
 
-                    <input
-                      onChange={handleChange}
-                      type="email"
-                      id="Email"
-                      className="mt-1 p-2 w-full rounded-md border border-gray-300 bg-main-fg text-sm text-black shadow-sm"
-                      name="email"
-                    />
+                    <div className="col-span-6 sm:col-span-3">
+                      <div className="py-2">
+                        <h1 className="text-main-text">Password</h1>
+                      </div>
 
-                    {errors.email && (
-                      <p className="text-red-500 text-xs italic">
-                        {errors.email}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="col-span-6 sm:col-span-3">
-                    <div className="py-2">
-                      <h1 className="text-main-text">Password</h1>
+                      <input
+                        onChange={handleChange}
+                        type="password"
+                        id="Password"
+                        name="password"
+                        autoComplete="on"
+                        className="mt-1 p-3 w-full rounded-full border border-gray-300 bg-main-fg text-md text-black shadow-sm"
+                      />
+                      {errors.password && (
+                        <p className="text-red-500 text-xs italic">
+                          {errors.password}
+                        </p>
+                      )}
                     </div>
 
-                    <input
-                      onChange={handleChange}
-                      type="password"
-                      id="Password"
-                      name="password"
-                      autoComplete="on"
-                      className="mt-1 p-2 w-full rounded-md border border-gray-300 bg-main-fg text-sm text-black shadow-sm"
-                    />
-                    {errors.password && (
-                      <p className="text-red-500 text-xs italic">
-                        {errors.password}
-                      </p>
-                    )}
-                  </div>
+                    <div className="col-span-6 sm:col-span-3">
+                      <div className="py-2">
+                        <h1 className="text-main-text">Address</h1>
+                      </div>
 
-                  <div className="col-span-6 sm:col-span-3">
-                    <div className="py-2">
-                      <h1 className="text-main-text">Address</h1>
+                      <input
+                        onChange={handleChange}
+                        type="address"
+                        id="Address"
+                        name="address"
+                        autoComplete="on"
+                        className="mt-1 p-3 w-full rounded-full border border-gray-300 bg-main-fg text-md text-black shadow-sm"
+                      />
+                      {errors.address && (
+                        <p className="text-red-500 text-xs italic">
+                          {errors.address}
+                        </p>
+                      )}
                     </div>
 
-                    <input
-                      onChange={handleChange}
-                      type="address"
-                      id="Address"
-                      name="address"
-                      autoComplete="on"
-                      className="mt-1 p-2 w-full rounded-md border border-gray-300 bg-main-fg text-sm text-black shadow-sm"
-                    />
-                    {errors.address && (
-                      <p className="text-red-500 text-xs italic">
-                        {errors.address}
-                      </p>
-                    )}
-                  </div>
+                    <div className="col-span-6 sm:col-span-3">
+                      <div className="py-2">
+                        <h1 className="text-main-text">Phone No</h1>
+                      </div>
 
-                  <div className="col-span-6 sm:col-span-3">
-                    <div className="py-2">
-                      <h1 className="text-main-text">Phone No</h1>
+                      <input
+                        onChange={handleChange}
+                        type="phone"
+                        id="Phone"
+                        name="phone"
+                        autoComplete="on"
+                        className="mt-1 p-3 w-full rounded-full border border-gray-300 bg-main-fg text-md text-black shadow-sm"
+                      />
+                      {errors.phone && (
+                        <p className="text-red-500 text-xs italic">
+                          {errors.phone}
+                        </p>
+                      )}
                     </div>
 
-                    <input
-                      onChange={handleChange}
-                      type="phone"
-                      id="Phone"
-                      name="phone"
-                      autoComplete="on"
-                      className="mt-1 p-2 w-full rounded-md border border-gray-300 bg-main-fg text-sm text-black shadow-sm"
-                    />
-                    {errors.phone && (
-                      <p className="text-red-500 text-xs italic">
-                        {errors.phone}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                    {loading ? (
-                      <button
-                        onClick={handleSubmit}
-                        className="inline-block bg-black hover:bg-emerald-700 shrink-0 rounded-md border border-none bg-custom-green px-12 py-3 text-sm font-medium text-white transition hover:text-white focus:outline-none focus:ring"
-                      >
-                        Create an account
-                      </button>
-                    ) : (
-                      <>
+                    <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
+                      {loading ? (
                         <button
-                          type="button"
-                          class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent text-white font-semibold bg-black"
+                          onClick={handleSubmit}
+                          className="inline-block bg-indigo-500 hover:bg-black shrink-0 rounded-full border border-none bg-custom-green px-8 py-3 text-md font-semibold text-white transition hover:text-white focus:outline-none focus:ring"
                         >
-                          <span
-                            class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full"
-                            role="status"
-                            aria-label="loading"
-                          ></span>
-                          <span>Creating Account</span>
+                          Create an account
                         </button>
-                      </>
-                    )}
-                    <ToastContainer />
-                    <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-                      Already have an account?
-                      <a
-                        href="/login"
-                        className="text-gray-500 underline hover:text-gray-700"
-                      >
-                        Log in
-                      </a>
-                      .
-                    </p>
-                  </div>
-                </form>
-              </div>
-            </main>
+                      ) : (
+                        <>
+                          <button
+                            type="button"
+                            class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent text-white font-semibold bg-black"
+                          >
+                            <span
+                              class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full"
+                              role="status"
+                              aria-label="loading"
+                            ></span>
+                            <span>Creating Account</span>
+                          </button>
+                        </>
+                      )}
+                      <ToastContainer />
+                      <p className="mt-4 text-sm text-gray-500 sm:mt-0">
+                        Already have an account?
+                        <a
+                          href="/login"
+                          className="text-gray-500 underline hover:text-gray-700"
+                        >
+                          Log in
+                        </a>
+                        .
+                      </p>
+                    </div>
+                  </form>
+                </div>
+              </main>
+            </Animate>
           </div>
         </section>
       </div>

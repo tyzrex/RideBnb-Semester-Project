@@ -103,7 +103,7 @@ export const getPostByType = async (req, res) => {
       params.push(user_id);
     }
 
-    query += ` ORDER BY vp.created_at DESC`;
+    query += ` ORDER BY r.avg_rating DESC NULLS LAST LIMIT 4`;
 
     const { rows } = await pool.query(query, params);
     res.status(200).json(rows);
@@ -139,6 +139,37 @@ export const getPost = async (req, res) => {
       throw new Error("Post not found");
     }
     res.status(200).json(post.rows[0]);
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+export const getPostByUser = async (req, res) => {
+  const { customer_id } = req.user;
+  console.log(customer_id);
+  try {
+    const post = await pool.query(
+      `SELECT 
+        vp.*, 
+        COALESCE(r.avg_rating, 0) AS avg_rating
+      FROM vehicle_post vp
+      LEFT JOIN (
+        SELECT vehicle_post_id, AVG(rating) AS avg_rating
+        FROM vehicle_post_comment
+        GROUP BY vehicle_post_id
+      ) r ON vp.vehicle_post_id = r.vehicle_post_id
+      WHERE vp.customer_id = $1;
+      `,
+      [customer_id]
+    );
+    if (post.rows.length === 0) {
+      throw new Error("Post not found");
+    }
+    res.status(200).json(post.rows);
   } catch (err) {
     console.log(err);
     res.status(404).json({

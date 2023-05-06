@@ -9,11 +9,30 @@ const ExploreCards = (props) => {
           <div className="relative w-full">
             <img
               src={`../../../Images/${props.vehicleImage}`}
-              className="mb-2 h-[250px] object-cover w-full rounded-t-xl transition-transform duration-500 ease-in-out"
+              className="mb-2 h-[250px] object-cover rounded-t-xl transition-transform duration-500 ease-in-out"
               alt=""
             />
-            <button className="absolute top-3 right-3 flex items-center justify-center rounded-full bg-white p-2 text-brand-500 hover:cursor-pointer">
-              <div className="flex hover:text-red-600 h-full w-full items-center justify-center rounded-full text-xl hover:bg-gray-50">
+          </div>
+          <div className="m-5 mt-10 flex items-center justify-between px-1 md:items-start border-b pb-2">
+            <div className="mb-2">
+              <p className="text-indigo-500 text-2xl font-bold text-navy-700">
+                Rs. {props?.vehiclePrice}{" "}
+                <span className="text-sm font-medium text-gray-600">
+                  {props?.buttonText === "Book" ? "/day" : ""}
+                </span>
+              </p>
+
+              <p className="mt-1 text-2xl font-bold text-black md:mt-2">
+                {props.vehicleName}
+              </p>
+
+              <p className="mt-1 text-md font-medium text-gray-600 md:mt-2">
+                <span className="">{props.vehicleLocation}</span>
+              </p>
+            </div>
+
+            <button className="border-2 flex items-center justify-center rounded-full -mt-1 text-indigo-500 bg-white p-2 text-brand-500 hover:cursor-pointer">
+              <div className="flex hover:text-red-600 h-full w-full items-center justify-center rounded-full text-2xl hover:bg-gray-50">
                 <svg
                   stroke="currentColor"
                   fill="currentColor"
@@ -34,42 +53,23 @@ const ExploreCards = (props) => {
               </div>
             </button>
           </div>
-          <div className="m-5 flex items-center justify-between px-1 md:items-start">
-            <div className="mb-2">
-              <p className="text-lg font-bold text-navy-700">
-                {props?.vehicleName}
-              </p>
-              <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2">
-                Posted by :{" "}
-                <span className="font-bold text-[#ff5a5f]">
-                  {props.postedBy}
-                </span>
-              </p>
-              <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2">
-                Location :{" "}
-                <span className="font-bold">{props.vehicleLocation}</span>
-              </p>
-            </div>
-            <div className="flex flex-row-reverse md:mt-2 lg:mt-0">
-              <h1>
-                {props.vehicleRating === null
-                  ? "❗"
-                  : parseFloat(props.vehicleRating).toFixed(1)}{" "}
-                ⭐
-              </h1>
-            </div>
-          </div>
           <div className="flex m-5 items-center justify-between md:items-center lg:justify-between ">
-            <div className="flex">
-              <p className="!mb-0 text-sm font-bold text-brand-500">
-                Rs {props.vehiclePrice} per day
-              </p>
-            </div>
             <Link to={`/explore/${props.postId}`}>
-              <button className="p-2 bg-main-accent font-semibold2 text-white px-5 rounded-xl border-2 border-black hover:text-black hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300">
+              <button className="p-2 bg-indigo-500 font-semibold text-white px-5 rounded-xl hover:text-black hover:border hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300">
                 {props.buttonText}
               </button>
             </Link>
+
+            <div className="flex">
+              <div className="flex flex-row-reverse items-center md:mt-2 lg:mt-0">
+                <h1>
+                  {props.vehicleRating === null
+                    ? "❗"
+                    : parseFloat(props.vehicleRating).toFixed(1)}{" "}
+                  ⭐
+                </h1>
+              </div>
+            </div>
           </div>
         </div>
       </div>

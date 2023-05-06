@@ -1,11 +1,18 @@
 import React from "react";
 import("preline");
 import CarArt from "../assets/car.png";
+import Background from "../assets/18.jpg";
 
 const FAQ = () => {
   return (
-    <div className="">
-      <div className="flex justify-center items-center h-auto w-screen max-w-[90%] xl:max-w-[1200px] mx-auto mt-[200px] sm:mt-[160px] md:mt-[120px] lg:my-16">
+    <div
+      className=""
+      style={{
+        backgroundImage: `url(${Background})`,
+        backgroundSize: "cover",
+      }}
+    >
+      <div className="flex justify-center items-center h-auto w-screen max-w-[90%] xl:max-w-[1200px] mx-auto pt-[200px] sm:pt-[160px] md:pt-[120px] lg:py-16">
         {/* <img src={CarArt} alt="car" className="absolute left-0 -z-0" /> */}
         <div className="">
           <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">

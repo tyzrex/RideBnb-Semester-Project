@@ -88,3 +88,11 @@ create table message(
     foreign key (customer_id) references customer(customer_id),
     foreign key (vehicle_post_id) references vehicle_post(vehicle_post_id)
 );
+
+create table online_users(
+    customer_id uuid primary key,
+    customer_name varchar(100) not null,
+    socket_id varchar(100) not null,
+    last_seen timestamp default now(),  
+    foreign key (customer_id) references customer(customer_id)
+);

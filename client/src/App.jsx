@@ -25,85 +25,7 @@ import Mybookings from "./Components/Pages/Mybookings";
 import Messenger from "./Components/Messenger/Messenger";
 import io from "socket.io-client";
 import { AuthContext } from "./Context/AuthContext";
-
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <Home />,
-//   },
-//   {
-//     path: "/login",
-//     element: <Login />,
-//   },
-
-//   {
-//     path: "/register",
-//     element: (
-//       <RidirectRegister>
-//         <Register />
-//       </RidirectRegister>
-//     ),
-//   },
-
-//   {
-//     path: "/listvehicle",
-//     element: (
-//       <IsAuthenticated>
-//         <ListVehicle />
-//       </IsAuthenticated>
-//     ),
-//   },
-//   {
-//     path: "/explore",
-//     element: <ExploreAll />,
-//   },
-//   {
-//     path: "/explore/:id",
-//     element: <PostDetails socket={socket} />,
-//   },
-//   {
-//     path: "/editprofile/:id",
-//     element: (
-//       <IsAuthenticated>
-//         <EditProfile />
-//       </IsAuthenticated>
-//     ),
-//   },
-//   {
-//     path: "*",
-//     element: <ErrorPage />,
-//   },
-
-//   {
-//     path: "/about",
-//     element: <About />,
-//   },
-//   {
-//     path: "/search",
-//     element: <List />,
-//   },
-
-//   {
-//     path: "/search/:location/:vehicleType",
-//     element: <List />,
-//   },
-//   {
-//     path: "/myBookings",
-//     element: <Mybookings />,
-//   },
-//   {
-//     path: "/experimentList",
-//     element: <ExperimentList />,
-//   },
-//   {
-//     path: "/messenger",
-//     element: (
-//       <IsAuthenticated>
-//         <Messenger />
-//       </IsAuthenticated>
-//     ),
-//   },
-// ]);
+import Profile from "./Components/Pages/Profile";
 
 const App = () => {
   const user = useContext(AuthContext);
@@ -115,7 +37,12 @@ const App = () => {
       socket.current = io("http://localhost:3000", {
         transports: ["websocket"],
       });
+
+      socket.current.on("notify", (data) => {
+        console.log(data);
+      });
     }
+
     shouldFetch.current = false;
   }, []);
 
@@ -170,6 +97,14 @@ const App = () => {
           element={
             <IsAuthenticated>
               <Messenger />
+            </IsAuthenticated>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <IsAuthenticated>
+              <Profile />
             </IsAuthenticated>
           }
         />

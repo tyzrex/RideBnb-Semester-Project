@@ -23,6 +23,7 @@ import {
 import DetailLoading from "./LoadingDetails";
 import { ToastContainer } from "react-toastify";
 import { toastError, toastSuccess } from "../Toast/Toast";
+import { AuthContext } from "../../Context/AuthContext";
 
 const PostDetails = ({ socket }) => {
   const [post, setPost] = useState({});
@@ -35,6 +36,7 @@ const PostDetails = ({ socket }) => {
   const [loading, setLoading] = useState(true);
   const [booked, setBooked] = useState(false);
   // const owner_id = post?.customer_id;
+  const { user } = useContext(AuthContext);
 
   const pagelocation = window.location.pathname.split("/");
 
@@ -98,32 +100,12 @@ const PostDetails = ({ socket }) => {
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  // console.log(socket.current);
-
-  // const createSocketConnection = () => {
-  //   console.log(socket);
-  // socket.current.on("connect", () => {
-  //   console.log("Connected to socket.io server");
-  // });
-  // socket.on("newComment", (comment) => {
-  //   setComments((prevState) => [...prevState, comment]);
-  // });
-  // socket.current.on("notification", (data) => {
-  //   console.log(data);
-  // });
-  // socket.current.on("disconnect", () => {
-  //   console.log("Disconnected from socket.io server");
-  // });
-  // return () => {
-  //   socket.current.disconnect();
-  // };
-  // };
-
   const handleNotification = async () => {
     try {
-      socket.current.emit("notification", {
+      socket.current.emit("notify", {
         message: "Hello World",
         receiver_id: post?.customer_id,
+        sender_name: user?.customername,
       });
     } catch (err) {
       console.log(err);
@@ -219,8 +201,9 @@ const PostDetails = ({ socket }) => {
         setBooked(false);
       }
     } catch (err) {
-      console.log(err);
-      toastError(err.response.data.message);
+      if (err.response.status === 401) {
+        toastError("Please Login First");
+      }
     }
   };
 
@@ -269,6 +252,7 @@ const PostDetails = ({ socket }) => {
     }
   }, []);
 
+  const shouldFetchComments = useRef(true);
   useEffect(() => {
     if (socket.current) {
       socket.current.on("newComment", (comment) => {
@@ -330,7 +314,7 @@ const PostDetails = ({ socket }) => {
                     </Link>
                   </li>
                   <li
-                    className="text-sm font-semibold text-gray-800 truncate dark:text-gray-200"
+                    className="text-sm font-semibold text-indigo-500 truncate dark:text-gray-200"
                     aria-current="page"
                   >
                     Post no. {id}
@@ -589,7 +573,7 @@ const PostDetails = ({ socket }) => {
                     ) : (
                       <button
                         onClick={handleBooking}
-                        className="button-hover bg-black w-full text-white p-3 rounded-md"
+                        className="button-transition bg-indigo-500 hover:bg-black w-full text-white p-3 rounded-md"
                       >
                         {post.vehicle_listing_type === "Rent" ? "Rent" : "Buy"}
                       </button>
@@ -632,7 +616,7 @@ const PostDetails = ({ socket }) => {
               </div>
               <button
                 type="submit"
-                className="inline-flex bg-black items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg "
+                className="inline-flex bg-green-500 text-bold items-center py-2.5 px-4 text-md font-medium text-center text-white bg-primary-700 rounded-lg "
               >
                 Post comment
               </button>

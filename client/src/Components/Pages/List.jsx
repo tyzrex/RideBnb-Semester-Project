@@ -124,7 +124,7 @@ const List = () => {
         <>
           <h1 className="text-4xl mt-10 pb-6 font-bold text-center">
             Search Results for {prevState.state.vehicleType} in{" "}
-            {prevState.state.location || searchParams.get("location")}
+            <span className="text-indigo-500">{prevState.state.location}</span>
           </h1>
         </>
       ) : (
@@ -239,7 +239,7 @@ const List = () => {
               >
                 <button
                   // onClick={handleSubmit}
-                  className="button-transition hover:bg-black bg-blue-500 font-semibold text-white p-3 rounded-full"
+                  className="button-transition hover:bg-black bg-indigo-500 font-semibold text-white p-3 rounded-full"
                 >
                   Search
                 </button>

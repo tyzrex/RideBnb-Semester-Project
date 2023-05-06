@@ -3,6 +3,7 @@ import PopularCard from "./Cards/PopularCard";
 import { axiosBase } from "../Instance/instance";
 import LogoCloud from "./LogoCloud";
 import { AuthContext } from "../Context/AuthContext";
+import cardBg from "../assets/cardbg.jpg";
 
 const HomeCards = () => {
   const { user } = useContext(AuthContext);
@@ -39,7 +40,7 @@ const HomeCards = () => {
   }, []);
 
   return (
-    <div className=" w-screen mx-auto h-auto bg-[#f8f8f8] ">
+    <div className=" w-screen mx-auto h-auto bg-gray-100">
       <div className="w-full max-w-[90%] xl:max-w-[1200px] mx-auto flex flex-col gap-10 justify-center items-center ">
         <div className=" mt-[300px] mt:mb-[150px] md:mt-[250px] xl:mt-[130px]">
           <div className="flex justify-center w-full items-center">

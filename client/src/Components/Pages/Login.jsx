@@ -4,6 +4,8 @@ import { ToastContainer } from "react-toastify";
 import { toastSuccess, toastError } from "../Toast/Toast";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import cardBg from "../../assets/login.svg";
+import Animate from "react-smooth";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -49,85 +51,91 @@ const Login = () => {
 
   return (
     <div>
-      <section className="bg-main-bg">
+      <section className="bg-white">
         <div className="lg:grid min-h-screen lg:min-h-screen lg:grid-cols-12">
-          <aside className="relative block h-[30vh] lg:order-first lg:col-span-5 lg:h-full xl:col-span-6">
-            <img
-              alt="Pattern"
-              src="https://images.unsplash.com/photo-1615968656371-986c58d584f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+          <aside className="relative block h-[60vh] lg:order-first lg:col-span-5 lg:h-full xl:col-span-6">
+            <Animate to="1" from="0" attributeName="opacity">
+              <img
+                alt="Pattern"
+                src={cardBg}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </Animate>
           </aside>
 
-          <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:py-12 lg:px-16 xl:col-span-6">
-            <div className="max-w-xl lg:max-w-3xl">
-              <h1 className="mt-6 text-center text-2xl font-bold text-main-text sm:text-3xl md:text-4xl">
-                Welcome <span className="text-custom-green">Back</span>
-              </h1>
+          <Animate to="1" from="0" attributeName="opacity">
+            <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:py-12 lg:px-16 xl:col-span-6">
+              <div className="max-w-xl lg:max-w-3xl">
+                <h1 className="mt-6 text-center text-2xl font-bold text-black sm:text-3xl md:text-4xl">
+                  Welcome <span className="text-indigo-500">Back</span>
+                </h1>
 
-              <p className="mt-4 text-center leading-relaxed text-gray-400">
-                Login to your account to continue.
-              </p>
+                <p className="mt-4 text-center leading-relaxed text-gray-400">
+                  Login to your account to continue.
+                </p>
 
-              <form onSubmit={handleSubmit} className="mt-8 gap-6">
-                <div className="flex flex-col gap-6 justify-center">
-                  <div>
-                    <div className="py-2">
-                      <h1 className="text-main-accent">Username</h1>
+                <form onSubmit={handleSubmit} className="mt-8 gap-6">
+                  <div className="flex flex-col gap-6 justify-center">
+                    <div>
+                      <div className="py-2">
+                        <h1 className="text-main-accent">Username</h1>
+                      </div>
+                      <input
+                        onChange={handleChange}
+                        type="text"
+                        id="username"
+                        name="name"
+                        autoComplete="username"
+                        placeholder="Username"
+                        className="mt-1 p-3 w-full rounded-full border border-gray-300 text-black text-md shadow-sm"
+                      />
+                      {loginError.name && (
+                        <p className="text-red-500">{loginError.name}</p>
+                      )}
                     </div>
-                    <input
-                      onChange={handleChange}
-                      type="text"
-                      id="username"
-                      name="name"
-                      autoComplete="username"
-                      className="mt-1 p-2 w-full rounded-md border border-gray-300 text-black bg-main-fg text-sm shadow-sm"
-                    />
-                    {loginError.name && (
-                      <p className="text-red-500">{loginError.name}</p>
-                    )}
-                  </div>
 
-                  <div>
-                    <div className="py-2">
-                      <h1 className="text-main-accent">Password</h1>
+                    <div>
+                      <div className="py-2">
+                        <h1 className="text-main-accent">Password</h1>
+                      </div>
+                      <input
+                        onChange={handleChange}
+                        type="password"
+                        id="Password"
+                        name="password"
+                        autoComplete="current-password"
+                        placeholder="********"
+                        className="mt-1 p-3 w-full rounded-full  border border-gray-300 text-md text-gray-700 shadow-sm"
+                      />
+                      {loginError.password && (
+                        <p className="text-red-500">{loginError.password}</p>
+                      )}
                     </div>
-                    <input
-                      onChange={handleChange}
-                      type="password"
-                      id="Password"
-                      name="password"
-                      autoComplete="current-password"
-                      className="mt-1 p-2 w-full rounded-md  border border-gray-300 bg-main-fg text-sm text-gray-700 shadow-sm"
-                    />
-                    {loginError.password && (
-                      <p className="text-red-500">{loginError.password}</p>
-                    )}
-                  </div>
 
-                  <div className=" flex flex-col items-center gap-4">
-                    <button
-                      type="submit"
-                      className="inline-block bg-main-text hover:bg-white  hover:border-2 hover:border-gray-500 hover:text-black shrink-0 rounded-md border  px-12 py-3 text-sm font-medium text-white transition"
-                    >
-                      Login
-                    </button>
-                    <ToastContainer />
-                    <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-                      Don't have an account?
-                      <a
-                        href="/register"
-                        className="text-gray-700 underline hover:text-teal-300"
+                    <div className=" flex flex-col items-center gap-4">
+                      <button
+                        type="submit"
+                        className="inline-block bg-indigo-500 hover:bg-white  hover:border-2 hover:border-gray-500 hover:text-black shrink-0 rounded-full border  px-12 py-3 text-lg font-semibold text-white transition"
                       >
-                        Sign Up
-                      </a>
-                      .
-                    </p>
+                        Login
+                      </button>
+                      <ToastContainer />
+                      <p className="mt-4 text-sm text-gray-500 sm:mt-0">
+                        Don't have an account?
+                        <a
+                          href="/register"
+                          className="text-gray-700 underline hover:text-indigo-300"
+                        >
+                          Sign Up
+                        </a>
+                        .
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </form>
-            </div>
-          </main>
+                </form>
+              </div>
+            </main>
+          </Animate>
         </div>
       </section>
     </div>

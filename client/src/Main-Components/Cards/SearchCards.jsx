@@ -27,16 +27,12 @@ const SearchItem = (props) => {
           {props.vehicle_name}
         </h1>
         <span className="text-md font-medium">{props.address}</span>
-        <span
-          className="p-2 text-[14px] rounded-md bg-black text-white"
-          style={{
-            width: "max-content",
-          }}
-        >
-          {props.vehicle_listing_type}
+        <span className="text-[14px] rounded-md  font-semibold text-black">
+          Listing Type : {props.vehicle_listing_type}
         </span>
-        <span className="text-[16px] font-bold">
-          Posted By : <span className="font-medium">{props.posted_by}</span>
+        <span className="text-[16px] text-indigo-500 font-bold">
+          Posted By :{" "}
+          <span className="font-normal text-black">{props.posted_by}</span>
         </span>
         <span className="text-[14px]">
           {props.vehicle_color} • {props.vehicle_type} • {props.vehicle_brand}
@@ -49,9 +45,11 @@ const SearchItem = (props) => {
         </span>
       </div>
       <div className="siDetails flex justify-around md:justify-between w-full">
-        <div className="flex justify-between">
-          <span className="font-medium mt-1">Excellent</span>
-          <button className="bg-black text-white p-[6px] rounded-md font-semibold bordernone ">
+        <div className="flex justify-end gap-5">
+          {/* <span className="font-medium mt-1 text-orange-500">
+            {props.vehicle_listing_type}
+          </span> */}
+          <button className="bg-black text-white p-[6px] rounded-full font-semibold bordernone ">
             8.9
           </button>
         </div>
@@ -59,7 +57,7 @@ const SearchItem = (props) => {
           <span className="siPrice">Rs. {props.price_per_day}</span>
           <span className="siTaxOp">Includes taxes and fees</span>
           <Link to={`/explore/${props.vehicle_id}`} state={date}>
-            <button className="bg-black text-white button-hover p-2 rounded-md">
+            <button className="bg-indigo-500 text-white button-transition hover:bg-black p-2 rounded-md">
               See availability
             </button>
           </Link>

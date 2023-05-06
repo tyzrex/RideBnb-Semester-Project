@@ -14,7 +14,8 @@ export const searchVehicle = async (req, res) => {
         vp.vehicle_listing_type, 
         vp.vehicle_color,
         vp.vehicle_brand,
-        c.customername
+        c.customername,
+        c.customer_id
       FROM vehicle_post vp
       JOIN customer c ON vp.customer_id = c.customer_id
       WHERE vp.address ILIKE $1
@@ -26,6 +27,7 @@ export const searchVehicle = async (req, res) => {
           WHERE b.vehicle_post_id = vp.vehicle_post_id
             AND (b.start_date::date, b.end_date::date) OVERLAPS ($3::date, $4::date)
         )
+      
     `;
     const values = [`%${location}%`, vehicleType, checkIn, checkOut];
     const { rows } = await pool.query(query, values);

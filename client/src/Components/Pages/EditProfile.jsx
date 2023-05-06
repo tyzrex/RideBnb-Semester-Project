@@ -84,7 +84,7 @@ const EditProfile = () => {
     <div>
       <Navbar />
       <h1 className="text-3xl font-bold text-center mt-10">
-        Edit Your Personal Information
+        Edit Your Personal <span className="text-blue-500">Details</span>
       </h1>
       <div className="xl:max-w-[1200px] px-4 py-10 max-w-[90%] lg:py-14 mb-10 mx-auto w-screen">
         <div className="bg-white rounded-xl p-4 sm:p-7 dark:bg-slate-900">
@@ -233,7 +233,7 @@ const EditProfile = () => {
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold button-hover bg-black text-white"
+                className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold button-transition hover:bg-black bg-indigo-500 text-white"
               >
                 Save changes
               </button>

@@ -6,7 +6,6 @@ import FAQ from "../../Main-Components/FAQ";
 import ExperimentHero from "../../Main-Components/experimentHero";
 import Hero from "../../Main-Components/Hero";
 import Album from "../../Main-Components/Album/Album";
-import HeroVideo from "../../assets/car.mp4";
 
 import("preline");
 

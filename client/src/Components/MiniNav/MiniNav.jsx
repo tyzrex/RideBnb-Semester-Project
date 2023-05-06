@@ -32,7 +32,7 @@ const MiniNav = () => {
               </li>
               <li className="text-sm">
                 <Link
-                  className="flex items-center text-gray-500 hover:text-blue-600"
+                  className="flex items-center text-indigo-500 hover:text-red-500"
                   to={`${pagelocation}`}
                 >
                   {pagelocation[1].toUpperCase() + pagelocation.slice(2)}

@@ -18,8 +18,13 @@ export const createComment = async (req, res) => {
     newComment.rating = rating;
     console.log(newComment);
 
-    // Emit the newComment event to notify connected clients
-    io.emit("newComment", newComment);
+    io.on("connection", (socket) => {
+      socket.on("newComment", (data) => {
+        console.log(data);
+        io.emit("newComment", newComment);
+      });
+    });
+    // io.emit("newComment", newComment);
 
     return newComment;
   } catch (err) {
@@ -35,7 +40,7 @@ export const getComments = async (req, res) => {
   try {
     const { id } = req.params;
     const { rows } = await pool.query(
-      "SELECT * FROM vehicle_post_comment WHERE vehicle_post_id = $1 ORDER BY created_at DESC;",
+      "SELECT * FROM vehicle_post_comment WHERE vehicle_post_id = $1 ORDER BY created_at ASC;",
       [id]
     );
     res.status(200).json(rows);

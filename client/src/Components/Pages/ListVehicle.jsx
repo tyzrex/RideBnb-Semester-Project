@@ -168,9 +168,9 @@ const ListVehicle = () => {
 
       <div className="flex justify-between mx-auto w-screen xl:max-w-[1200px] max-w-[90%] gap-2">
         <div className="lg:w-[60%] w-full">
-          <section className="bg-white  mb-20 mx-auto w-full text-black rounded-md dark:bg-gray-800 ">
+          <section className="  mb-20 mx-auto w-full text-black rounded-md dark:bg-gray-800 ">
             <h1 className="text-[24px] md:text-[48px] font-semibold ">
-              List Your Vehicle
+              List Your <span className="text-indigo-500">Vehicle</span>
             </h1>
             <form>
               <div className="grid grid-cols-1 gap-6 mt-4 ">
@@ -198,7 +198,7 @@ const ListVehicle = () => {
                       <div className="flex text-sm text-gray-600 justify-center items-center">
                         <label
                           htmlFor="file-upload"
-                          className="relative cursor-pointer bg-black rounded-md font-medium text-white p-2"
+                          className="relative cursor-pointer bg-indigo-500 rounded-md font-medium text-white p-2"
                         >
                           <span className="">Upload a file</span>
                           <input
@@ -467,7 +467,7 @@ const ListVehicle = () => {
               <div className="flex justify-start mt-6">
                 <button
                   onClick={handleSubmit}
-                  className="px-4 py-3 leading-5 text-white transition-colors duration-200 transform bg-black rounded-full font-bold hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
+                  className="px-4 py-3 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-full font-bold hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
                 >
                   Submit
                 </button>

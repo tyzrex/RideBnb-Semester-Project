@@ -55,12 +55,3 @@
 .button-hover {
   @apply border-2 border-black hover:text-black hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300;
 }
-
-.black-glass {
-  background: rgba(0, 0, 0, 0.897);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-}

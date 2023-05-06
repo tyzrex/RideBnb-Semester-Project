@@ -28,7 +28,7 @@ const Navbar = () => {
               <Link to="/">
                 <h1 className="text-3xl">
                   <span className="font-semibold">Ride</span>
-                  <span className="font-semibold">Bnb</span>
+                  <span className="font-semibold text-indigo-500">Bnb</span>
                 </h1>
                 {/* <img src={RideBnb} alt="logo" className="w-[200px]" /> */}
               </Link>
@@ -49,26 +49,30 @@ const Navbar = () => {
                 <div className="hidden lg:flex justify-center items-center gap-8 cursor-pointer top-0 ">
                   <Link to="/">
                     <div className="flex items-center gap-2">
-                      <div className="font-medium text-[#23262f]">Home</div>
+                      <div className="font-semibold text-lg text-indigo-500 ">
+                        Home
+                      </div>
                     </div>
                   </Link>
 
                   <Link to="/about">
                     <div className="flex items-center gap-2">
-                      <div className="font-medium text-[#23262f]">About</div>
+                      <div className="font-medium text-lg text-[#23262f]">
+                        About
+                      </div>
                     </div>
                   </Link>
 
                   <Link to="/mybookings">
                     <div className="flex items-center gap-2">
-                      <div className="font-medium text-[#23262f]">
+                      <div className="font-medium text-[#23262f] text-lg">
                         My Bookings
                       </div>
                     </div>
                   </Link>
 
                   <Link to="/listvehicle">
-                    <div className=" font-medium flex items-center gap-2 py-2 bg-white border-2 hover:text-white hover:bg-black hover:border-black transition-all duration-300 ease-in-out text-black px-4 rounded-full ">
+                    <div className=" font-medium text-lg flex items-center gap-2 py-2 bg-white border-2 hover:text-white hover:bg-black hover:border-black transition-all duration-300 ease-in-out text-black px-4 rounded-full ">
                       <span>List Your Vehicle</span>
                     </div>
                   </Link>
@@ -85,7 +89,7 @@ const Navbar = () => {
                             type="button"
                             className="hs-dropdown-toggle border-none inline-flex justify-center items-center gap-2 rounded-md  font-medium bg-white text-gray-700 align-middle"
                           >
-                            <div className="relative inline-flex items-center p-2 justify-center w-12 h-12 overflow-hidden bg-black rounded-full dark:bg-gray-600">
+                            <div className="relative inline-flex items-center p-2 justify-center w-12 h-12 overflow-hidden bg-indigo-500 rounded-full dark:bg-gray-600">
                               <span className="font-medium text-white dark:text-gray-300">
                                 {user.customername[0]}
                                 {user.customername[1]}

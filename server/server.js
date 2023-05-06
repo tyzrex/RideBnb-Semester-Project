@@ -10,9 +10,9 @@ import SearchRoute from "./src/routes/search.js";
 import CommentRoute from "./src/routes/comments.js";
 import BookingRoute from "./src/routes/booking.js";
 import MessageRoute from "./src/routes/message.js";
-import http from "http";
+import http, { get } from "http";
 import { Server } from "socket.io";
-import { isAuthenticated } from "./src/middleware/isAuthenticated.js";
+import pool from "./src/config/database.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -50,8 +50,72 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+const addNewUser = async (socketId, user) => {
+  if (user.user) {
+    const { customer_id, customername } = user.user;
+
+    const checkUser = await pool.query(
+      "SELECT * FROM online_users WHERE customer_id = $1",
+      [customer_id]
+    );
+
+    if (checkUser.rows.length > 0) {
+      const updateSocketId = await pool.query(
+        "UPDATE online_users SET socket_id = $1 WHERE customer_id = $2 RETURNING *",
+        [socketId, customer_id]
+      );
+    } else {
+      try {
+        const insertUser = await pool.query(
+          "INSERT INTO online_users (socket_id, customer_id, customer_name) VALUES ($1, $2, $3) RETURNING *",
+          [socketId, customer_id, customername]
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+};
+
+const getSocketId = async (userId) => {
+  try {
+    const socketId = await pool.query(
+      "SELECT socket_id FROM online_users WHERE customer_id = $1",
+      [userId]
+    );
+
+    return socketId.rows[0].socket_id;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteUser = async (socketId) => {
+  try {
+    const deleteUser = await pool.query(
+      "DELETE FROM online_users WHERE socket_id = $1",
+      [socketId]
+    );
+    return deleteUser.rows[0];
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
+
+  socket.on("newUser", (user) => {
+    addNewUser(socket.id, user);
+    // console.log(user.user.customer_id);
+  });
+
+  socket.on("notify", (data) => {
+    getSocketId(data.receiver_id).then((socketId) => {
+      console.log(socketId);
+      io.to(socketId).emit("notify", data);
+    });
+  });
 
   const bookingId = socket.handshake.query.booking_id;
   socket.join(bookingId);
@@ -62,6 +126,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
+    deleteUser(socket.id);
     console.log("User Disconnected", socket.id);
   });
 });
