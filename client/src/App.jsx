@@ -73,7 +73,7 @@ const App = () => {
       </ShowNavbar>
 
       <Routes>
-        <Route path="/" element={<Home socket={socket} notify={notify} />} />
+        <Route path="/" element={<Home />} />
         <Route
           path="/login"
           element={
@@ -126,7 +126,7 @@ const App = () => {
           path="/profile"
           element={
             <IsAuthenticated>
-              <Profile />
+              <Profile socket={socket} />
             </IsAuthenticated>
           }
         />

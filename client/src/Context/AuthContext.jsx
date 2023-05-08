@@ -13,10 +13,10 @@ export const AuthProvider = ({ children }) => {
       // const response = await axios.post("http://localhost:5000/auth/login", data);
       const response = await axiosInstance.post("/auth/login", data);
       setUser(response.data);
-      toastSuccess("Login Successful Redirecting...");
-      setTimeout(() => {
-        window.location.replace("/");
-      }, 2000);
+      toastSuccess(`Welcome ${response.data.customername}!`);
+      // setTimeout(() => {
+      //   window.location.replace("/");
+      // }, 2000);
     } catch (err) {
       if (err.response.status === 422) {
         toastError("Invalid credentials");

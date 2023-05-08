@@ -7,7 +7,7 @@ import Footer from "../../Main-Components/Footer";
 import Table from "../Table/Table";
 import RequestsTable from "../Table/RequestsTable";
 
-const Profile = () => {
+const Profile = ({ socket }) => {
   const { user } = useContext(AuthContext);
   return (
     <div>
@@ -85,7 +85,7 @@ const Profile = () => {
       <div className="mt-10">
         <Table />
       </div>
-      <RequestsTable />
+      <RequestsTable socket={socket} />
       <Footer />
     </div>
   );

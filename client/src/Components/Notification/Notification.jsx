@@ -58,6 +58,10 @@ const Notification = ({ socket }) => {
             </div>
           );
         });
+
+        socket?.current.on("notifyBooking", (data) => {
+          console.log(data);
+        });
       }
     }
     shouldFetch.current = false;

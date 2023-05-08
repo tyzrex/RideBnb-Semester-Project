@@ -26,6 +26,7 @@ export const searchVehicle = async (req, res) => {
           FROM booking b
           WHERE b.vehicle_post_id = vp.vehicle_post_id
             AND (b.start_date::date, b.end_date::date) OVERLAPS ($3::date, $4::date)
+            AND b.booking_status = 'Accepted'
         )
       
     `;

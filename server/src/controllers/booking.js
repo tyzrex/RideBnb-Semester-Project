@@ -66,12 +66,16 @@ export const bookedByUser = async (req, res) => {
 
   try {
     const { rows } = await pool.query(
-      `SELECT * FROM booking WHERE vehicle_post_id = $1 AND booking_customer_id = $2`,
+      `SELECT * FROM booking WHERE vehicle_post_id = $1 AND booking_customer_id = $2 
+        AND booking_status = 'Accepted'
+      `,
       [vehicle_post_id, customer_id]
     );
+
     if (rows.length > 0) {
       return res.status(400).json({ message: "Booked" });
     }
+
     return res.status(200).json({ message: "Not booked" });
   } catch (error) {
     console.error(error);
@@ -98,8 +102,8 @@ export const getOwnerVehicles = async (req, res) => {
 
 // accept and reject booking
 export const bookingAction = async (req, res) => {
-  const { booking_id } = req.params;
-  const { action } = req.body;
+  const { booking_id } = req.query;
+  const { booking_status } = req.body;
   const { customer_id } = req.user;
 
   try {
@@ -110,8 +114,8 @@ export const bookingAction = async (req, res) => {
     if (rows.length === 0) {
       return res.status(404).json({ message: "Booking not found" });
     }
-    const query = `UPDATE booking SET status = $1 WHERE booking_id = $2 RETURNING *`;
-    const values = [action, booking_id];
+    const query = `UPDATE booking SET booking_status = $1 WHERE booking_id = $2 RETURNING *`;
+    const values = [booking_status, booking_id];
     const response = await pool.query(query, values);
     return res.status(200).json(response.rows[0]);
   } catch (error) {

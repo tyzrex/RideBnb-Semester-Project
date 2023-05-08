@@ -1,12 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import axiosInstance from "../../Instance/instance";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthContext";
 
 import { FcApproval, FcCancel } from "react-icons/fc";
 
-function RequestsTable() {
+function RequestsTable({ socket }) {
   const [requests, setRequests] = useState([]);
-
+  const { user } = useContext(AuthContext);
   const getRequests = async () => {
     try {
       const res = await axiosInstance.get("/booking/getOwnerVehicles");
@@ -23,6 +24,25 @@ function RequestsTable() {
     }
     shouldFetch.current = false;
   }, []);
+
+  const handleBooking = async (id, action, receiver_id) => {
+    try {
+      socket.current.emit("notify", {
+        sender_name: user?.customername,
+        receiver_id: receiver_id,
+        notification_message: `Your booking request for ${id} has been ${action.booking_status}`,
+      });
+      const res = await axiosInstance.post(
+        `booking/bookingAction?booking_id=${id}`,
+        action
+      );
+
+      console.log(res);
+      getRequests();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   console.log(requests);
 
@@ -53,7 +73,7 @@ function RequestsTable() {
                 <th className="font-normal text-left pl-20">Total Price</th>
                 <th className="font-normal text-left pl-20">Created On</th>
                 <th className="font-normal text-left pl-8">Booking Dates</th>
-                <th className="font-normal text-left pl-4">Actions</th>
+                <th className="font-normal text-left pl-10 md:pl-4">Actions</th>
               </tr>
             </thead>
             <tbody className="w-full">
@@ -80,7 +100,21 @@ function RequestsTable() {
                     </p>
                   </td>
                   <td className="pl-12">
-                    <p className="font-medium">{listing.booking_status}</p>
+                    <p className="font-medium">
+                      {listing.booking_status === "pending" ? (
+                        <span className="bg-yellow-500 text-white rounded-full px-4 py-1 text-xs font-bold">
+                          {listing.booking_status}
+                        </span>
+                      ) : listing.booking_status === "Accepted" ? (
+                        <span className="bg-green-500 text-white rounded-full px-4 py-1 text-xs font-bold">
+                          {listing.booking_status}
+                        </span>
+                      ) : (
+                        <span className="bg-red-500 text-white rounded-full px-4 py-1 text-xs font-bold">
+                          {listing.booking_status}
+                        </span>
+                      )}
+                    </p>
                   </td>
                   <td className="pl-20">
                     <p className="font-medium">Rs. {listing.total_price}</p>
@@ -104,13 +138,47 @@ function RequestsTable() {
                     </p>
                   </td>
                   <td className="px-8 2xl:px-0">
-                    <div className="flex items-center gap-5">
-                      <button className=" rounded-full text-white transform hover:text-white hover:bg-indigo-500 button-transition">
-                        <FcApproval className="text-3xl" />
-                      </button>{" "}
-                      <button className=" rounded-full text-white transform hover:text-white hover:bg-indigo-500 button-transition">
-                        <FcCancel className="text-3xl" />
-                      </button>
+                    <div className="flex items-center gap-5 justify-center">
+                      {listing.booking_status === "pending" ? (
+                        <>
+                          <button
+                            onClick={() =>
+                              handleBooking(
+                                listing.booking_id,
+                                {
+                                  booking_status: "Accepted",
+                                },
+                                listing.booking_customer_id
+                              )
+                            }
+                            className=" rounded-full text-white transform hover:text-white hover:bg-indigo-500 button-transition"
+                          >
+                            <FcApproval className="text-3xl" />
+                          </button>{" "}
+                          <button
+                            onClick={() =>
+                              handleBooking(
+                                listing.booking_id,
+                                {
+                                  booking_status: "Rejected",
+                                },
+                                listing.booking_customer_id
+                              )
+                            }
+                            className=" rounded-full text-white transform hover:text-white hover:bg-indigo-500 button-transition"
+                          >
+                            <FcCancel className="text-3xl" />
+                          </button>
+                        </>
+                      ) : listing.booking_status === "Accepted" ? (
+                        <button className=" rounded-full text-white transform hover:text-white hover:bg-indigo-500 button-transition">
+                          <FcApproval className="text-3xl" />
+                        </button>
+                      ) : (
+                        <button className=" rounded-full text-white transform hover:text-white hover:bg-indigo-500 button-transition">
+                          <FcCancel className="text-3xl" />
+                        </button>
+                      )}
                     </div>
                   </td>
                 </tr>

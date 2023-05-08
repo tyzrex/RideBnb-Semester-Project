@@ -9,7 +9,7 @@ import Album from "../../Main-Components/Album/Album";
 
 import("preline");
 
-const Home = ({ socket }) => {
+const Home = () => {
   return (
     <div>
       <ExperimentHero />
