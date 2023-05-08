@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
-import Navbar from "../../Main-Components/Navbar";
 import Footer from "../../Main-Components/Footer";
 import axiosInstance from "../../Instance/instance";
 import { GoLocation } from "react-icons/go";
@@ -43,6 +42,24 @@ const PostDetails = ({ socket }) => {
   const navigate = useNavigate();
   const prevState = useLocation().state;
 
+  const fetchPost = async () => {
+    try {
+      const response = await axiosInstance.get(`/post/getpost/${id}`);
+      setTimeout(() => {
+        setLoading(false);
+      }, 300);
+      setPost(response.data);
+    } catch (err) {
+      if (err.response.status === 404) {
+        console.log(err);
+        setTimeout(() => {
+          return navigate("/404");
+        }, 300);
+      }
+      console.log(err);
+    }
+  };
+
   const [data, setData] = useState({
     vehicle_post_id: id,
     checkIn: prevState?.checkIn || "",
@@ -65,24 +82,6 @@ const PostDetails = ({ socket }) => {
       return 1;
     }
     return diffDays;
-  };
-
-  const fetchPost = async () => {
-    try {
-      const response = await axiosInstance.get(`/post/getpost/${id}`);
-      setTimeout(() => {
-        setLoading(false);
-      }, 300);
-      setPost(response.data);
-    } catch (err) {
-      if (err.response.status === 404) {
-        console.log(err);
-        setTimeout(() => {
-          return navigate("/404");
-        }, 300);
-      }
-      console.log(err);
-    }
   };
 
   const handleSelect = (ranges) => {
@@ -139,6 +138,11 @@ const PostDetails = ({ socket }) => {
         comment: newComment,
         rating: rating,
       };
+      socket.current.emit("notify", {
+        notification_message: `Commented on your post`,
+        receiver_id: post?.customer_id,
+        sender_name: user?.customername,
+      });
       const response = await axiosInstance.post("/comment/createComment", data);
     } catch (err) {
       if (err.response.status === 401) {
@@ -191,7 +195,22 @@ const PostDetails = ({ socket }) => {
 
   const handleBooking = async () => {
     try {
+      socket.current.emit("notify", {
+        notification_message: `Booking Request for ${post?.vehicle_name} from ${data.checkIn} to ${data.checkOut}`,
+        receiver_id: post?.customer_id,
+        sender_name: user?.customername,
+      });
+
       const response = await axiosInstance.post("/booking/createBooking", data);
+      const response2 = await axiosInstance.post(
+        "/notification/createNotification",
+        {
+          receiver_id: post?.customer_id,
+          sender_id: user?.customer_id,
+          sender_name: user?.customername,
+          notification_message: `Booking Request for ${post?.vehicle_name} from ${data.checkIn} to ${data.checkOut}`,
+        }
+      );
       console.log(response);
       if (response.status === 201) {
         setBooked(true);
@@ -252,9 +271,12 @@ const PostDetails = ({ socket }) => {
     }
   }, []);
 
-  const shouldFetchComments = useRef(true);
   useEffect(() => {
     if (socket.current) {
+      socket.current.on("connect", () => {
+        console.log("connected");
+      });
+
       socket.current.on("newComment", (comment) => {
         setComments((prevState) => [...prevState, comment]);
       });
@@ -263,10 +285,6 @@ const PostDetails = ({ socket }) => {
 
   return (
     <div>
-      <div className="border-b">
-        <Navbar />
-      </div>
-
       {/* <h1 className="text-center text-4xl font-bold text-black mt-10">
         {" "}
         Post Details{" "}

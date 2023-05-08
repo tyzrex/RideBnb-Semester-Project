@@ -18,13 +18,7 @@ export const createComment = async (req, res) => {
     newComment.rating = rating;
     console.log(newComment);
 
-    io.on("connection", (socket) => {
-      socket.on("newComment", (data) => {
-        console.log(data);
-        io.emit("newComment", newComment);
-      });
-    });
-    // io.emit("newComment", newComment);
+    io.emit("newComment", newComment);
 
     return newComment;
   } catch (err) {

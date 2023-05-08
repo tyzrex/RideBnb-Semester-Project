@@ -1,15 +1,16 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
-import Navbar from "../../Main-Components/Navbar";
+
 import MiniNav from "../MiniNav/MiniNav";
 import Footer from "../../Main-Components/Footer";
 import Table from "../Table/Table";
+import RequestsTable from "../Table/RequestsTable";
+
 const Profile = () => {
   const { user } = useContext(AuthContext);
   return (
     <div>
-      <Navbar />
       <MiniNav />
 
       <div>
@@ -81,7 +82,10 @@ const Profile = () => {
           {/* Card code block end */}
         </div>
       </div>
-      <Table />
+      <div className="mt-10">
+        <Table />
+      </div>
+      <RequestsTable />
       <Footer />
     </div>
   );

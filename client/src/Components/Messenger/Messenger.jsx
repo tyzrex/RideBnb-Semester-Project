@@ -86,7 +86,6 @@ const Messenger = () => {
 
   return (
     <div>
-      <Navbar />
       <MiniNav />
       <div className="flex flex-row  w-screen max-w-[90%] xl:max-w-[1200px] antialiased text-gray-800 mx-auto ">
         <div className="flex flex-col h-full w-full ">

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -26,9 +26,14 @@ import Messenger from "./Components/Messenger/Messenger";
 import io from "socket.io-client";
 import { AuthContext } from "./Context/AuthContext";
 import Profile from "./Components/Pages/Profile";
+import { toastSuccess } from "./Components/Toast/Toast";
+import { ToastContainer } from "react-toastify";
+import Navbar from "./Main-Components/Navbar";
+import ShowNavbar from "./Main-Components/ShowNavbar/ShowNavbar";
 
 const App = () => {
   const user = useContext(AuthContext);
+  const [notify, setNotify] = useState([]);
   const shouldFetch = useRef(true);
 
   const socket = useRef(null);
@@ -38,9 +43,11 @@ const App = () => {
         transports: ["websocket"],
       });
 
-      socket.current.on("notify", (data) => {
-        console.log(data);
-      });
+      // socket.current.on("notify", (data) => {
+      //   console.log(data);
+      //   setNotify(data);
+      //   // toastSuccess("new notification");
+      // });
     }
 
     shouldFetch.current = false;
@@ -54,12 +61,27 @@ const App = () => {
     emitNewUser.current = false;
   }, []);
 
+  // const { isAuthenticated, User } = useSelector((state) => state.user);
+  // console.log(isAuthenticated);
+  // console.log(User);
+
   return (
     <div className="app">
       {/* <RouterProvider router={router} /> */}
+      <ShowNavbar>
+        <Navbar socket={socket} />
+      </ShowNavbar>
+
       <Routes>
-        <Route path="/" element={<Home socket={socket} />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home socket={socket} notify={notify} />} />
+        <Route
+          path="/login"
+          element={
+            <RidirectRegister>
+              <Login />
+            </RidirectRegister>
+          }
+        />
         <Route
           path="/register"
           element={
@@ -109,6 +131,7 @@ const App = () => {
           }
         />
       </Routes>
+      <ToastContainer />
     </div>
   );
 };

@@ -10,6 +10,7 @@ import SearchRoute from "./src/routes/search.js";
 import CommentRoute from "./src/routes/comments.js";
 import BookingRoute from "./src/routes/booking.js";
 import MessageRoute from "./src/routes/message.js";
+import NotificationRoute from "./src/routes/notification.js";
 import http, { get } from "http";
 import { Server } from "socket.io";
 import pool from "./src/config/database.js";
@@ -38,6 +39,7 @@ app.use("/search", SearchRoute);
 app.use("/comment", CommentRoute);
 app.use("/booking", BookingRoute);
 app.use("/chat", MessageRoute);
+app.use("/notification", NotificationRoute);
 
 const io = new Server(server, {
   cors: {
@@ -83,6 +85,10 @@ const getSocketId = async (userId) => {
       "SELECT socket_id FROM online_users WHERE customer_id = $1",
       [userId]
     );
+
+    if (socketId.rows.length === 0) {
+      return null;
+    }
 
     return socketId.rows[0].socket_id;
   } catch (error) {

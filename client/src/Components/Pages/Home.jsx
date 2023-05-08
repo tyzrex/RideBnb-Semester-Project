@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../../Main-Components/Navbar";
 import HomeCards from "../../Main-Components/HomeCards";
 import Footer from "../../Main-Components/Footer";
@@ -12,8 +12,6 @@ import("preline");
 const Home = ({ socket }) => {
   return (
     <div>
-      <Navbar socket={socket} />
-
       <ExperimentHero />
 
       {/* <Hero /> */}

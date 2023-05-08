@@ -1,10 +1,8 @@
 import React from "react";
-import Navbar from "../Main-Components/Navbar";
 
 const ErrorPage = () => {
   return (
     <div>
-      <Navbar />
       <div className="h-[85vh] flex justify-center items-center">
         <body className="flex h-full">
           <div className="max-w-[50rem] flex flex-col mx-auto w-full h-full">

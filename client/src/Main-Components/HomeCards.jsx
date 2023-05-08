@@ -3,7 +3,6 @@ import PopularCard from "./Cards/PopularCard";
 import { axiosBase } from "../Instance/instance";
 import LogoCloud from "./LogoCloud";
 import { AuthContext } from "../Context/AuthContext";
-import cardBg from "../assets/cardbg.jpg";
 
 const HomeCards = () => {
   const { user } = useContext(AuthContext);

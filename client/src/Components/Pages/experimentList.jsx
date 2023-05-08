@@ -1,12 +1,11 @@
 import React from "react";
-import Navbar from "../../Main-Components/Navbar";
+
 import MiniNav from "../MiniNav/MiniNav";
 import PreviewCards from "../../Main-Components/Cards/PreviewCards";
 
 const ExperimentList = () => {
   return (
     <div>
-      <Navbar />
       <MiniNav />
 
       <div className="flex justify-between mx-auto w-screen xl:max-w-[1200px] max-w-[90%] gap-2">

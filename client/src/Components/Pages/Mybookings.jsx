@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Navbar from "../../Main-Components/Navbar";
 import axiosInstance from "../../Instance/instance";
 import SearchItem from "../../Main-Components/Cards/SearchCards";
 import MiniNav from "../MiniNav/MiniNav";
@@ -27,7 +26,6 @@ const Mybookings = () => {
 
   return (
     <div>
-      <Navbar />
       <MiniNav />
       <div className="w-screen max-w-[1200px] flex justify-center items-center mx-auto mt-10">
         <div className="">

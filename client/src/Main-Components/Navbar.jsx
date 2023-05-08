@@ -1,14 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { RiMenu4Line } from "react-icons/ri";
 import { AiOutlineClose, AiOutlineHome } from "react-icons/ai";
 import { AuthContext } from "../Context/AuthContext";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FcAbout, FcHome, FcBookmark, FcAddImage } from "react-icons/fc";
+import Notification from "../Components/Notification/Notification";
 
 import("preline");
 
-const Navbar = () => {
+const Navbar = ({ socket }) => {
   const [nav, setNav] = useState(true);
   const handleNav = () => {
     setNav(!nav);
@@ -78,11 +79,15 @@ const Navbar = () => {
                   </Link>
                 </div>
               </div>
+
               <div className="flex justify-center items-center gap-4 ">
                 {user ? (
                   <div className="flex justify-center items-center gap-2 ">
                     <div>
-                      <div>
+                      <div className="flex justify-center items-center gap-4">
+                        <div className="w-full h-full">
+                          <Notification socket={socket} />
+                        </div>
                         <div className="hs-dropdown [--placement:bottom-right]">
                           <button
                             id="hs-dropdown-with-header"

@@ -4,6 +4,7 @@ import {
   createBooking,
   getBookingById,
   bookedByUser,
+  getOwnerVehicles,
 } from "../controllers/booking.js";
 import { isAuthenticated } from "../middleware/isAuthenticated.js";
 import { isBooked } from "../middleware/isBooked.js";
@@ -19,5 +20,8 @@ router.route("/getBookingById").get(isAuthenticated, getBookingById);
 
 //Check if a user has already booked a vehicle post
 router.route("/bookedByUser").get(isAuthenticated, bookedByUser);
+
+//Get owner vehicles which are listed in the booking table
+router.route("/getOwnerVehicles").get(isAuthenticated, getOwnerVehicles);
 
 export default router;

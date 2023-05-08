@@ -1,5 +1,4 @@
 import "./list.css";
-import Navbar from "../../Main-Components/Navbar";
 import {
   Link,
   Navigate,
@@ -118,7 +117,6 @@ const List = () => {
 
   return (
     <div>
-      <Navbar />
       <MiniNav />
       {prevState.state ? (
         <>

@@ -23,3 +23,9 @@ export const toastSuccess = (message) => {
     ...toastStyle,
   });
 };
+
+export const toastBooking = (message) => {
+  toast.info(message, {
+    ...toastStyle,
+  });
+};

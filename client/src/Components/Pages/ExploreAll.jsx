@@ -48,7 +48,6 @@ const ExploreAll = () => {
 
   return (
     <div>
-      <Navbar />
       <MiniNav />
       <div>
         <ExploreHero />

@@ -47,7 +47,8 @@ CREATE TABLE vehicle_post_comment (
 
 create table booking(
     booking_id serial primary key,
-    customer_id int not null,
+    customer_id uuid not null,
+    owner_id uuid not null,
     vehicle_post_id int not null,
     total_cost DECIMAL(10,2) not null,
     booking_status varchar(50) not null,
@@ -59,14 +60,16 @@ create table booking(
     foreign key (vehicle_post_id) references vehicle_post(vehicle_post_id)
 );
 
-CREATE TABLE transactions (
-  transaction_id SERIAL PRIMARY KEY,
-  customer_id INTEGER REFERENCES customer(customer_id),
-  booking_id INTEGER REFERENCES booking(booking_id),
-  transaction_type VARCHAR(20) NOT NULL,
-  transaction_status VARCHAR(20) NOT NULL,
-  amount NUMERIC(8,2) NOT NULL
+
+create TABLE notifications(
+    notification_id SERIAL PRIMARY KEY,
+    sender_id UUID NOT NULL,
+    receiver_id UUID NOT NULL,
+    notification_message TEXT NOT NULL,
+    foreign key (sender_id) references customer(customer_id),
+    foreign key (receiver_id) references customer(customer_id)
 );
+
 
 create table vehicle_review(
     vehicle_review_id serial primary key,

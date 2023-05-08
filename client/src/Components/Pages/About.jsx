@@ -1,12 +1,10 @@
 import React from "react";
-import Navbar from "../../Main-Components/Navbar";
 import Footer from "../../Main-Components/Footer";
 import MiniNav from "../MiniNav/MiniNav";
 
 const About = () => {
   return (
     <div>
-      <Navbar />
       <div>
         <MiniNav />
       </div>

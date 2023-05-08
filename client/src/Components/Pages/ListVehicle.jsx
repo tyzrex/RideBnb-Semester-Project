@@ -163,7 +163,6 @@ const ListVehicle = () => {
 
   return (
     <div>
-      <Navbar />
       <MiniNav />
 
       <div className="flex justify-between mx-auto w-screen xl:max-w-[1200px] max-w-[90%] gap-2">

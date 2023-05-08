@@ -86,19 +86,14 @@ export const editProfile = async (req, res) => {
 
 export const getUser = async (req, res) => {
   const user = req.user;
-  const { customer_id } = user;
   try {
-    const userInfo = await pool.query(
-      "Select * FROM customer WHERE customer_id = $1",
-      [customer_id]
-    );
-    const { password, ...rest } = userInfo.rows[0];
-    res.cookie("user", rest, {
-      httpOnly: true,
-    });
-    res.status(200).json(rest);
+    res.json(user);
   } catch (err) {
     console.log(err);
+    res.status(401).json({
+      success: false,
+      message: err.message,
+    });
   }
 };
 
