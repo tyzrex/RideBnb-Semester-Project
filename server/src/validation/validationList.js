@@ -46,7 +46,7 @@ function validateVehiclePost() {
       .notEmpty()
       .withMessage("Vehicle description is required"),
 
-    check("vehiclefile").notEmpty().withMessage("Vehicle image is required"),
+    // check("vehiclefile").notEmpty().withMessage("Vehicle image is required"),
 
     check("listingType").notEmpty().withMessage("Listing type is required"),
 

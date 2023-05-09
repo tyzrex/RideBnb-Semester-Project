@@ -8,7 +8,7 @@ const ExploreCards = (props) => {
         <div className="h-full w-full">
           <div className="relative w-full">
             <img
-              src={`../../../Images/${props.vehicleImage}`}
+              src={props.vehicleImage}
               className="mb-2 h-[250px] object-cover rounded-t-xl transition-transform duration-500 ease-in-out"
               alt=""
             />

@@ -1,8 +1,33 @@
 import dotenv from "dotenv";
 import pool from "../config/database.js";
-import jwt from "jsonwebtoken";
+import { v2 as cloudinary } from "cloudinary";
 
 dotenv.config();
+
+// Configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+export const uploadImage = async (req, res) => {
+  try {
+    const file = req.files.vehiclefile;
+
+    const { secure_url } = await cloudinary.uploader.upload(
+      file.tempFilePath,
+      (err, result) => {
+        if (err) throw err;
+        console.log(result);
+      }
+    );
+    res.status(200).json({ url: secure_url });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 export const post = async (req, res) => {
   const {

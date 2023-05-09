@@ -11,9 +11,11 @@ import CommentRoute from "./src/routes/comments.js";
 import BookingRoute from "./src/routes/booking.js";
 import MessageRoute from "./src/routes/message.js";
 import NotificationRoute from "./src/routes/notification.js";
+import CloudinaryRoute from "./src/routes/cloudinary.js";
 import http, { get } from "http";
 import { Server } from "socket.io";
 import pool from "./src/config/database.js";
+import fileUpload from "express-fileupload";
 
 const app = express();
 const server = http.createServer(app);
@@ -31,6 +33,12 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.options("*", cors());
 
+app.use(
+  fileUpload({
+    useTempFiles: true,
+  })
+);
+
 app.use("/auth", AuthRoute);
 app.use("/post", PostRoute);
 app.use("/upload", UploadRoute);
@@ -40,6 +48,7 @@ app.use("/comment", CommentRoute);
 app.use("/booking", BookingRoute);
 app.use("/chat", MessageRoute);
 app.use("/notification", NotificationRoute);
+app.use("/cloudinary", CloudinaryRoute);
 
 const io = new Server(server, {
   cors: {

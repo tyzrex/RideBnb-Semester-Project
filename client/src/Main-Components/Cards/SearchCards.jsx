@@ -18,7 +18,7 @@ const SearchItem = (props) => {
   return (
     <div className="bg-white w-screen max-w-[90%] mx-auto xl:w-[100%] xl:max-w-[100%] shadow-lg p-[20px] rounded-xl grid grid-flow-row content-center justify-items-center lg:justify-items-stretch md:grid-flow-col gap-[20px] mb-[20px]">
       <img
-        src={`../../../Images/${props.vehicle_image}`}
+        src={props.vehicle_image}
         alt=""
         className="w-screen h-[350px] lg:w-[280px] lg:max-w-[100%] lg:h-full object-cover "
       />

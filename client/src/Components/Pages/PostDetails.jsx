@@ -393,7 +393,7 @@ const PostDetails = ({ socket }) => {
             <div className="w-full shadow-md rounded-3xl">
               <img
                 className="w-full max-h-[45vh] h-full object-cover rounded-3xl"
-                src={`../../../Images/${post.vehicle_image}`}
+                src={post.vehicle_image}
                 alt="post"
               />
             </div>

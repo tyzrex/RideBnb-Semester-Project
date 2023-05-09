@@ -65,7 +65,7 @@ function Table() {
                   <td className="pl-4 cursor-pointer">
                     <div className="flex items-center">
                       <img
-                        src={`../../../Images/${listing.vehicle_image}`}
+                        src={listing.vehicle_image}
                         alt="car"
                         className="w-12 h-12 rounded-full flex-shrink-0 object-contain object-center"
                       />

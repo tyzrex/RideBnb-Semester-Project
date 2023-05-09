@@ -29,10 +29,10 @@ const ListVehicle = () => {
     vehicleMakeYear: "",
     vehicleType: "",
     vehicleDescription: "",
-    vehiclefile: "",
     numberPlate: "",
     listingType: "",
     features: "",
+    vehiclefile: "",
   });
 
   const [postError, setPostError] = useState({
@@ -44,21 +44,11 @@ const ListVehicle = () => {
     vehicleMakeYear: "",
     vehicleType: "",
     vehicleDescription: "",
-    vehiclefile: "",
     numberPlate: "",
     listingType: "",
     features: "",
+    vehiclefile: "",
   });
-
-  const uploadfile = async () => {
-    let formData = new FormData();
-    formData.append("file", file.data);
-    const response = await fetch("http://localhost:5000/upload/uploadImage", {
-      method: "POST",
-      body: formData,
-    });
-    console.log(response);
-  };
 
   const validateData = useCallback(
     (name, value) => {
@@ -104,24 +94,18 @@ const ListVehicle = () => {
     }));
   }, []);
 
-  const handlefileChange = useCallback(
-    (e) => {
-      const file = e.target.files[0];
-      const name = file.name;
-      setData((prevData) => ({
-        ...prevData,
-        vehiclefile: name,
-      }));
-      if (!file) {
-        toastError("Please select a file");
-      }
-      setFile({
-        preview: URL.createObjectURL(file),
-        data: file,
-      });
-    },
-    [validateData]
-  );
+  const handlefileChange = useCallback((e) => {
+    const file = e.target.files[0];
+    const name = file.name;
+    if (!file) {
+      toastError("Please select a file");
+    }
+
+    setFile({
+      preview: URL.createObjectURL(file),
+      data: file,
+    });
+  });
 
   const handleSubmit = async (e) => {
     console.log("submit");
@@ -145,8 +129,36 @@ const ListVehicle = () => {
     if (Object.keys(error).length === 0) {
       // const res = await axios.post("http://localhost:5000/post/listvehicle", data) ;
       try {
-        const res = await axiosInstance.post("/post/listvehicle", data);
-        uploadfile();
+        const formData = new FormData();
+        formData.append("file", file.data);
+
+        const response = await axiosInstance.post(
+          "/cloudinary/uploadImage",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
+        console.log(response.data.url);
+
+        data.vehiclefile = response.data.url;
+
+        console.log(data);
+
+        const res = await axiosInstance.post(
+          "/post/listvehicle",
+          data,
+
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
         console.log(res);
         toastSuccess("Vehicle Listed Successfully");
       } catch (error) {
