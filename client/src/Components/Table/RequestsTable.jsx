@@ -44,6 +44,15 @@ function RequestsTable({ socket }) {
     }
   };
 
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("notify", (data) => {
+        console.log(data);
+        getRequests();
+      });
+    }
+  }, [socket.current]);
+
   console.log(requests);
 
   return (

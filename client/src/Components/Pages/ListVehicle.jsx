@@ -129,6 +129,15 @@ const ListVehicle = () => {
     if (Object.keys(error).length === 0) {
       // const res = await axios.post("http://localhost:5000/post/listvehicle", data) ;
       try {
+        if (file.data === "") {
+          toastError("Please select a file");
+          setPostError((prevErrors) => ({
+            ...prevErrors,
+            vehiclefile: "Please select a file",
+          }));
+          return;
+        }
+
         const formData = new FormData();
         formData.append("file", file.data);
 

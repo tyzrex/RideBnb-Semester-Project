@@ -67,13 +67,20 @@ export const bookedByUser = async (req, res) => {
   try {
     const { rows } = await pool.query(
       `SELECT * FROM booking WHERE vehicle_post_id = $1 AND booking_customer_id = $2 
-        AND booking_status = 'Accepted'
+        AND booking_status = 'Accepted' 
+        OR booking_status = 'pending'
       `,
       [vehicle_post_id, customer_id]
     );
 
     if (rows.length > 0) {
-      return res.status(400).json({ message: "Booked" });
+      if (rows[0].booking_status === "pending") {
+        return res.status(202).json({ message: "Pending" });
+      }
+
+      return res.status(400).json({
+        message: "You have already booked this vehicle post",
+      });
     }
 
     return res.status(200).json({ message: "Not booked" });

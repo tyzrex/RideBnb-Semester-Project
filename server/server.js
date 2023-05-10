@@ -133,6 +133,13 @@ io.on("connection", (socket) => {
     });
   });
 
+  socket.on("notifyBooking", (data) => {
+    getSocketId(data.receiver_id).then((socketId) => {
+      console.log(socketId);
+      io.to(socketId).emit("notifyBooking", data);
+    });
+  });
+
   const bookingId = socket.handshake.query.booking_id;
   socket.join(bookingId);
 

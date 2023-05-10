@@ -41,6 +41,7 @@ const PostDetails = ({ socket }) => {
 
   const navigate = useNavigate();
   const prevState = useLocation().state;
+  const [pending, setPending] = useState(false);
 
   const fetchPost = async () => {
     try {
@@ -213,7 +214,7 @@ const PostDetails = ({ socket }) => {
       );
       console.log(response);
       if (response.status === 201) {
-        setBooked(true);
+        setPending(true);
         toastSuccess("Booking Successful");
       } else {
         toastError("Booking Failed");
@@ -241,11 +242,18 @@ const PostDetails = ({ socket }) => {
           vehicle_post_id: id,
         },
       });
+      console.log(response);
+      if (response.status === 202) {
+        setPending(true);
+        return;
+      }
+
       if (response.status === 200) {
         setBooked(false);
       }
     } catch (err) {
       if (err.response.status === 400) {
+        setPending(false);
         setBooked(true);
       }
       console.log(err);
@@ -256,12 +264,6 @@ const PostDetails = ({ socket }) => {
   useEffect(() => {
     if (shouldFetch.current) {
       window.scrollTo(0, 0);
-      // socket.current = io("http://localhost:3000", {
-      //   transports: ["websocket"],
-      //   query: {
-      //     reciever_id: post?.customer_id,
-      //   },
-      // });
 
       isBooked();
       getComments();
@@ -279,6 +281,10 @@ const PostDetails = ({ socket }) => {
 
       socket.current.on("newComment", (comment) => {
         setComments((prevState) => [...prevState, comment]);
+      });
+
+      socket.current.on("notify", (data) => {
+        isBooked();
       });
     }
   }, []);
@@ -477,6 +483,7 @@ const PostDetails = ({ socket }) => {
                         </label>
                         <input
                           onClick={handleDatePicker}
+                          disabled={pending || booked}
                           type="text"
                           readOnly={true}
                           value={data.checkIn}
@@ -515,6 +522,7 @@ const PostDetails = ({ socket }) => {
                         <input
                           onClick={handleDatePicker}
                           type="text"
+                          disabled={pending || booked}
                           readOnly={true}
                           value={data.checkOut}
                           onChange={handleChange}
@@ -576,12 +584,24 @@ const PostDetails = ({ socket }) => {
                         <span className="text-black">Booked</span>{" "}
                       </h1>
                     ) : (
-                      <></>
+                      { pending } && (
+                        <h1 className="text-[18px] flex justify-between items-center mt-5 font-semibold text-gray-500 mb-3">
+                          <span>Booking Status:</span>{" "}
+                          <span className="text-black">Pending</span>{" "}
+                        </h1>
+                      )
                     )}
                   </div>
 
                   <Link>
-                    {booked ? (
+                    {pending ? (
+                      <button
+                        className="bg-yellow-500  w-full text-white p-3 rounded-md"
+                        disabled
+                      >
+                        Pending
+                      </button>
+                    ) : booked ? (
                       <button
                         disabled={true}
                         className=" bg-green-500 w-full text-white p-3 rounded-md"
@@ -603,6 +623,22 @@ const PostDetails = ({ socket }) => {
           </div>
         </div>
       )}
+      {/* 
+      {booked ? (
+        <button
+          disabled={true}
+          className=" bg-green-500 w-full text-white p-3 rounded-md"
+        >
+          Booked
+        </button>
+      ) : (
+        <button
+          onClick={handleBooking}
+          className="button-transition bg-indigo-500 hover:bg-black w-full text-white p-3 rounded-md"
+        >
+          {post.vehicle_listing_type === "Rent" ? "Rent" : "Buy"}
+        </button>
+      )} */}
 
       {loading ? (
         <></>

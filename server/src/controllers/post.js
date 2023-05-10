@@ -44,9 +44,7 @@ export const post = async (req, res) => {
     features,
     numberPlate,
   } = req.body;
-  console.log(req.body);
   const user = req.user;
-  console.log(user);
   const { customer_id } = user;
   try {
     const newPost = await pool.query(
