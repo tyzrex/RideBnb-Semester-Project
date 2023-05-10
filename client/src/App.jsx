@@ -39,7 +39,11 @@ const App = () => {
   const socket = useRef(null);
   useEffect(() => {
     if (shouldFetch.current) {
-      socket.current = io("http://localhost:3000", {
+      // socket.current = io("http://localhost:3000", {
+      //   transports: ["websocket"],
+      // });
+
+      socket.current = io("https://ridebnb-backend.onrender.com:3000", {
         transports: ["websocket"],
       });
 
