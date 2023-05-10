@@ -43,7 +43,7 @@ const App = () => {
       //   transports: ["websocket"],
       // });
 
-      socket.current = io("https://ridebnb-backend.onrender.com:3000", {
+      socket.current = io("https://ridebnb-backend.onrender.com", {
         transports: ["websocket"],
       });
 
