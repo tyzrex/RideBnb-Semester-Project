@@ -12,6 +12,7 @@ const axiosInstance = axios.create({
       "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   },
   withCredentials: true,
+  credentials: "include",
 });
 
 const axiosBase = axios.create({
