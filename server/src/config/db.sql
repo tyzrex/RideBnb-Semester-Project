@@ -73,7 +73,7 @@ create TABLE notifications(
 
 create table vehicle_review(
     vehicle_review_id serial primary key,
-    customer_id int not null,
+    customer_id uuid not null,
     vehicle_post_id int not null,
     review varchar(50) not null,
     rating int not null,
@@ -84,7 +84,7 @@ create table vehicle_review(
 
 create table message(
     message_id serial primary key,
-    customer_id int not null,
+    customer_id uuid not null,
     vehicle_post_id int not null,
     message varchar(50) not null,
     created_at timestamp default now(),
