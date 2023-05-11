@@ -46,12 +46,6 @@ const App = () => {
       socket.current = io("https://ridebnb-backend.onrender.com", {
         transports: ["websocket"],
       });
-
-      // socket.current.on("notify", (data) => {
-      //   console.log(data);
-      //   setNotify(data);
-      //   // toastSuccess("new notification");
-      // });
     }
 
     shouldFetch.current = false;
