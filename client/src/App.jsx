@@ -42,12 +42,6 @@ const App = () => {
       socket.current = io("http://localhost:3000", {
         transports: ["websocket"],
       });
-
-      // socket.current.on("notify", (data) => {
-      //   console.log(data);
-      //   setNotify(data);
-      //   // toastSuccess("new notification");
-      // });
     }
 
     shouldFetch.current = false;
