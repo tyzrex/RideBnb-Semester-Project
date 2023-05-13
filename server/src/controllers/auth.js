@@ -50,7 +50,7 @@ export const login = async (req, res) => {
         httpOnly: true,
         sameSite: "none",
         secure: true,
-        domain: "https://ridebnb-frontend.onrender.com/",
+        domain: "https://ridebnb-frontend.onrender.com",
       })
       .status(200)
       .json(others);
