@@ -48,7 +48,7 @@ export const login = async (req, res) => {
     res
       .cookie("session_token", token, {
         httpOnly: true,
-        sameSite: true,
+        sameSite: "none",
         secure: true,
         domain: "https://ride-bnb.vercel.app/",
       })

@@ -12,7 +12,7 @@ import BookingRoute from "./src/routes/booking.js";
 import MessageRoute from "./src/routes/message.js";
 import NotificationRoute from "./src/routes/notification.js";
 import CloudinaryRoute from "./src/routes/cloudinary.js";
-import http, { get } from "http";
+import http from "http";
 import { Server } from "socket.io";
 import pool from "./src/config/database.js";
 import fileUpload from "express-fileupload";
@@ -39,6 +39,8 @@ app.use(
     useTempFiles: true,
   })
 );
+
+app.set("trust proxy", 1);
 
 app.use("/auth", AuthRoute);
 app.use("/post", PostRoute);
