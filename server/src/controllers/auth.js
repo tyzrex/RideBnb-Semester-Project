@@ -49,6 +49,8 @@ export const login = async (req, res) => {
       .cookie("session_token", token, {
         httpOnly: true,
         secure: true,
+        sameSite: "none",
+        domain: "https://ridebnb-frontend.onrender.com",
       })
       .status(200)
       .json(others);
