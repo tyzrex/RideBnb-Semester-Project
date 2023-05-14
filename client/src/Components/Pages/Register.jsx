@@ -56,7 +56,7 @@ const Register = () => {
     if (Object.keys(error).length === 0) {
       try {
         const res = await axios.post(
-          "https://ridebnb-backend.onrender.com/auth/register",
+          "https://ridebnb-semester-project-production.up.railway.app/auth/register",
           data
         );
         console.log(res);

@@ -43,9 +43,12 @@ const App = () => {
       //   transports: ["websocket"],
       // });
 
-      socket.current = io("https://ridebnb-backend.onrender.com", {
-        transports: ["websocket"],
-      });
+      socket.current = io(
+        "https://ridebnb-semester-project-production.up.railway.app/",
+        {
+          transports: ["websocket"],
+        }
+      );
     }
 
     shouldFetch.current = false;
