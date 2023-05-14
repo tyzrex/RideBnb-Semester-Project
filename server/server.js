@@ -19,7 +19,8 @@ import fileUpload from "express-fileupload";
 
 const app = express();
 const server = http.createServer(app);
-const port = 5000;
+const port = process.env.PORT || 5000;
+const socket_port = process.env.SOCKET_PORT || 3000;
 
 app.use(
   cors({
@@ -159,8 +160,8 @@ app.listen(port, () => {
   console.log(`Rental app listening at http://localhost:${port}`);
 });
 
-server.listen(3000, () => {
-  console.log("Socket server listening on port 3000");
+server.listen(socket_port, () => {
+  console.log("Socket server listening on port", socket_port);
 });
 
 export default io;
