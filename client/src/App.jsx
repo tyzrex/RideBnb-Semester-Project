@@ -43,12 +43,9 @@ const App = () => {
       //   transports: ["websocket"],
       // });
 
-      socket.current = io(
-        "https://ridebnb-semester-project-production.up.railway.app/",
-        {
-          transports: ["websocket"],
-        }
-      );
+      socket.current = io("https://ride.adaptable.app/", {
+        transports: ["websocket"],
+      });
     }
 
     shouldFetch.current = false;

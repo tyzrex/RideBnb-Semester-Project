@@ -55,7 +55,7 @@ app.use("/cloudinary", CloudinaryRoute);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://ride-bnb.vercel.app",
+    origin: "https://ride.adaptable.app",
     methods: ["GET", "POST"],
   },
 });
