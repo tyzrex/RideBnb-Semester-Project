@@ -17,6 +17,11 @@ import { Server } from "socket.io";
 import pool from "./src/config/database.js";
 import fileUpload from "express-fileupload";
 
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const server = http.createServer(app);
 const port = 5000;
@@ -51,6 +56,8 @@ app.use("/booking", BookingRoute);
 app.use("/chat", MessageRoute);
 app.use("/notification", NotificationRoute);
 app.use("/cloudinary", CloudinaryRoute);
+
+app.use(express.static(path.join(__dirname, "client/dist")));
 
 const io = new Server(server, {
   cors: {
@@ -153,6 +160,10 @@ io.on("connection", (socket) => {
     deleteUser(socket.id);
     console.log("User Disconnected", socket.id);
   });
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/dist/index.html"));
 });
 
 app.listen(port, () => {
