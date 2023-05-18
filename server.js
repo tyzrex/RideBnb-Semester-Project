@@ -23,7 +23,7 @@ const port = 5000;
 
 app.use(
   cors({
-    origin: "https://ridebnb-frontend.onrender.com",
+    origin: "https://ridebnb-backend.onrender.com",
     credentials: true,
   })
 );
@@ -54,7 +54,7 @@ app.use("/cloudinary", CloudinaryRoute);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://ridebnb-frontend.onrender.com",
+    origin: "https://ridebnb-backend.onrender.com",
     methods: ["GET", "POST"],
   },
 });
