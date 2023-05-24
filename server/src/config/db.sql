@@ -57,7 +57,7 @@ create table booking(
     end_date varchar(12) not null,
     total_price DECIMAL(10,2) not null,
     foreign key (customer_id) references customer(customer_id),
-    foreign key (vehicle_post_id) references vehicle_post(vehicle_post_id)
+    foreign key (vehicle_post_id) references vehicle_post(vehicle_post_id) on delete cascade
 );
 
 
@@ -68,6 +68,13 @@ create TABLE notifications(
     notification_message TEXT NOT NULL,
     foreign key (sender_id) references customer(customer_id),
     foreign key (receiver_id) references customer(customer_id)
+);
+
+create table conversation(
+    conversation_id uuid primary key default uuid_generate_v4(),
+    members uuid[] not null,
+    created_at timestamp default now(),
+    updated_at timestamp default now()
 );
 
 
@@ -84,12 +91,14 @@ create table vehicle_review(
 
 create table message(
     message_id serial primary key,
-    customer_id int not null,
-    vehicle_post_id int not null,
+    conversation_id uuid not null,
+    sender_id uuid not null,
+    receiver_id uuid not null,
     message varchar(50) not null,
     created_at timestamp default now(),
     foreign key (customer_id) references customer(customer_id),
-    foreign key (vehicle_post_id) references vehicle_post(vehicle_post_id)
+    FOREIGN KEY (conversation_id) REFERENCES conversation(conversation_id),
+    FOREIGN KEY (sender_id) REFERENCES customer(customer_id)
 );
 
 create table online_users(

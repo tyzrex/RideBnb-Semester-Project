@@ -6,6 +6,7 @@ import {
   getPost,
   getPostByType,
   getPostByUser,
+  deletePost,
 } from "../controllers/post.js";
 import { isAuthenticated } from "../middleware/isAuthenticated.js";
 import { validateVehiclePost } from "../validation/validationList.js";
@@ -27,5 +28,8 @@ router.route("/getpostbytype").get(getPostByType);
 
 //get posts by user
 router.route("/getpostsbyuser").get(isAuthenticated, getPostByUser);
+
+//delete post
+router.route("/deletepost/:id").delete(isAuthenticated, deletePost);
 
 export default router;
