@@ -122,3 +122,24 @@ export const getChatTwoUsers = async (req, res) => {
     res.status(500).json({ error: "Failed to get chat room" });
   }
 };
+
+export const checkUserOnline = async (req, res) => {
+  const { customer_id } = req.query;
+
+  try {
+    const userResult = await pool.query(
+      "SELECT customer_id FROM online_users WHERE customer_id = $1;",
+      [customer_id]
+    );
+    const user = userResult.rows[0];
+
+    if (!user) {
+      return res.status(200).json(false);
+    } else {
+      return res.status(200).json(true);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get user" });
+  }
+};
