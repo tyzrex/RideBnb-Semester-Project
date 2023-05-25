@@ -4,18 +4,18 @@ import MiniNav from "../MiniNav/MiniNav";
 
 const About = () => {
   return (
-    <div>
+    <div className="dark:bg-dark-main">
       <div>
         <MiniNav />
       </div>
 
-      <div>
+      <div className="">
         <div className="xl:max-w-[1200px] max-w-[90%] mx-auto">
           <div className=" mx-auto">
             <div className="grid gap-12">
               <div>
                 <h2 className="text-3xl text-gray-800 font-bold lg:text-4xl dark:text-white">
-                  About <span className="text-indigo-500">Us</span>
+                  About <span className="text-accent-1">Us</span>
                 </h2>
                 <p className="mt-3 text-gray-800 dark:text-gray-400">
                   Welcome to Ridebnb, the ultimate marketplace for booking rides
@@ -62,7 +62,7 @@ const About = () => {
             <div className="grid gap-12">
               <div>
                 <h2 className="text-3xl text-gray-800 font-bold lg:text-4xl dark:text-white">
-                  Our <span className="text-indigo-500">Vision</span>
+                  Our <span className="text-accent-1">Vision</span>
                 </h2>
                 <p className="mt-3 text-gray-800 dark:text-gray-400">
                   Our vision at Ridebnb is to create a world where
@@ -80,7 +80,7 @@ const About = () => {
               <div className="space-y-6 lg:space-y-10">
                 <div className="flex">
                   <svg
-                    className="flex-shrink-0 mt-2 h-8 w-8 text-indigo-500 dark:text-white"
+                    className="flex-shrink-0 mt-2 h-8 w-8 text-accent-1 dark:text-white"
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"
@@ -107,7 +107,7 @@ const About = () => {
 
                 <div className="flex">
                   <svg
-                    className="flex-shrink-0 mt-2 h-8 w-8 text-indigo-500 dark:text-white"
+                    className="flex-shrink-0 mt-2 h-8 w-8 text-accent-1 dark:text-white"
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"
@@ -131,7 +131,7 @@ const About = () => {
 
                 <div className="flex">
                   <svg
-                    className="flex-shrink-0 mt-2 h-8 w-8 text-indigo-500 dark:text-white"
+                    className="flex-shrink-0 mt-2 h-8 w-8 text-accent-1 dark:text-white"
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"

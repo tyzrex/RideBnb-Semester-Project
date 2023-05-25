@@ -71,8 +71,8 @@ app.get("/", (req, res) => {
 });
 
 const addNewUser = async (socketId, user) => {
-  if (user.user) {
-    const { customer_id, customername } = user.user;
+  if (user) {
+    const { customer_id, customername } = user;
 
     const checkUser = await pool.query(
       "SELECT * FROM online_users WHERE customer_id = $1",
@@ -98,6 +98,7 @@ const addNewUser = async (socketId, user) => {
 };
 
 const getSocketId = async (userId) => {
+  const isOnline = false;
   try {
     const socketId = await pool.query(
       "SELECT socket_id FROM online_users WHERE customer_id = $1",
@@ -154,6 +155,14 @@ io.on("connection", (socket) => {
   socket.on("newMessage", (message) => {
     console.log(message);
     io.to(bookingId).emit("newMessage", message);
+  });
+
+  socket.on("message", (data) => {
+    getSocketId(data.receiver_id).then((socketId) => {
+      console.log(socketId);
+      console.log(data);
+      io.to(socketId).emit("message", data);
+    });
   });
 
   socket.on("disconnect", () => {

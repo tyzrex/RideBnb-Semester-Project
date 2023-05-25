@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const ExploreCards = (props) => {
   return (
     <div>
-      <div className="!z-5 hover:scale-105 transition-all duration-300 hover:shadow-xl shadow-lg relative flex flex-col rounded-[20px] max-w-[300px] xs:w-[400px] xs:max-w-[400px] sm:max-w-[600px] sm:w-[600px] lg:max-w-[500px] lg:w-[500px] xl:w-[300px] xl:max-w-[290px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 3xl:p-![18px] undefined">
-        <div className="h-full w-full">
+      <div className="!z-5 hover:scale-105 transition-all duration-300 hover:shadow-xl shadow-lg relative flex flex-col  rounded-[20px] max-w-[300px] xs:w-[400px] xs:max-w-[400px] sm:max-w-[600px] sm:w-[600px] lg:max-w-[500px] lg:w-[500px] xl:w-[300px] xl:max-w-[290px] bg-white dark:glass bg-clip-border shadow-3xl shadow-shadow-500 3xl:p-![18px] undefined">
+        <div className="h-full w-full ">
           <div className="relative w-full">
             <img
               src={props.vehicleImage}
@@ -15,24 +15,24 @@ const ExploreCards = (props) => {
           </div>
           <div className="m-5 mt-10 flex items-center justify-between px-1 md:items-start border-b pb-2">
             <div className="mb-2">
-              <p className="text-indigo-500 text-2xl font-bold text-navy-700">
+              <p className="text-accent-1 text-2xl font-bold text-navy-700">
                 Rs. {props?.vehiclePrice}{" "}
-                <span className="text-sm font-medium text-gray-600">
+                <span className="text-sm font-medium text-accent-2">
                   {props?.buttonText === "Book" ? "/day" : ""}
                 </span>
               </p>
 
-              <p className="mt-1 text-2xl font-bold text-black md:mt-2">
+              <p className="mt-1 text-2xl font-bold text-accent-3 md:mt-2">
                 {props.vehicleName}
               </p>
 
-              <p className="mt-1 text-md font-medium text-gray-600 md:mt-2">
+              <p className="mt-1 text-md font-medium text-accent-3 md:mt-2">
                 <span className="">{props.vehicleLocation}</span>
               </p>
             </div>
 
-            <button className="border-2 flex items-center justify-center rounded-full -mt-1 text-indigo-500 bg-white p-2 text-brand-500 hover:cursor-pointer">
-              <div className="flex hover:text-red-600 h-full w-full items-center justify-center rounded-full text-2xl hover:bg-gray-50">
+            <button className="border-2 flex items-center justify-center rounded-full -mt-1 text-accent-1 bg-white dark:bg-dark-main p-2 text-brand-500 hover:cursor-pointer">
+              <div className="flex hover:text-red-600 h-full w-full items-center justify-center rounded-full text-2xl ">
                 <svg
                   stroke="currentColor"
                   fill="currentColor"
@@ -55,14 +55,14 @@ const ExploreCards = (props) => {
           </div>
           <div className="flex m-5 items-center justify-between md:items-center lg:justify-between ">
             <Link to={`/explore/${props.postId}`}>
-              <button className="p-2 bg-indigo-500 font-semibold text-white px-5 rounded-xl hover:text-black hover:border hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300">
+              <button className="p-2 bg-accent-2 font-semibold text-white px-5 rounded-xl hover:text-black hover:border hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300">
                 {props.buttonText}
               </button>
             </Link>
 
             <div className="flex">
               <div className="flex flex-row-reverse items-center md:mt-2 lg:mt-0">
-                <h1>
+                <h1 className="text-accent-3">
                   {props.vehicleRating === null
                     ? "❗"
                     : parseFloat(props.vehicleRating).toFixed(1)}{" "}

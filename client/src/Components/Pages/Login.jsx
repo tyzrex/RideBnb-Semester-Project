@@ -51,7 +51,7 @@ const Login = () => {
 
   return (
     <div>
-      <section className="bg-white">
+      <section className="bg-white dark:bg-dark-main">
         <div className="lg:grid min-h-screen lg:min-h-screen lg:grid-cols-12">
           <aside className="relative block h-[60vh] lg:order-first lg:col-span-5 lg:h-full xl:col-span-6">
             <Animate to="1" from="0" attributeName="opacity">
@@ -66,8 +66,8 @@ const Login = () => {
           <Animate to="1" from="0" attributeName="opacity">
             <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:py-12 lg:px-16 xl:col-span-6">
               <div className="max-w-xl lg:max-w-3xl">
-                <h1 className="mt-6 text-center text-2xl font-bold text-black sm:text-3xl md:text-4xl">
-                  Welcome <span className="text-indigo-500">Back</span>
+                <h1 className="mt-6 text-center dark:text-white text-2xl font-bold sm:text-3xl md:text-4xl text-black">
+                  Welcome <span className="text-accent-1">Back</span>
                 </h1>
 
                 <p className="mt-4 text-center leading-relaxed text-gray-400">
@@ -87,7 +87,7 @@ const Login = () => {
                         name="name"
                         autoComplete="username"
                         placeholder="Username"
-                        className="mt-1 p-3 w-full rounded-full border border-gray-300 text-black text-md shadow-sm"
+                        className="mt-1 p-3 w-full rounded-full border border-gray-300 dark:bg-gray-900 dark:text-gray-400 dark:border-gray-800 text-black text-md shadow-sm"
                       />
                       {loginError.name && (
                         <p className="text-red-500">{loginError.name}</p>
@@ -105,7 +105,7 @@ const Login = () => {
                         name="password"
                         autoComplete="current-password"
                         placeholder="********"
-                        className="mt-1 p-3 w-full rounded-full  border border-gray-300 text-md text-gray-700 shadow-sm"
+                        className="mt-1 p-3 w-full rounded-full  border border-gray-300 dark:bg-gray-900 dark:text-gray-400 dark:border-gray-800 text-md text-gray-700 shadow-sm"
                       />
                       {loginError.password && (
                         <p className="text-red-500">{loginError.password}</p>
@@ -115,7 +115,7 @@ const Login = () => {
                     <div className=" flex flex-col items-center gap-4">
                       <button
                         type="submit"
-                        className="inline-block bg-indigo-500 hover:bg-white  hover:border-2 hover:border-gray-500 hover:text-black shrink-0 rounded-full border  px-12 py-3 text-lg font-semibold text-white transition"
+                        className="inline-block bg-accent-1 hover:bg-white hover:text-black shrink-0 rounded-full px-12 py-3 text-lg font-semibold text-white transition"
                       >
                         Login
                       </button>

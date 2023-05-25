@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@heroicons/react": "^2.0.18",
     "@react-google-maps/api": "^2.18.1",
     "@reduxjs/toolkit": "^1.9.5",
     "aos": "^2.3.4",
@@ -17,7 +18,9 @@
     "daisyui": "^2.51.5",
     "date-fns": "^2.29.3",
     "fontawesome": "^5.6.3",
+    "framer-motion": "^10.12.16",
     "google-map-react": "^2.2.0",
+    "heroicons": "^2.0.18",
     "leaflet": "^1.9.3",
     "preline": "^1.8.0",
     "react": "^18.2.0",

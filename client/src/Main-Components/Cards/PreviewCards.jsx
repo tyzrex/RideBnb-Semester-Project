@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ExploreCards = (props) => {
   return (
     <div>
-      <div className="!z-5 hover:scale-105 transition-transform duration-300 hover:shadow-xl shadow-lg relative flex flex-col rounded-[20px] w-[350px] bg-white bg-clip-border shadow-3xl shadow-shadow-500 3xl:p-![18px] undefined">
+      <div className="!z-5 hover:scale-105 transition-transform duration-300 hover:shadow-xl shadow-lg relative flex flex-col rounded-[20px] w-[350px] bg-white dark:glass bg-clip-border shadow-3xl shadow-shadow-500 3xl:p-![18px] undefined">
         <div className="h-full w-full">
           <div className="relative w-full">
             <img
@@ -40,14 +40,14 @@ const ExploreCards = (props) => {
           </div>
           <div className="m-5 flex items-center justify-between px-1 md:items-start">
             <div className="mb-2">
-              <p className="text-lg font-bold text-navy-700">
+              <p className="text-lg font-bold dark:text-white">
                 {props.vehicleName.length === 0
                   ? "Vehicle Name"
                   : props.vehicleName}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-600 md:mt-2">
                 Posted by :{" "}
-                <span className="font-bold text-blue-500">
+                <span className="font-bold text-accent-1">
                   {props.postedBy}
                 </span>
               </p>
@@ -58,13 +58,13 @@ const ExploreCards = (props) => {
           </div>
           <div className="flex m-5 items-center justify-between md:items-center lg:justify-between ">
             <div className="flex">
-              <p className="!mb-0 text-sm font-bold text-brand-500">
+              <p className="!mb-0 text-sm font-bold dark:text-accent-3">
                 Rs {props.price.length === 0 ? "0" : props.vehiclePrice} per day
               </p>
             </div>
             <Link to={`/explore/${props.postId}`}>
-              <button className="p-2 bg-main-accent text-white px-5 rounded-xl border-2 border-black hover:text-black hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300">
-                {props.buttonText}
+              <button className="p-2 bg-main-accent text-white px-5 rounded-xl border-2 border-black hover:text-black hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300 dark:bg-accent-1">
+                {props.buttonText ? props.buttonText : "Rent"}
               </button>
             </Link>
           </div>

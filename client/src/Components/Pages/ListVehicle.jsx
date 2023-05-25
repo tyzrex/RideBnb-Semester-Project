@@ -12,6 +12,7 @@ import { AuthContext } from "../../Context/AuthContext";
 
 const ListVehicle = () => {
   const fileInputRef = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   const [file, setFile] = useState({
     preview: "",
@@ -108,6 +109,7 @@ const ListVehicle = () => {
   });
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     console.log("submit");
     e.preventDefault();
     const error = validation(data);
@@ -170,6 +172,7 @@ const ListVehicle = () => {
 
         console.log(res);
         toastSuccess("Vehicle Listed Successfully");
+        setLoading(false);
       } catch (error) {
         if (error.response.status === 422) {
           const errors = error.response.data.errors;
@@ -178,19 +181,20 @@ const ListVehicle = () => {
         }
       }
     } else {
+      setLoading(false);
       toastError("Fill all fields");
     }
   };
 
   return (
-    <div>
+    <div className="dark:bg-dark-main">
       <MiniNav />
 
-      <div className="flex justify-between mx-auto w-screen xl:max-w-[1200px] max-w-[90%] gap-2">
+      <div className="flex justify-between mx-auto w-screen xl:max-w-[1200px] max-w-[90%] gap-2 ">
         <div className="lg:w-[60%] w-full">
-          <section className="  mb-20 mx-auto w-full text-black rounded-md dark:bg-gray-800 ">
-            <h1 className="text-[24px] md:text-[48px] font-semibold ">
-              List Your <span className="text-indigo-500">Vehicle</span>
+          <section className="  mb-20 mx-auto w-full text-black rounded-md  ">
+            <h1 className="text-[24px] md:text-[48px] font-semibold dark:text-accent-3">
+              List Your <span className="text-accent-1">Vehicle</span>
             </h1>
             <form>
               <div className="grid grid-cols-1 gap-6 mt-4 ">
@@ -199,10 +203,10 @@ const ListVehicle = () => {
                   <label className="block text-sm text-gray-500">
                     Drag or choose your file to upload
                   </label>
-                  <div className="mt-5 flex justify-center px-6 py-8 border-2 border-gray-300 border-dashed rounded-2xl">
+                  <div className="mt-5 flex justify-center px-6 py-8 border-2 border-gray-400 dark:border-gray-600 border-dashed rounded-2xl">
                     <div className="space-y-1 text-center">
                       <svg
-                        className="mx-auto h-12 w-12"
+                        className="mx-auto h-12 w-12 dark:text-accent-3"
                         stroke="currentColor"
                         fill="none"
                         viewBox="0 0 48 48"
@@ -218,7 +222,7 @@ const ListVehicle = () => {
                       <div className="flex text-sm text-gray-600 justify-center items-center">
                         <label
                           htmlFor="file-upload"
-                          className="relative cursor-pointer bg-indigo-500 rounded-md font-medium text-white p-2"
+                          className="relative cursor-pointer bg-accent-2 rounded-md font-medium text-white p-2"
                         >
                           <span className="">Upload a file</span>
                           <input
@@ -237,7 +241,7 @@ const ListVehicle = () => {
                         // </div>
                         <></>
                       ) : (
-                        <div>
+                        <div className="dark:text-accent-3">
                           <p className="pl-1">or drag and drop</p>
                           <p className="text-xs">PNG, JPG, GIF up to 10MB</p>
                         </div>
@@ -267,7 +271,7 @@ const ListVehicle = () => {
                     name="vehicleName"
                     id="vehicleName"
                     type="text"
-                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
+                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-900 rounded-[12px] "
                     placeholder="e.g. Toyota Corolla"
                   />
                   {postError.vehicleName && (
@@ -287,7 +291,7 @@ const ListVehicle = () => {
                     name="vehicleBrand"
                     id="vehicleBrand"
                     type="text"
-                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
+                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-900 rounded-[12px] "
                     placeholder="e.g. Toyota Corolla"
                   />
                   {postError.vehicleBrand && (
@@ -307,7 +311,7 @@ const ListVehicle = () => {
                     name="vehicleColor"
                     id="vehicleColor"
                     type="text"
-                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
+                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-900 rounded-[12px] "
                     placeholder="e.g. Toyota Corolla"
                   />
                   {postError.vehicleColor && (
@@ -327,7 +331,7 @@ const ListVehicle = () => {
                     name="pricePerDay"
                     id="pricePerDay"
                     type="text"
-                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
+                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-900 rounded-[12px] "
                     placeholder="e.g. 9000"
                   />
                   {postError.pricePerDay && (
@@ -347,7 +351,7 @@ const ListVehicle = () => {
                     name="numberPlate"
                     id="numberPlate"
                     type="text"
-                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
+                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-900 rounded-[12px] "
                     placeholder="e.g. Ga 1 Jha"
                   />
                   {postError.numberPlate && (
@@ -367,7 +371,7 @@ const ListVehicle = () => {
                     name="address"
                     id="address"
                     type="text"
-                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
+                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-900 rounded-[12px] "
                     placeholder="e.g. Kathmandu"
                   />
                   {postError.address && (
@@ -388,7 +392,7 @@ const ListVehicle = () => {
                       name="vehicleMakeYear"
                       id="vehicleMakeYear"
                       type="text"
-                      className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
+                      className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-900 rounded-[12px] "
                       placeholder="e.g. 2019"
                     />
                     {postError.vehicleMakeYear && (
@@ -405,7 +409,7 @@ const ListVehicle = () => {
                       Vehicle Type
                     </label>
                     <select
-                      className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
+                      className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-900 rounded-[12px] "
                       name="vehicleType"
                       onChange={handleVehicleType}
                     >
@@ -426,7 +430,7 @@ const ListVehicle = () => {
                       Listing Type
                     </label>
                     <select
-                      className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
+                      className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-900 rounded-[12px] "
                       name="listingType"
                       onChange={handleListingType}
                     >
@@ -452,7 +456,7 @@ const ListVehicle = () => {
                     type="textarea"
                     onChange={handleChange}
                     name="vehicleDescription"
-                    className="block w-full px-4 h-[130px] py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
+                    className="block w-full px-4 h-[130px] py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-900 rounded-[12px] "
                     placeholder="e.g. Toyota Corolla"
                   ></textarea>
                   {postError.vehicleDescription && (
@@ -474,7 +478,7 @@ const ListVehicle = () => {
                     name="features"
                     id="features"
                     type="text"
-                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white border-2 border-gray-200 rounded-[12px] "
+                    className="block w-full px-4 py-3 mt-2 text-gray-700 placeholder:text-gray-500 font-medium bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-900 rounded-[12px] "
                     placeholder="e.g. Toyota Corolla"
                   />
                   {postError.features && (
@@ -485,12 +489,30 @@ const ListVehicle = () => {
               <ToastContainer />
 
               <div className="flex justify-start mt-6">
-                <button
-                  onClick={handleSubmit}
-                  className="px-4 py-3 leading-5 text-white transition-colors duration-200 transform bg-indigo-500 rounded-full font-bold hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
-                >
-                  Submit
-                </button>
+                {loading ? (
+                  <>
+                    <button
+                      type="button"
+                      class="py-3 px-4 inline-flex justify-center
+                      items-center gap-2 rounded-md border border-transparent
+                      text-white font-semibold bg-indigo-500"
+                    >
+                      <span
+                        class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full"
+                        role="status"
+                        aria-label="loading"
+                      ></span>
+                      <span>Creating Post</span>
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={handleSubmit}
+                    className="px-4 py-3 leading-5 text-white transition-colors duration-200 transform bg-accent-1 rounded-full font-bold hover:bg-pink-700 focus:outline-none focus:bg-gray-600"
+                  >
+                    Submit
+                  </button>
+                )}
               </div>
             </form>
           </section>
@@ -498,7 +520,7 @@ const ListVehicle = () => {
 
         <div className="max-w-[40%] hidden lg:block ">
           <div className="grid w-full sticky top-10">
-            <h1 className="text-[24px] mb-10 font-semibold text-gray-800">
+            <h1 className="text-[24px] mb-10 font-semibold text-gray-800 dark:text-accent-1">
               Preview
             </h1>
             <PreviewCards

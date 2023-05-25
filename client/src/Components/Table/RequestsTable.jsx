@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 
 import { FcApproval, FcCancel } from "react-icons/fc";
+import { ToastContainer } from "react-toastify";
 
 function RequestsTable({ socket }) {
   const [requests, setRequests] = useState([]);
@@ -58,13 +59,18 @@ function RequestsTable({ socket }) {
   return (
     <>
       <div className="w-screen max-w-[90%] mx-auto xl:max-w-[1200px] mb-10 relative">
-        <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg">
+        <div className="px-4 md:px-10 py-4 md:py-7 bg-gray-100 dark:bg-gray-900 rounded-t-2xl">
           <div className="sm:flex items-center justify-between">
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800">
-              Requested Bookings
-            </p>
             <div>
-              <button className="inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3 bg-indigo-500 hover:bg-indigo-600 focus:outline-none rounded-full">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800 dark:text-white">
+                Requested Bookings
+              </p>
+              <p className="text-sm sm:text-base leading-normal text-gray-400 dark:text-gray-400">
+                Number of Requests: {requests.length}
+              </p>
+            </div>
+            <div>
+              <button className="inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3 bg-accent-1 hover:bg-indigo-600 focus:outline-none rounded-full">
                 <p className="text-sm font-medium leading-none text-white">
                   <Link to="/listvehicle">New Listing</Link>
                 </p>
@@ -72,10 +78,10 @@ function RequestsTable({ socket }) {
             </div>
           </div>
         </div>
-        <div className="bg-white shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto">
+        <div className="bg-white shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto dark:bg-gray-800 rounded-b-2xl">
           <table className="w-full whitespace-nowrap">
             <thead>
-              <tr className="h-16 w-full text-sm leading-none text-gray-800">
+              <tr className="h-16 w-full text-sm leading-none text-gray-800 dark:text-white">
                 <th className="font-normal text-left pl-4">Vehicle</th>
                 <th className="font-normal text-left pl-20">Booked by</th>
                 <th className="font-normal text-left pl-12">Booking Status</th>
@@ -85,11 +91,25 @@ function RequestsTable({ socket }) {
                 <th className="font-normal text-left pl-10 md:pl-4">Actions</th>
               </tr>
             </thead>
+
             <tbody className="w-full">
-              {requests.map((listing) => (
+              {requests.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan="7"
+                    className="lg:text-center py-8 text-red-500 font-semibold"
+                  >
+                    No Requested Bookings Found
+                  </td>
+                </tr>
+              ) : (
+                ""
+              )}
+
+              {requests?.map((listing) => (
                 <tr
                   key={listing.booking_id}
-                  className="h-20 text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100"
+                  className="h-20 text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100 dark:border-gray-700 dark:text-white dark:bg-gray-800"
                 >
                   <td className="pl-4 cursor-pointer">
                     <div className="flex items-center">
@@ -104,7 +124,7 @@ function RequestsTable({ socket }) {
                     </div>
                   </td>
                   <td className="pl-20">
-                    <p className="text-sm font-medium leading-none text-gray-800">
+                    <p className="text-sm font-medium leading-none ">
                       {listing.customername}
                     </p>
                   </td>
@@ -132,7 +152,7 @@ function RequestsTable({ socket }) {
                     <p className="font-medium">
                       {listing.created_at.split("T")[0]}
                     </p>
-                    <p className="text-xs leading-3 text-gray-600 mt-2">
+                    <p className="text-xs leading-3 text-gray-400 mt-2">
                       {Math.floor(
                         (new Date() - new Date(listing.created_at)) /
                           (1000 * 60 * 60 * 24)
@@ -142,7 +162,7 @@ function RequestsTable({ socket }) {
                   </td>
                   <td className="pl-8">
                     <p className="font-medium">{listing.start_date}</p>
-                    <p className="text-xs leading-3 text-gray-600 mt-2">
+                    <p className="text-xs leading-3 text-gray-400 mt-2">
                       {listing.end_date}
                     </p>
                   </td>
@@ -196,6 +216,7 @@ function RequestsTable({ socket }) {
           </table>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
