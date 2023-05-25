@@ -1,7 +1,6 @@
 import React from "react";
 import("preline");
-import CarArt from "../assets/car.png";
-import Background from "../assets/18.jpg";
+import Background from "../assets/pattern2.jpg";
 
 const FAQ = () => {
   return (
@@ -13,7 +12,6 @@ const FAQ = () => {
       }}
     >
       <div className="flex justify-center items-center h-auto w-screen max-w-[90%] xl:max-w-[1200px] mx-auto pt-[200px] sm:pt-[160px] md:pt-[120px] lg:py-16">
-        {/* <img src={CarArt} alt="car" className="absolute left-0 -z-0" /> */}
         <div className="">
           <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
             <div className="max-w-[1200px] mx-auto text-center mb-10 lg:mb-14">
@@ -26,7 +24,7 @@ const FAQ = () => {
             </div>
 
             <div className="max-w-[1200px] mx-auto">
-              <div className="hs-accordion-group bg-white shadow-2xl rounded-xl">
+              <div className="hs-accordion-group abs-home shadow-2xl rounded-xl">
                 <div
                   className="hs-accordion hs-accordion-active:bg-gray-100 rounded-xl p-6 dark:hs-accordion-active:bg-white/[.05] active"
                   id="hs-basic-with-title-and-arrow-stretched-heading-one"

@@ -39,12 +39,14 @@ const HomeCards = () => {
   }, []);
 
   return (
-    <div className=" w-screen mx-auto h-auto bg-gray-100">
+    <div className=" w-screen mx-auto h-auto bg-gray-100 dark:bg-dark-main">
       <div className="w-full max-w-[90%] xl:max-w-[1200px] mx-auto flex flex-col gap-10 justify-center items-center ">
         <div className=" mt-[300px] mt:mb-[150px] md:mt-[250px] xl:mt-[130px]">
           <div className="flex justify-center w-full items-center">
             <div className="max-w-[90%] flex justify-between w-full xl:max-w-[1200px]">
-              <h1 className="text-3xl font-bold">Popular Rent Choices</h1>
+              <h1 className="text-3xl font-bold text-accent-1 dark:text-accent-3">
+                Popular Rent Choices
+              </h1>
               <h1 className="text-md font-bold">
                 <u>Explore All</u>
               </h1>

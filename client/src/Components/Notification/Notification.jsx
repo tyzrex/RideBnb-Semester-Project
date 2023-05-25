@@ -71,7 +71,7 @@ const Notification = ({ socket }) => {
     <div className="hs-dropdown [--placement:bottom-right]">
       <button
         onClick={notificationHandler}
-        className="text-3xl text-white bg-green-500 rounded-full p-2 relative hs-dropdown-toggle focus:outline-none hover:bg-black button-transition"
+        className="text-3xl text-white bg-accent-2 rounded-full p-2 relative hs-dropdown-toggle focus:outline-none hover:bg-black button-transition"
       >
         <AiOutlineBell />
         {notifyCount > 0 && (
@@ -81,12 +81,12 @@ const Notification = ({ socket }) => {
         )}
       </button>
       <div
-        className="mx-auto xl:max-w-[1200px] hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden w-full z-10 bg-white rounded-lg p-2 "
+        className="mx-auto xl:max-w-[1200px] hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden w-full z-10 rounded-lg p-2 "
         id="notification"
       >
-        <div className="lg:w-5/12 w-screen rounded-b-2xl md:rounded-2xl lg:mt-0 bg-gray-50 border h-[400px]  overflow-y-auto p-8 absolute right-0">
+        <div className="lg:w-5/12 w-screen rounded-b-2xl md:rounded-2xl lg:mt-0 bg-gray-50 dark:bg-gray-900 border dark:border-gray-800 h-[400px]  overflow-y-auto p-8 absolute right-0">
           <div className="flex items-center justify-between">
-            <p className="text-2xl font-semibold leading-6 text-gray-800">
+            <p className="text-2xl font-semibold leading-6 dark:text-white text-gray-800">
               Notifications
             </p>
             <div className="cursor-pointer" onClick={notificationHandler}>

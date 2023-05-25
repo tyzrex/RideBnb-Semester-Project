@@ -32,16 +32,18 @@ import Navbar from "./Main-Components/Navbar";
 import ShowNavbar from "./Main-Components/ShowNavbar/ShowNavbar";
 
 const App = () => {
-  const user = useContext(AuthContext);
-  const [notify, setNotify] = useState([]);
+  const { user } = useContext(AuthContext);
+  console.log(user);
   const shouldFetch = useRef(true);
 
   const socket = useRef(null);
   useEffect(() => {
     if (shouldFetch.current) {
-      socket.current = io("http://localhost:3000", {
-        transports: ["websocket"],
-      });
+      if (user) {
+        socket.current = io("http://localhost:3000", {
+          transports: ["websocket"],
+        });
+      }
     }
 
     shouldFetch.current = false;
@@ -50,7 +52,10 @@ const App = () => {
   const emitNewUser = useRef(true);
   useEffect(() => {
     if (emitNewUser.current) {
-      socket.current.emit("newUser", user);
+      if (user) {
+        socket.current.emit("newUser", user);
+        toastSuccess(`Welcome to RideBnb ${user.customername}`);
+      }
     }
     emitNewUser.current = false;
   }, []);
@@ -112,7 +117,7 @@ const App = () => {
           path="/messenger"
           element={
             <IsAuthenticated>
-              <Messenger />
+              <Messenger socket={socket} />
             </IsAuthenticated>
           }
         />
