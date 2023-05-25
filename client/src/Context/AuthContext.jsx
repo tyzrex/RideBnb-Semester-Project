@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
       // const response = await axios.post("http://localhost:5000/auth/login", data);
       const response = await axiosInstance.post("/auth/login", data);
       setUser(response.data);
-      toastSuccess(`Welcome ${response.data.customername}!`);
+      window.location.replace("/");
       // setTimeout(() => {
       //   window.location.replace("/");
       // }, 2000);

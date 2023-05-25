@@ -1,11 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { RiMenu4Line } from "react-icons/ri";
-import { AiOutlineClose, AiOutlineHome } from "react-icons/ai";
+import {
+  AiOutlineClose,
+  AiOutlineProfile,
+  AiFillMessage,
+} from "react-icons/ai";
 import { AuthContext } from "../Context/AuthContext";
 import { IoSettingsOutline } from "react-icons/io5";
-import { FcAbout, FcHome, FcBookmark, FcAddImage } from "react-icons/fc";
 import Notification from "../Components/Notification/Notification";
+import Theme from "../hooks/theme";
 
 import("preline");
 
@@ -18,31 +22,23 @@ const Navbar = ({ socket }) => {
   const { user, logoutUser } = useContext(AuthContext);
 
   return (
-    <div className="sticky top-0 bg-black z-10">
+    <div className="sticky top-0 dark:bg-dark-main z-10">
       <div
         id="navbar"
-        className=" flex relative z-[20] justify-center items-center w-screen bg-[#fcfcfc] text-black py-6 border-b"
+        className=" flex relative z-[20] justify-center items-center w-screen dark:bg-dark-main text-black py-6 "
       >
         <div className="xl:max-w-[1200px] max-w-[90%] flex justify-center w-full items-center">
           <div className="flex justify-between items-center w-full">
             <div className="logo flex justify-center items-center gap-4">
               <Link to="/">
                 <h1 className="text-3xl">
-                  <span className="font-semibold">Ride</span>
-                  <span className="font-semibold text-indigo-500">Bnb</span>
+                  <span className="font-semibold dark:text-accent-3">Ride</span>
+                  <span className="font-semibold text-sky-500 dark:text-accent-1">
+                    Bnb
+                  </span>
                 </h1>
                 {/* <img src={RideBnb} alt="logo" className="w-[200px]" /> */}
               </Link>
-
-              {/* <div>
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Search by name or location"
-                    className="border-2 border-gray-300 border-none rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  />
-                </div> */}
-              {/* </div> */}
             </div>
 
             <div className="menu-items flex justify-center items-center gap-7 ">
@@ -50,7 +46,7 @@ const Navbar = ({ socket }) => {
                 <div className="hidden lg:flex justify-center items-center gap-8 cursor-pointer top-0 ">
                   <Link to="/">
                     <div className="flex items-center gap-2">
-                      <div className="font-semibold text-lg text-indigo-500 ">
+                      <div className="font-semibold text-lg text-gray-700 dark:text-accent-3 ">
                         Home
                       </div>
                     </div>
@@ -58,7 +54,7 @@ const Navbar = ({ socket }) => {
 
                   <Link to="/about">
                     <div className="flex items-center gap-2">
-                      <div className="font-medium text-lg text-[#23262f]">
+                      <div className="font-medium text-lg text-gray-700 dark:text-accent-3">
                         About
                       </div>
                     </div>
@@ -66,17 +62,21 @@ const Navbar = ({ socket }) => {
 
                   <Link to="/mybookings">
                     <div className="flex items-center gap-2">
-                      <div className="font-medium text-[#23262f] text-lg">
+                      <div className="font-medium text-gray-700 dark:text-accent-3 text-lg">
                         My Bookings
                       </div>
                     </div>
                   </Link>
 
                   <Link to="/listvehicle">
-                    <div className=" font-medium text-lg flex items-center gap-2 py-2 bg-white border-2 hover:text-white hover:bg-black hover:border-black transition-all duration-300 ease-in-out text-black px-4 rounded-full ">
+                    <div className=" text-sm font-bold flex items-center gap-2 py-4 bg-accent-1 dark:text-accent-1 dark:bg-gray-900 hover:text-white hover:bg-black hover:border-black transition-all duration-300 ease-in-out text-white px-4 rounded-xl ">
                       <span>List Your Vehicle</span>
                     </div>
                   </Link>
+
+                  <div className="  ">
+                    <Theme />
+                  </div>
                 </div>
               </div>
 
@@ -85,6 +85,12 @@ const Navbar = ({ socket }) => {
                   <div className="flex justify-center items-center gap-2 ">
                     <div>
                       <div className="flex justify-center items-center gap-4">
+                        <Link to="/messenger">
+                          <div className="p-[10px] rounded-full bg-accent-1 text-white">
+                            <AiFillMessage className="text-3xl" />
+                          </div>
+                        </Link>
+
                         <div className="w-full h-full">
                           <Notification socket={socket} />
                         </div>
@@ -92,9 +98,9 @@ const Navbar = ({ socket }) => {
                           <button
                             id="hs-dropdown-with-header"
                             type="button"
-                            className="hs-dropdown-toggle border-none inline-flex justify-center items-center gap-2 rounded-md  font-medium bg-white text-gray-700 align-middle"
+                            className="hs-dropdown-toggle border-none inline-flex justify-center items-center gap-2 rounded-md  font-medium text-gray-700 align-middle"
                           >
-                            <div className="relative inline-flex items-center p-2 justify-center w-12 h-12 overflow-hidden bg-indigo-500 rounded-full dark:bg-gray-600">
+                            <div className="relative inline-flex items-center p-2 justify-center w-12 h-12 overflow-hidden bg-accent-1 rounded-full dark:bg-gray-600">
                               <span className="font-medium text-white dark:text-gray-300">
                                 {user.customername[0]}
                                 {user.customername[1]}
@@ -122,6 +128,12 @@ const Navbar = ({ socket }) => {
                                 <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-green-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
                                   <IoSettingsOutline className="text-[16px]" />
                                   Settings
+                                </div>
+                              </Link>
+                              <Link to={`/profile`}>
+                                <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-green-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
+                                  <AiOutlineProfile className="text-[16px]" />
+                                  Profile
                                 </div>
                               </Link>
                               <button
@@ -156,10 +168,10 @@ const Navbar = ({ socket }) => {
                       <button
                         id="hs-dropdown-custom-icon-trigger"
                         type="button"
-                        className="hs-dropdown-toggle p-3 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+                        className="hs-dropdown-toggle p-3 inline-flex justify-center items-center gap-2 rounded-md font-medium bg-accent-2 text-gray-700 shadow-sm align-middle hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
                       >
                         <svg
-                          className="w-4 h-4 text-gray-600"
+                          className="w-4 h-4 text-accent-3"
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
                           height="16"
@@ -229,10 +241,7 @@ const Navbar = ({ socket }) => {
                 </div>
                 <div className="flex flex-col gap-4">
                   {user ? (
-                    <li
-                      className="flex flex-col justify-center items-center gap-4"
-                      onClick={logoutUser}
-                    >
+                    <li className="" onClick={logoutUser}>
                       Log out
                     </li>
                   ) : (

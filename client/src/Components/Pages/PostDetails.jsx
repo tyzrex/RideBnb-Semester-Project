@@ -460,7 +460,7 @@ const PostDetails = ({ socket }) => {
                     onClick={handleNotification}
                     className="bg-blue-600 text-white px-5 py-2 rounded-xl mt-5"
                   >
-                    Contact Owner
+                    Start Chat
                   </button>
                 </div>
               </div>

@@ -3,8 +3,8 @@ import "aos/dist/aos.css";
 import HeroCard from "./HeroCard";
 import { useEffect, useState } from "react";
 import Animate from "react-smooth";
-import BikeImg from "../assets/cbr2.png";
-import CarImg from "../assets/bmwclear.png";
+// import BikeImg from "../assets/cbr2.png";
+// import CarImg from "../assets/1131473.jpg";
 import HeroVideo from "../assets/car.mp4";
 
 const ExperimentHero = () => {
@@ -22,14 +22,12 @@ const ExperimentHero = () => {
   return (
     <div className={` h-auto text-black bg-gray-200 flex`}>
       <div className="w-screen h-full">
-        <video
-          autoPlay
-          loop
-          muted
-          className="bg-black object-cover h-[700px] w-full"
-        >
-          <source src={HeroVideo} type="video/mp4" />
-        </video>
+        <img
+          src={CarImg}
+          alt="background"
+          className="object-cover h-[70vh] w-full"
+          loading="lazy"
+        />
       </div>
 
       <div className="absolute z-[2] translate-y-[50%] self-end w-full">

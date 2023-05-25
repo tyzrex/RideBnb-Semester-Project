@@ -81,9 +81,9 @@ const EditProfile = () => {
   }, []);
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-center mt-10">
-        Edit Your Personal <span className="text-blue-500">Details</span>
+    <div className="dark:bg-dark-main bg-gray-100">
+      <h1 className="text-3xl font-bold text-center pt-20 dark:text-accent-3">
+        Edit Your Personal <span className="text-accent-1">Details</span>
       </h1>
       <div className="xl:max-w-[1200px] px-4 py-10 max-w-[90%] lg:py-14 mb-10 mx-auto w-screen">
         <div className="bg-white rounded-xl p-4 sm:p-7 dark:bg-slate-900">
@@ -101,7 +101,7 @@ const EditProfile = () => {
               <div className="col-span-3">
                 <label
                   htmlFor="af-account-user-name"
-                  className="inline-block text-md text-gray-800 mt-2.5 dark:text-gray-200"
+                  className="inline-block text-md text-gray-800 mt-2.5 dark:text-gray-200 "
                 >
                   Username
                 </label>
@@ -133,7 +133,7 @@ const EditProfile = () => {
                   <input
                     id="af-account-full-name"
                     type="text"
-                    className="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-md relative focus:z-10"
+                    className="py-2 px-3 pr-11 block w-full border-gray-200 dark:bg-slate-900 dark:text-gray-400 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-md relative focus:z-10"
                     onChange={(e) => setUsername(e.target.value)}
                     value={username}
                   />
@@ -232,7 +232,7 @@ const EditProfile = () => {
               <button
                 type="button"
                 onClick={handleSubmit}
-                className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold button-transition hover:bg-black bg-indigo-500 text-white"
+                className="py-2 px-3 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold button-transition hover:bg-black bg-accent-2 text-white"
               >
                 Save changes
               </button>

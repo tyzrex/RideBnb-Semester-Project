@@ -18,34 +18,15 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* .hover-underline-animation {
-  position: inherit;
+.abs-home {
+  /* From https://css.glass */
+  background: rgba(95, 94, 94, 0.082);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(70px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(1, 5, 14, 0.3);
 }
-
-.hover-underline-animation:hover {
-  color: black;
-  transform: scale(1.1);
-  transition: transform 0.3s ease-in-out;
-}
-
-.hover-underline-animation:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  transform: scaleX(0);
-  height: 2px;
-  bottom: 3px;
-  left: 0;
-
-  background-color: black;
-  transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
-}
-
-.hover-underline-animation:hover:after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
-} */
 
 /* hide scroll bar */
 ::-webkit-scrollbar {
@@ -54,4 +35,27 @@
 
 .button-hover {
   @apply border-2 border-black hover:text-black hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300;
+}
+
+@layer components {
+  .mobile-nav-links {
+    @apply block p-4 text-sm font-semibold text-accent-4 dark:text-gray-400 hover:bg-accent-1 dark:hover:bg-gray-900 hover:text-white rounded-xl;
+  }
+
+  .btn-main {
+    @apply py-4 px-6 bg-accent-1 hover:bg-teal-500 text-sm text-white font-bold rounded-full transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply py-4 px-6 bg-accent-2 hover:bg-gray-700 hover:text-accent-1 text-sm text-white font-bold rounded-full transition duration-300;
+  }
+
+  .glass {
+    @apply bg-[#01050e] bg-opacity-5 rounded-3xl shadow-lg backdrop-filter backdrop-blur-[70px] backdrop-contrast-[0.86] border border-gray-900 border-opacity-30;
+  }
+}
+
+body * {
+  @apply transition-[background-image,background-color] ease-in-out duration-700;
+  font-family: "Poppins", sans-serif;
 }

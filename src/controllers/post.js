@@ -190,9 +190,31 @@ export const getPostByUser = async (req, res) => {
       [customer_id]
     );
     if (post.rows.length === 0) {
-      throw new Error("Post not found");
+      res.status(404).json({
+        success: false,
+        message: "No posts found",
+      });
+    } else {
+      res.status(200).json(post.rows);
     }
-    res.status(200).json(post.rows);
+  } catch (err) {
+    console.log(err);
+    res.status(404).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+export const deletePost = async (req, res) => {
+  const { id } = req.params;
+  const { customer_id } = req.user;
+  try {
+    const post = await pool.query(
+      "DELETE FROM vehicle_post WHERE vehicle_post_id = $1 AND customer_id = $2 RETURNING *",
+      [id, customer_id]
+    );
+    res.status(200).json("Post deleted");
   } catch (err) {
     console.log(err);
     res.status(404).json({
