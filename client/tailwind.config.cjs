@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  safelist: ["light-hero-pattern", "dark-hero-pattern"],
   darkMode: "class",
   content: [
     "./index.html",
@@ -8,7 +9,7 @@ module.exports = {
     "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
     "node_modules/preline/dist/*.js",
   ],
-  darkMode: "class",
+  // darkMode: "class",
   theme: {
     extend: {
       backgroundImage: {
