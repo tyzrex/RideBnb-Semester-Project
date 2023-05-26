@@ -55,7 +55,7 @@
   }
 
   .dark-glass {
-    @apply bg-[#01050e] bg-opacity-50 shadow-lg backdrop-filter backdrop-blur-[1000px] backdrop-contrast-[1.1] border border-gray-900 border-opacity-30;
+    /* @apply bg-[#01050e] bg-opacity-50 shadow-lg backdrop-filter backdrop-blur-[1000px] backdrop-contrast-[1.1] border border-gray-900 border-opacity-30; */
   }
 
   .hero-dark {
@@ -75,7 +75,7 @@
   }
 
   .dark-glass-messenger {
-    @apply bg-[#01050e] bg-opacity-80 shadow-lg backdrop-filter backdrop-blur-[1000px] backdrop-contrast-[1.1] border border-gray-900 border-opacity-30;
+    /* @apply bg-[#01050e] bg-opacity-80 shadow-lg backdrop-filter backdrop-blur-[1000px] backdrop-contrast-[1.1] border border-gray-900 border-opacity-30; */
   }
 
   .faq-dark {

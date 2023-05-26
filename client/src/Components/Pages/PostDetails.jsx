@@ -290,8 +290,8 @@ const PostDetails = ({ socket }) => {
   }, []);
 
   return (
-    <div className="dark:details-hero bg-no-repeat bg-center bg-cover ">
-      <div className="h-full w-full dark:dark-glass">
+    <div className="dark:bg-dark-secondary">
+      <div className="h-full w-full">
         {/* <h1 className="text-center text-4xl font-bold text-black mt-10">
         {" "}
         Post Details{" "}
@@ -474,7 +474,7 @@ const PostDetails = ({ socket }) => {
 
               <div className="">
                 <div className="h-full">
-                  <div className="xl:flex-1 pb-5 lg:w-[450px] mx-auto dark:glass dark:border-0 border px-10 py-6 lg:px-8 lg:py-10 rounded-3xl ">
+                  <div className="xl:flex-1 pb-5 lg:w-[450px] mx-auto dark:bg-gray-900 dark:border-0 border px-10 py-6 lg:px-8 lg:py-10 rounded-3xl ">
                     <div>
                       <h1 className="text-3xl font-semibold text-black mb-3 dark:text-accent-3">
                         Rs. {post.price_per_day}
@@ -495,7 +495,7 @@ const PostDetails = ({ socket }) => {
                             value={data.checkIn}
                             onChange={handleChange}
                             placeholder="Pick a date"
-                            className="w-full border-2 text-gray-500 border-gray-300 bg-white rounded-lg p-4 mb-4 cursor-pointer text-xl dark:bg-dark-secondary dark:border-gray-800"
+                            className="w-full border-2 text-gray-500 border-gray-300 bg-white rounded-lg p-4 mb-4 cursor-pointer text-xl dark:bg-gray-800 dark:border-gray-800"
                             name="checkIn"
                           />
                           {datePicker && (
@@ -533,7 +533,7 @@ const PostDetails = ({ socket }) => {
                             value={data.checkOut}
                             onChange={handleChange}
                             placeholder="Pick a date"
-                            className="w-full border-2 text-gray-500 border-gray-300 bg-white rounded-lg p-4 mb-4 cursor-pointer text-xl dark:bg-dark-secondary dark:border-gray-800"
+                            className="w-full border-2 text-gray-500 border-gray-300 bg-white rounded-lg p-4 mb-4 cursor-pointer text-xl dark:bg-gray-800 dark:border-gray-800"
                             id="checkOut"
                             name="checkOut"
                           />

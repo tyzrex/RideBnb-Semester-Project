@@ -81,8 +81,8 @@ const EditProfile = () => {
   }, []);
 
   return (
-    <div className="dark:bg-gradient-to-r from-gray-900 via-gray-700 to-dark-main bg-gray-100">
-      <div className="dark:dark-glass-messenger">
+    <div className="dark:bg-dark-secondary bg-gray-100">
+      <div className="">
         <h1 className="text-3xl font-bold text-center pt-20 dark:text-accent-3">
           Edit Your Personal <span className="text-accent-1">Details</span>
         </h1>
@@ -134,7 +134,7 @@ const EditProfile = () => {
                     <input
                       id="af-account-full-name"
                       type="text"
-                      className="py-2 px-3 pr-11 block w-full border-gray-200 dark:dark-glass dark:border-0 dark:text-gray-400 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-md relative focus:z-10"
+                      className="py-2 px-3 pr-11 block w-full border-gray-200 dark:bg-gray-800 rounded-xl dark:border-0 dark:text-gray-400 shadow-sm -mt-px -ml-px  text-md relative focus:z-10"
                       onChange={(e) => setUsername(e.target.value)}
                       value={username}
                     />
@@ -154,7 +154,7 @@ const EditProfile = () => {
                   <input
                     id="af-account-email"
                     type="email"
-                    className="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-md rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:dark-glass dark:border-0 dark:border-gray-700 dark:text-gray-400"
+                    className="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm text-md rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-0 dark:border-gray-700 dark:text-gray-400"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -173,7 +173,7 @@ const EditProfile = () => {
                   <div className="space-y-2">
                     <input
                       type="text"
-                      className="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm rounded-lg text-md focus:border-blue-500 focus:ring-blue-500 dark:dark-glass dark:border-0 dark:border-gray-700 dark:text-gray-400"
+                      className="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm rounded-lg text-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-0 dark:border-gray-700 dark:text-gray-400"
                       placeholder="Enter new password"
                       onChange={(e) => setNewPassword(e.target.value)}
                     />
@@ -196,7 +196,7 @@ const EditProfile = () => {
                     <input
                       id="af-account-phone"
                       type="text"
-                      className="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-md relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:dark-glass dark:border-0 dark:border-gray-700 dark:text-gray-400"
+                      className="py-2 px-3 pr-11 block w-full border-gray-200 shadow-sm -mt-px -ml-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-l-lg sm:mt-0 sm:first:ml-0 sm:first:rounded-tr-none sm:last:rounded-bl-none sm:last:rounded-r-lg text-md relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-0 dark:border-gray-700 dark:text-gray-400"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                     />
@@ -215,7 +215,7 @@ const EditProfile = () => {
                 <div className="col-span-9">
                   <input
                     id="af-account-address"
-                    className="py-2 px-3 block w-full border-gray-200 rounded-lg text-md focus:border-blue-500 focus:ring-blue-500 dark:dark-glass dark:border-0 dark:border-gray-700 dark:text-gray-400"
+                    className="py-2 px-3 block w-full border-gray-200 rounded-lg text-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-0 dark:border-gray-700 dark:text-gray-400"
                     rows="6"
                     onChange={(e) => setAddress(e.target.value)}
                     value={address}

@@ -47,7 +47,7 @@ const ExploreAll = () => {
   };
 
   return (
-    <div>
+    <div className="dark:bg-dark-secondary">
       <MiniNav />
       <div>
         <ExploreHero />
@@ -69,17 +69,17 @@ const ExploreAll = () => {
           <button
             onClick={handlePrevClick}
             disabled={currentPage === 1}
-            className="px-4 py-2 bg-black button-hover text-white rounded-md"
+            className="px-4 py-2 bg-black dark:bg-accent-1 button-hover text-white rounded-md"
           >
             Previous
           </button>
-          <p className="text-xl font-bold">
+          <p className="text-xl font-bold dark:text-accent-3">
             {currentPage} of {totalPages}
           </p>
           <button
             onClick={handleNextClick}
             disabled={currentPage === totalPages}
-            className="px-4 py-2 bg-black button-hover text-white rounded-md"
+            className="px-4 py-2 bg-black dark:bg-accent-1 button-hover text-white rounded-md"
           >
             Next
           </button>

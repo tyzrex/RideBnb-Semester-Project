@@ -58,10 +58,10 @@ const Navbar = ({ socket }) => {
   const { user, logoutUser } = useContext(AuthContext);
 
   return (
-    <div className="bg-white dark:bg-gradient-to-r from-gray-900 via-gray-700 to-dark-main z-50 ">
+    <div className="bg-white dark:bg-dark-secondary border-b border-b-gray-800 z-50 ">
       <div
         id="navbar"
-        className=" flex relative z-[20] justify-center items-center w-screen text-black py-6 dark:dark-glass "
+        className=" flex relative z-[20] justify-center items-center w-screen text-black py-6  "
       >
         <div className="xl:max-w-[1200px] max-w-[90%] flex justify-center w-full items-center">
           <div className="flex justify-between items-center w-full">

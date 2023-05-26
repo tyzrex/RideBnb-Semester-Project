@@ -116,190 +116,188 @@ const List = () => {
   }, []);
 
   return (
-    <div className="dark:bg-gradient-to-r from-gray-900 via-gray-700 to-dark-main bg-cover bg-center">
-      <div className="dark:dark-glass-messenger">
-        <MiniNav />
-        {prevState.state ? (
-          <>
-            <h1 className="text-4xl mt-10 pb-6 font-bold text-center dark:text-white">
-              Search Results for {prevState.state.vehicleType} in{" "}
-              <span className="text-accent-1">{prevState.state.location}</span>
-            </h1>
-          </>
-        ) : (
-          <></>
-        )}
-        <div className="flex justify-center max-w-[90%] xl:max-w-[1200px] mx-auto w-screen mt-10 mb-10">
-          <div className="w-full flex-col flex xl:flex-row justify-center gap-[20px]">
-            <div className="h-full">
-              <div className="xl:flex-1 pb-5 w-screen max-w-[90%] mx-auto xl:mx-0 xl:w-full bg-white dark:bg-gray-900 dark:border-0 border border-gray-200 px-8 py-2 lg:p-5 rounded-2xl ">
-                <h1 className="text-2xl py-6 font-bold top-[10px] text-black dark:text-accent-3">
-                  Search for Vehicles
-                </h1>
-                <div className="flex flex-col gap-[10px] mb-[10px]">
-                  <label className="text-black dark:text-accent-3 font-medium">
-                    Location
-                  </label>
-                  <input
-                    type="text"
-                    className="rounded-md border p-2 dark:glass dark:text-gray-300"
-                    placeholder="Enter Location"
-                    onChange={handleChange}
-                    value={data.location}
-                    name="location"
-                  />
-                </div>
-                <div className="flex flex-col mb-[5px]">
-                  <div>
-                    <label className="text-gray-500">Check In</label>
-                    <input
-                      onClick={handleDatePicker}
-                      type="text"
-                      readOnly={true}
-                      value={data.checkIn}
-                      onChange={handleChange}
-                      placeholder="Pick a date"
-                      className="w-full border-2 text-gray-500 border-gray-300 bg-white dark:glass dark:text-gray-300 rounded-lg p-2 mb-4 cursor-pointer"
-                      name="checkIn"
-                    />
-                    {datePicker && (
-                      <div className="flex justify-center items-center">
-                        <DateRange
-                          className=""
-                          ranges={[selectionRange]}
-                          rangeColors={["#000000"]}
-                          onChange={handleSelect}
-                          minDate={new Date()}
-                          footerContent={
-                            <div className="flex justify-center items-center">
-                              <button
-                                onClick={handleDatePicker}
-                                className="bg-black text-white px-4 py-2 rounded-lg"
-                              >
-                                Close
-                              </button>
-                            </div>
-                          }
-                        />
-                      </div>
-                    )}
-                  </div>
-
-                  <div>
-                    <label className="text-gray-500">Check Out</label>
-                    <input
-                      onClick={handleDatePicker}
-                      type="text"
-                      readOnly={true}
-                      value={data.checkOut}
-                      onChange={handleChange}
-                      placeholder="Pick a date"
-                      className="w-full border-2 text-gray-500 border-gray-300 bg-white dark:glass dark:text-gray-300 rounded-lg p-2 mb-4 cursor-pointer"
-                      id="checkOut"
-                      name="checkOut"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-[5px] ">
-                  <label className="text-[16px] pt-3 font-medium dark:text-accent-1">
-                    Options
-                  </label>
-                  <div className="p-[10px]">
-                    <div className="flex justify-between mb-[10px] items-center text-black dark:text-accent-3 text-[12px]">
-                      <span className="text-lg">Min price</span>
-                      <input
-                        type="number"
-                        className="w-[100px] border p-2 dark:glass text-[15px] rounded-md"
-                      />
-                    </div>
-                    <div className="flex justify-between mb-[10px] items-center text-black dark:text-accent-3 text-[12px]">
-                      <span className="text-lg">Max price</span>
-                      <input
-                        type="number"
-                        className="w-[100px] border p-2 dark:glass text-[15px] rounded-md"
-                      />
-                    </div>
-                    <div className="flex justify-between mb-[10px] items-center text-black dark:text-accent-3 text-[12px]">
-                      <span className="text-lg">Vehicle Type</span>
-                      <select
-                        className="border p-2 w-[100px] bg-white dark:glass dark:text-gray-300"
-                        name="vehicleType"
-                        onChange={handleChange}
-                      >
-                        <option value="Car">Car</option>
-                        <option value="Bike">Bike</option>
-                      </select>
-                    </div>
-
-                    <div className="flex justify-between mb-[10px] items-center text-black dark:text-accent-3 text-[12px]">
-                      <span className="text-lg">Listing Type</span>
-                      <select className="border p-2 w-[100px] bg-white dark:glass dark:text-gray-300">
-                        <option value="Car">Rent</option>
-                        <option value="Bike">Sell</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <Link
-                  to={`/search?location=${data.location}&vehicleType=${data.vehicleType}`}
-                  state={data}
-                  onClick={searchVehicle}
-                >
-                  <button
-                    // onClick={handleSubmit}
-                    className="button-transition hover:bg-black bg-accent-1 font-semibold text-white p-3 rounded-full"
-                  >
-                    Search
-                  </button>
-                </Link>
+    <div className="dark:bg-dark-main ">
+      <MiniNav />
+      {prevState.state ? (
+        <>
+          <h1 className="text-4xl mt-10 pb-6 font-bold text-center dark:text-white">
+            Search Results for {prevState.state.vehicleType} in{" "}
+            <span className="text-accent-1">{prevState.state.location}</span>
+          </h1>
+        </>
+      ) : (
+        <></>
+      )}
+      <div className="flex justify-center max-w-[90%] xl:max-w-[1200px] mx-auto w-screen mt-10 mb-10">
+        <div className="w-full flex-col flex xl:flex-row justify-center gap-[20px]">
+          <div className="h-full">
+            <div className="xl:flex-1 pb-5 w-screen max-w-[90%] mx-auto xl:mx-0 xl:w-full bg-white dark:bg-gray-900 dark:border-0 border border-gray-200 px-8 py-2 lg:p-5 rounded-2xl ">
+              <h1 className="text-2xl py-6 font-bold top-[10px] text-black dark:text-accent-3">
+                Search for Vehicles
+              </h1>
+              <div className="flex flex-col gap-[10px] mb-[10px]">
+                <label className="text-black dark:text-accent-3 font-medium">
+                  Location
+                </label>
+                <input
+                  type="text"
+                  className="rounded-md border p-2 dark:bg-gray-800 dark:border-0 placeholder:dark:text-gray-300 dark:text-gray-300"
+                  placeholder="Enter Location"
+                  onChange={handleChange}
+                  value={data.location}
+                  name="location"
+                />
               </div>
-            </div>
-            <div className="flex-[3]">
-              {prevState.state || searchParams ? (
-                searchData.map((item, index) => (
-                  <SearchItem
-                    key={index}
-                    vehicle_id={item.vehicle_post_id}
-                    vehicle_name={item.vehicle_name}
-                    vehicle_type={item.vehicle_type}
-                    vehicle_price={item.vehicle_price}
-                    vehicle_image={item.vehicle_image}
-                    vehicle_location={item.vehicle_location}
-                    vehicle_listing_type={item.vehicle_listing_type}
-                    address={item.address}
-                    vehicle_color={item.vehicle_color}
-                    vehicle_brand={item.vehicle_brand}
-                    posted_by={item.customername}
-                    price_per_day={item.price_per_day}
-                    checkIn={data.checkIn}
-                    checkOut={data.checkOut}
+              <div className="flex flex-col mb-[5px]">
+                <div>
+                  <label className="text-gray-500">Check In</label>
+                  <input
+                    onClick={handleDatePicker}
+                    type="text"
+                    readOnly={true}
+                    value={data.checkIn}
+                    onChange={handleChange}
+                    placeholder="Pick a date"
+                    className="w-full border-2 text-gray-500 border-gray-300 bg-white dark:bg-gray-800 dark:border-0 placeholder:dark:text-gray-300 dark:text-gray-300 rounded-lg p-2 mb-4 cursor-pointer"
+                    name="checkIn"
                   />
-                ))
-              ) : (
-                <>
-                  <div className="flex-col flex justify-center items-center">
-                    <h1 className="text-3xl  py-6 font-bold top-[10px] text-black dark:text-accent-3">
-                      Wow Such Empty Try Searching for Vehicles
-                    </h1>
-                    <img
-                      src={empty}
-                      alt="empty"
-                      className="w-[100%] object-cover"
-                    />
-                  </div>
-                </>
-              )}
-              {searchData.length === 0 && (
-                <div className="h-full flex text-center justify-center items-center">
-                  <img
-                    src={wow}
-                    alt="empty"
-                    className="max-w-[90%] lg:w-[100%] object-cover "
+                  {datePicker && (
+                    <div className="flex justify-center items-center">
+                      <DateRange
+                        className=""
+                        ranges={[selectionRange]}
+                        rangeColors={["#000000"]}
+                        onChange={handleSelect}
+                        minDate={new Date()}
+                        footerContent={
+                          <div className="flex justify-center items-center">
+                            <button
+                              onClick={handleDatePicker}
+                              className="bg-black text-white px-4 py-2 rounded-lg"
+                            >
+                              Close
+                            </button>
+                          </div>
+                        }
+                      />
+                    </div>
+                  )}
+                </div>
+
+                <div>
+                  <label className="text-gray-500">Check Out</label>
+                  <input
+                    onClick={handleDatePicker}
+                    type="text"
+                    readOnly={true}
+                    value={data.checkOut}
+                    onChange={handleChange}
+                    placeholder="Pick a date"
+                    className="w-full border-2 text-gray-500 border-gray-300 bg-white dark:bg-gray-800 dark:border-0 placeholder:dark:text-gray-300 dark:text-gray-300 rounded-lg p-2 mb-4 cursor-pointer"
+                    id="checkOut"
+                    name="checkOut"
                   />
                 </div>
-              )}
+              </div>
+
+              <div className="flex flex-col gap-[5px] ">
+                <label className="text-[16px] pt-3 font-medium dark:text-accent-1">
+                  Options
+                </label>
+                <div className="p-[10px]">
+                  <div className="flex justify-between mb-[10px] items-center text-black dark:text-accent-3 text-[12px]">
+                    <span className="text-lg">Min price</span>
+                    <input
+                      type="number"
+                      className="w-[100px] border p-2 dark:bg-gray-800 dark:border-0 placeholder:dark:text-gray-300 text-[15px]3rounded-md"
+                    />
+                  </div>
+                  <div className="flex justify-between mb-[10px] items-center text-black dark:text-accent-3 text-[12px]">
+                    <span className="text-lg">Max price</span>
+                    <input
+                      type="number"
+                      className="w-[100px] border p-2 dark:bg-gray-800 dark:border-0 placeholder:dark:text-gray-300 text-[15px]3rounded-md"
+                    />
+                  </div>
+                  <div className="flex justify-between mb-[10px] items-center text-black dark:text-accent-3 text-[12px]">
+                    <span className="text-lg">Vehicle Type</span>
+                    <select
+                      className="border p-2 w-[100px] bg-white dark:bg-gray-800 dark:border-0 placeholder:dark:text-gray-300 dark:text-gray-300"
+                      name="vehicleType"
+                      onChange={handleChange}
+                    >
+                      <option value="Car">Car</option>
+                      <option value="Bike">Bike</option>
+                    </select>
+                  </div>
+
+                  <div className="flex justify-between mb-[10px] items-center text-black dark:text-accent-3 text-[12px]">
+                    <span className="text-lg">Listing Type</span>
+                    <select className="border p-2 w-[100px] bg-white dark:bg-gray-800 dark:border-0 placeholder:dark:text-gray-300 dark:text-gray-300">
+                      <option value="Car">Rent</option>
+                      <option value="Bike">Sell</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <Link
+                to={`/search?location=${data.location}&vehicleType=${data.vehicleType}`}
+                state={data}
+                onClick={searchVehicle}
+              >
+                <button
+                  // onClick={handleSubmit}
+                  className="button-transition hover:bg-black bg-accent-1 font-semibold text-white p-3 rounded-full"
+                >
+                  Search
+                </button>
+              </Link>
             </div>
+          </div>
+          <div className="flex-[3]">
+            {prevState.state || searchParams ? (
+              searchData.map((item, index) => (
+                <SearchItem
+                  key={index}
+                  vehicle_id={item.vehicle_post_id}
+                  vehicle_name={item.vehicle_name}
+                  vehicle_type={item.vehicle_type}
+                  vehicle_price={item.vehicle_price}
+                  vehicle_image={item.vehicle_image}
+                  vehicle_location={item.vehicle_location}
+                  vehicle_listing_type={item.vehicle_listing_type}
+                  address={item.address}
+                  vehicle_color={item.vehicle_color}
+                  vehicle_brand={item.vehicle_brand}
+                  posted_by={item.customername}
+                  price_per_day={item.price_per_day}
+                  checkIn={data.checkIn}
+                  checkOut={data.checkOut}
+                />
+              ))
+            ) : (
+              <>
+                <div className="flex-col flex justify-center items-center">
+                  <h1 className="text-3xl  py-6 font-bold top-[10px] text-black dark:text-accent-3">
+                    Wow Such Empty Try Searching for Vehicles
+                  </h1>
+                  <img
+                    src={empty}
+                    alt="empty"
+                    className="w-[100%] object-cover"
+                  />
+                </div>
+              </>
+            )}
+            {searchData.length === 0 && (
+              <div className="h-full flex text-center justify-center items-center">
+                <img
+                  src={wow}
+                  alt="empty"
+                  className="max-w-[90%] lg:w-[100%] object-cover "
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
