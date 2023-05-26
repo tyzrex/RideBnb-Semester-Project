@@ -18,7 +18,7 @@ const Theme = () => {
 
   return (
     <div>
-      <button className="text-white dark:text-accent-1 p-4 text-sm font-bold dark:hover:bg-gray-900 rounded-xl bg-accent-2 dark:bg-gray-900">
+      <button className="text-black dark:text-accent-1 p-2 md:p-[14px] text-sm font-bold dark:hover:bg-gray-900 rounded-xl bg-white dark:bg-gray-900 border-2 dark:border-0 hover:bg-black hover:text-white duration-300 transition-colors ease-in">
         {theme === "light" ? (
           <div
             className="flex justify-center items-center gap-2"

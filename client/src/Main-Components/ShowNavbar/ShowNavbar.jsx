@@ -13,7 +13,7 @@ const ShowNavbar = ({ children }) => {
     }
   }, [location]);
 
-  return <div>{showNavbar && children}</div>;
+  return <div className="top-0 sticky z-50">{showNavbar && children}</div>;
 };
 
 export default ShowNavbar;

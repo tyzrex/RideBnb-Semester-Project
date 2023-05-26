@@ -96,105 +96,107 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
       <div className="w-full flex h-auto flex-col justify-center items-center">
         <div className="w-[90%]  xl:max-w-[1200px]  xl:w-[100%] relative ">
           <div className="bg-white dark:glass p-8 md:p-10 lg:p-12 shadow-2xl rounded-3xl">
-            <div className="grid content-center md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-5 ">
-              <div>
-                <div className="flex gap-3 items-center">
-                  <TbLocation className="text-3xl text-yellow-500" />
-                  <label className="text-gray-800 dark:text-accent-3 text-xl md:text-2xl font-bold">
-                    {" "}
-                    Location
-                  </label>
-                </div>
+            <div>
+              <div className=" grid content-center md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-5 ">
                 <div>
-                  <input
-                    type="text"
-                    placeholder="Preferred Location"
-                    className="w-full border-none text-gray-500 bg-transparent rounded-lg p-2  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
-                    onChange={handleChange}
-                    id="location"
-                    name="location"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex gap-3 items-center">
-                  <FcCalendar className="text-3xl text-gray-500" />
-                  <label className="text-gray-800 dark:text-accent-3 text-xl md:text-2xl font-bold">
-                    {" "}
-                    Check In
-                  </label>
-                </div>
-                <input
-                  onClick={handleDatePicker}
-                  type="text"
-                  readOnly={true}
-                  value={data.checkIn}
-                  onChange={handleChange}
-                  placeholder="Pick a date"
-                  className="w-full border-none text-gray-500 bg-transparent rounded-lg p-2  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
-                  name="checkIn"
-                />
-              </div>
-
-              <div>
-                <div className="flex gap-3 items-center">
-                  <FcPlanner className="text-3xl text-gray-500" />
-                  <label className="text-gray-800 dark:text-accent-3 text-xl md:text-2xl font-bold">
-                    {" "}
-                    Check Out
-                  </label>
-                </div>
-                <input
-                  onClick={handleDatePicker}
-                  type="text"
-                  readOnly={true}
-                  value={data.checkOut}
-                  onChange={handleChange}
-                  placeholder="Pick a date"
-                  className="w-full border-none text-gray-500 bg-transparent rounded-lg p-2  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
-                  id="checkOut"
-                  name="checkOut"
-                />
-                {datePicker && (
-                  <div className="absolute">
-                    <DateRange
-                      className=""
-                      ranges={[selectionRange]}
-                      rangeColors={["#000000"]}
-                      onChange={handleSelect}
-                      minDate={new Date()}
-                      footerContent={
-                        <div className="flex justify-center items-center">
-                          <button
-                            onClick={handleDatePicker}
-                            className="bg-black text-white px-4 py-2 rounded-lg"
-                          >
-                            Close
-                          </button>
-                        </div>
-                      }
+                  <div className="flex gap-3 items-center">
+                    <TbLocation className="text-3xl text-yellow-500" />
+                    <label className="text-gray-800 dark:text-accent-3 text-xl md:text-2xl font-bold">
+                      {" "}
+                      Location
+                    </label>
+                  </div>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Preferred Location"
+                      className="w-full border-none text-gray-500 bg-transparent rounded-lg p-2  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
+                      onChange={handleChange}
+                      id="location"
+                      name="location"
                     />
                   </div>
-                )}
-              </div>
-
-              <div className="flex flex-col">
-                <div className="flex gap-3 items-center">
-                  <FcList className="text-3xl text-gray-500" />
-                  <label className="text-gray-800 dark:text-accent-3 text-xl md:text-2xl font-bold">
-                    {" "}
-                    Vehicle Type
-                  </label>
                 </div>
-                <select
-                  id="hs-select-label"
-                  onChange={handleChange}
-                  className="w-full border-none text-gray-500 bg-transparent rounded-lg p-1  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
-                  name="vehicleType"
-                >
-                  <option>{vehicleChoice}</option>
-                </select>
+
+                <div>
+                  <div className="flex gap-3 items-center">
+                    <FcCalendar className="text-3xl text-gray-500" />
+                    <label className="text-gray-800 dark:text-accent-3 text-xl md:text-2xl font-bold">
+                      {" "}
+                      Check In
+                    </label>
+                  </div>
+                  <input
+                    onClick={handleDatePicker}
+                    type="text"
+                    readOnly={true}
+                    value={data.checkIn}
+                    onChange={handleChange}
+                    placeholder="Pick a date"
+                    className="w-full border-none text-gray-500 bg-transparent rounded-lg p-2  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
+                    name="checkIn"
+                  />
+                </div>
+
+                <div>
+                  <div className="flex gap-3 items-center">
+                    <FcPlanner className="text-3xl text-gray-500" />
+                    <label className="text-gray-800 dark:text-accent-3 text-xl md:text-2xl font-bold">
+                      {" "}
+                      Check Out
+                    </label>
+                  </div>
+                  <input
+                    onClick={handleDatePicker}
+                    type="text"
+                    readOnly={true}
+                    value={data.checkOut}
+                    onChange={handleChange}
+                    placeholder="Pick a date"
+                    className="w-full border-none text-gray-500 bg-transparent rounded-lg p-2  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
+                    id="checkOut"
+                    name="checkOut"
+                  />
+                  {datePicker && (
+                    <div className="absolute">
+                      <DateRange
+                        className=""
+                        ranges={[selectionRange]}
+                        rangeColors={["#000000"]}
+                        onChange={handleSelect}
+                        minDate={new Date()}
+                        footerContent={
+                          <div className="flex justify-center items-center">
+                            <button
+                              onClick={handleDatePicker}
+                              className="bg-black text-white px-4 py-2 rounded-lg"
+                            >
+                              Close
+                            </button>
+                          </div>
+                        }
+                      />
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex flex-col">
+                  <div className="flex gap-3 items-center">
+                    <FcList className="text-3xl text-gray-500" />
+                    <label className="text-gray-800 dark:text-accent-3 text-xl md:text-2xl font-bold">
+                      {" "}
+                      Vehicle Type
+                    </label>
+                  </div>
+                  <select
+                    id="hs-select-label"
+                    onChange={handleChange}
+                    className="w-full border-none text-gray-500 bg-transparent rounded-lg p-1  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
+                    name="vehicleType"
+                  >
+                    <option>{vehicleChoice}</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>

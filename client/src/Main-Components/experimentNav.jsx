@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Bars3Icon,
@@ -9,9 +9,12 @@ import Logo from "../assets/login.svg";
 // import Theme from "@/components/utils/theme/Theme";
 import { Link } from "react-router-dom";
 import { navVariant } from "./motion";
+import { AuthContext } from "../Context/AuthContext";
+import("preline");
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
+  const { user, logoutUser } = useContext(AuthContext);
   const handleNav = () => {
     setNav(true);
   };
@@ -47,7 +50,9 @@ const Navbar = () => {
         <Link className="" to={"/"}>
           {/* <img src={Logo} alt="logo" className="w-[200px]" />
            */}
-          RideBnb
+          <h1 className="text-3xl font-bold text-accent-1 dark:text-accent-3">
+            <span className="text-accent-2">Ride</span>Bnb
+          </h1>
         </Link>
         <div className="xl:hidden flex justify-center items-center gap-4">
           <div>
@@ -67,7 +72,7 @@ const Navbar = () => {
 
           <button
             onClick={handleNav}
-            className="navbar-burger flex items-center text-[#a55e6f] p-3"
+            className="navbar-burger flex items-center dark:text-accent-3 p-3"
           >
             <Bars3Icon className="h-10 w-10" />
           </button>
@@ -79,12 +84,12 @@ const Navbar = () => {
               initial="hidden"
               animate="show"
               whileHover="hover"
-              className="text-accent-4 dark:text-gray-400"
+              className="text-gray-700 dark:text-gray-"
             >
               Home
             </motion.div>
           </Link>
-          <li className="text-accent-4 dark:text-gray-400">
+          <li className="text-gray-700 dark:text-gray-">
             <EllipsisVerticalIcon className="h-5 w-5" />
           </li>
           <Link to={"/about"}>
@@ -93,26 +98,26 @@ const Navbar = () => {
               initial="hidden"
               animate="show"
               whileHover="hover"
-              className="text-accent-4 dark:text-gray-400"
+              className="text-gray-700 dark:text-gray-"
             >
               About
             </motion.div>
           </Link>
-          <li className="text-accent-4 dark:text-gray-400">
+          <li className="text-gray-700 dark:text-gray-">
             <EllipsisVerticalIcon className="h-5 w-5" />
           </li>
-          <div>
+          <Link to={"/mybookings"}>
             <motion.div
               variants={navVariant(0.2)}
               initial="hidden"
               animate="show"
               whileHover="hover"
-              className="text-accent-4 dark:text-gray-400"
+              className="text-gray-700 dark:text-gray-"
             >
-              Services
+              My Bookings
             </motion.div>
-          </div>
-          <li className="text-accent-4 dark:text-gray-400">
+          </Link>
+          <li className="text-gray-700 dark:text-gray-">
             <EllipsisVerticalIcon className="h-5 w-5" />
           </li>
           <div>
@@ -121,12 +126,12 @@ const Navbar = () => {
               initial="hidden"
               animate="show"
               whileHover="hover"
-              className="text-accent-4 dark:text-gray-400"
+              className="text-gray-700 dark:text-gray-"
             >
               Pricing
             </motion.div>
           </div>
-          <li className="text-accent-4 dark:text-gray-400">
+          <li className="text-gray-700 dark:text-gray-">
             <EllipsisVerticalIcon className="h-5 w-5" />
           </li>
           <div>
@@ -135,7 +140,7 @@ const Navbar = () => {
               initial="hidden"
               animate="show"
               whileHover="hover"
-              className="text-accent-4 dark:text-gray-400"
+              className="text-gray-700 dark:text-gray-"
             >
               Contact
             </motion.div>
@@ -270,7 +275,7 @@ const Navbar = () => {
                       Sign Up
                     </motion.div>
                   </div>
-                  <p className="my-4 text-xs text-center text-accent-4 dark:text-gray-400">
+                  <p className="my-4 text-xs text-center text-gray-700 dark:text-gray-">
                     <span>Copyright © 2021</span>
                   </p>
                 </div>

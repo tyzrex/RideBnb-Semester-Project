@@ -43,6 +43,7 @@ export const createChatRoom = async (req, res) => {
   const { member_2 } = req.body;
 
   const members = [member_1, member_2];
+  console.log(members);
 
   //check if chat room already exists
   const chatRoomResult = await pool.query(
@@ -141,5 +142,24 @@ export const checkUserOnline = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to get user" });
+  }
+};
+
+export const searchForUser = async (req, res) => {
+  const { user } = req;
+  const { customer_id } = user;
+  const { searchQuery } = req.query;
+
+  try {
+    const userResult = await pool.query(
+      "SELECT customer_id,customername FROM customer WHERE customer_id != $1 AND customername ILIKE $2;",
+      [customer_id, `%${searchQuery}%`]
+    );
+    const users = userResult.rows;
+
+    return res.status(200).json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to get users" });
   }
 };

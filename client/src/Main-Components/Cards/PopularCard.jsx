@@ -22,11 +22,11 @@ const ExploreCards = (props) => {
                 </span>
               </p>
 
-              <p className="mt-1 text-2xl font-bold text-accent-3 md:mt-2">
+              <p className="mt-1 text-2xl font-bold dark:text-accent-3 md:mt-2">
                 {props.vehicleName}
               </p>
 
-              <p className="mt-1 text-md font-medium text-accent-3 md:mt-2">
+              <p className="mt-1 text-md font-medium text-gray-700 dark:text-accent-3 md:mt-2">
                 <span className="">{props.vehicleLocation}</span>
               </p>
             </div>
@@ -62,7 +62,7 @@ const ExploreCards = (props) => {
 
             <div className="flex">
               <div className="flex flex-row-reverse items-center md:mt-2 lg:mt-0">
-                <h1 className="text-accent-3">
+                <h1 className="dark:text-accent-3">
                   {props.vehicleRating === null
                     ? "❗"
                     : parseFloat(props.vehicleRating).toFixed(1)}{" "}
