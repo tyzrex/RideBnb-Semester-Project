@@ -53,6 +53,14 @@
   .glass {
     @apply bg-[#01050e] bg-opacity-5 rounded-3xl shadow-lg backdrop-filter backdrop-blur-[70px] backdrop-contrast-[0.86] border border-gray-900 border-opacity-30;
   }
+
+  .hero-dark {
+    @apply bg-[url("./assets/pattern.jpg")] bg-cover bg-center bg-no-repeat;
+  }
+
+  .hero-light {
+    @apply bg-[url("./assets/lightpattern.jpg")] bg-cover bg-center bg-no-repeat;
+  }
 }
 
 body * {

@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
-  safelist: ["light-hero-pattern", "dark-hero-pattern"],
   darkMode: "class",
   content: [
     "./index.html",

@@ -20,7 +20,7 @@ const ExperimentHero = () => {
 
   return (
     <div
-      className={` h-auto text-black bg-light-hero-pattern dark:bg-dark-hero-pattern flex bg-cover bg-center bg-no-repeat`}
+      className={` h-auto text-black flex bg-cover bg-center bg-no-repeat hero-light dark:hero-dark`}
       // style={{ backgroundImage: `url(${Vector})`, backgroundSize: "cover" }}
     >
       <div className="w-full mx-auto xl:max-w-[1200px] max-w-[90%] z-[0] py-[60px] md:py-[80px] lg:pt-[50px] xl:pb-[120px] h-full  lg:mt-[0px] lg:flex lg:justify-between lg:items-center md:grid grid gap-0 content-center justify-items-center md:justify-items-center md:content-center sm:content-center sm:justify-items-center">
