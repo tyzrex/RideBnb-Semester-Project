@@ -4,12 +4,31 @@ import axiosInstance from "../../Instance/instance";
 import { AuthContext } from "../../Context/AuthContext";
 import Navbar from "../../Main-Components/Navbar";
 import MiniNav from "../MiniNav/MiniNav";
+<<<<<<< HEAD
+=======
+import { GoPrimitiveDot } from "react-icons/go";
+import Footer from "../../Main-Components/Footer";
+import {
+  XMarkIcon,
+  UserCircleIcon,
+  UserPlusIcon,
+} from "@heroicons/react/20/solid";
+import { toastSuccess } from "../Toast/Toast";
+>>>>>>> new-production
 
 const Messenger = () => {
   const { user } = useContext(AuthContext);
   const sender_id = user.customer_id;
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+<<<<<<< HEAD
+=======
+  const [conversation, setConversation] = useState([]);
+  const [convoDetails, setConvoDetails] = useState([]);
+  const [isOnline, setIsOnline] = useState(false);
+  const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+>>>>>>> new-production
 
   console.log(messages);
 
@@ -71,6 +90,71 @@ const Messenger = () => {
     }
   };
 
+<<<<<<< HEAD
+=======
+  const getChatDetails = async (conversation_id) => {
+    //filter conversation array to get the conversation details
+    const convo = conversation.filter(
+      (convo) => convo.conversation_id === conversation_id
+    );
+    setConvoDetails(convo);
+    checkUserOnline(convo[0].receiver_name.customer_id);
+  };
+
+  const getConversations = async () => {
+    try {
+      const response = await axiosInstance.get(`/chat/getUserChatRooms`);
+
+      console.log(response.data);
+      setConversation(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const searchForUser = async (e) => {
+    // e.preventDefault();
+    try {
+      const response = await axiosInstance.get(`/chat/searchForUser`, {
+        params: {
+          searchQuery: `${search}`,
+        },
+      });
+      if (response.data.length > 0) {
+        console.log(response.data);
+        setSearchResults(response.data);
+      } else {
+        console.log("No user found");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const addNewChat = async (receiver_id) => {
+    console.log(receiver_id);
+    try {
+      const response = await axiosInstance.post(`/chat/createChatRoom`, {
+        member_2: receiver_id,
+      });
+      console.log(response.data);
+      getConversations();
+      toastSuccess("Added new chat");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (search.length > 4 && search.length < 8) {
+      searchForUser();
+    }
+    if (search.length === 0) {
+      setSearchResults([]);
+    }
+  }, [search]);
+
+>>>>>>> new-production
   const chatBox = useRef(null);
   useEffect(() => {
     chatBox.current.scrollTop = chatBox.current.scrollHeight;
@@ -85,6 +169,7 @@ const Messenger = () => {
   }, []);
 
   return (
+<<<<<<< HEAD
     <div>
       <MiniNav />
       <div className="flex flex-row  w-screen max-w-[90%] xl:max-w-[1200px] antialiased text-gray-800 mx-auto ">
@@ -92,6 +177,97 @@ const Messenger = () => {
           <div className="flex flex-row items-center py-4 px-6 rounded-2xl shadow">
             <div className="flex items-center justify-center h-10 w-10 rounded-full bg-pink-500 text-pink-100">
               T
+=======
+    <div className="dark:bg-dark-secondary">
+      <div className=" min-h-[60vh]">
+        <MiniNav />
+        <div className="w-screen max-w-[90%] xl:max-w-[1200px] antialiased text-gray-800 mx-auto ">
+          <div className="flex flex-col lg:flex-row gap-6">
+            <div className="lg:w-[40%] border-b pb-5 lg:border-r dark:border-r-gray-800 lg:border-b-0">
+              <div className="flex flex-col h-full w-full ">
+                <h1 className="text-2xl font-semibold py-4 px-6 dark:text-accent-3">
+                  Conversations
+                </h1>
+
+                <div className="flex flex-col mx-4 gap-4 " ref={chatBox}>
+                  <div className="flex flex-row items-center relative py-3 px-4 rounded-2xl border dark:border-gray-800 dark:bg-gray-900">
+                    <input
+                      type="text"
+                      placeholder="Search for a user"
+                      value={search}
+                      onChange={(e) => setSearch(e.target.value)}
+                      className="w-full bg-transparent outline-none text-sm dark:text-white"
+                    />
+
+                    {search && (
+                      <div
+                        onClick={() => setSearch("")}
+                        className="flex items-center justify-center h-6 w-6 rounded-full bg-gray-100 dark:bg-gray-800 cursor-pointer"
+                      >
+                        <XMarkIcon className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+                      </div>
+                    )}
+
+                    {searchResults.length > 0 ? (
+                      // make a floating div that shows the search results
+                      <div className="absolute flex flex-col gap-5 dark:border-gray-800 top-14 left-0 w-full bg-white dark:bg-gray-900 shadow-lg rounded-lg py-2 px-4">
+                        {searchResults.map((result) => (
+                          <div
+                            className="flex flex-col gap-6 h-auto dark:text-white"
+                            key={result.customer_id}
+                          >
+                            <div className="flex flex-row items-center gap-2">
+                              <div className="flex items-center justify-center h-8 w-8 rounded-full bg-pink-500 text-pink-100">
+                                <UserCircleIcon className="h-8 w-8" />
+                              </div>
+                              <div className="flex flex-col">
+                                <h1 className="text-sm font-semibold">
+                                  {result.customername}
+                                </h1>
+                                <p className="text-xs text-gray-500">
+                                  {result.customer_id}
+                                </p>
+                              </div>
+
+                              <div className="flex-grow">
+                                <button
+                                  onClick={() => addNewChat(result.customer_id)}
+                                  className="flex items-center justify-center h-8 w-8 rounded-full bg-pink-500 text-pink-100"
+                                >
+                                  <UserPlusIcon className="h-5 w-5" />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div className="flex lg:flex-col">
+                    {conversation.map((conversation) => (
+                      <div
+                        key={conversation.conversation_id}
+                        onClick={() =>
+                          getChatDetails(conversation.conversation_id)
+                        }
+                        className="flex flex-row items-center rounded-full md:rounded-2xl border dark:border-gray-800 mr-5 mt-3 hover:bg-gray-100 dark:hover:bg-gray-700 dark:bg-gray-900 cursor-pointer md:p-4"
+                      >
+                        <div className="flex items-center justify-center h-10 w-10 rounded-full bg-pink-500 text-pink-100">
+                          {conversation.receiver_name.customername[0]}
+                        </div>
+                        <div className=" flex-col ml-3 hidden md:flex dark:text-white">
+                          <div className="font-semibold text-sm ">
+                            {conversation.receiver_name.customername}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+>>>>>>> new-production
             </div>
             <div className="flex flex-col ml-3">
               <div className="font-semibold text-sm">helo</div>
@@ -116,8 +292,60 @@ const Messenger = () => {
                               </div>
                             </div>
 
+<<<<<<< HEAD
                             <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
                               <div>{message.message_text}</div>
+=======
+                {convoDetails.length > 0 ? (
+                  <div className="h-[60vh] mt-5 overflow-auto chatBox">
+                    {messages?.map((message, index) => (
+                      <div className="overflow-hidden " key={index}>
+                        {message.conversation_id ===
+                        convoDetails[0].conversation_id ? (
+                          <div className="h-full overflow-y-auto">
+                            <div className="grid grid-cols-12 gap-y-2">
+                              {message.receiver_id !== user.customer_id ? (
+                                <div className="col-start-6 col-end-13 p-3 rounded-lg">
+                                  <div className="flex  flex-row-reverse items-center ">
+                                    <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0 text-white">
+                                      {message.sender_name[0]}
+                                    </div>
+
+                                    <div className="flex-col flex justify-center items-end gap-1">
+                                      <div className="flex flex-col mr-3">
+                                        <div className="text-sm font-semibold">
+                                          {message.sender_name}
+                                        </div>
+                                      </div>
+
+                                      <div className="relative ml-3 text-sm bg-gradient-to-r text-white from-indigo-500 to-purple-500 mr-3 py-2 px-4 shadow rounded-xl">
+                                        <div>{message.message_text}</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="col-start-1 col-end-8 p-3 rounded-lg">
+                                  <div className="flex flex-row items-center">
+                                    <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0 text-white">
+                                      {message.sender_name[0]}
+                                    </div>
+
+                                    <div className="flex-col flex justify-center items-start gap-1">
+                                      <div className="flex flex-col ml-5">
+                                        <div className="text-sm font-semibold">
+                                          {message.sender_name}
+                                        </div>
+                                      </div>
+
+                                      <div className="relative ml-3 text-sm text-black bg-gray-200 py-2 px-4 shadow rounded-xl">
+                                        <div>{message.message_text}</div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+>>>>>>> new-production
                             </div>
                           </div>
                         </div>

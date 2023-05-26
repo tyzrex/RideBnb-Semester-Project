@@ -39,13 +39,11 @@ const App = () => {
   const socket = useRef(null);
   useEffect(() => {
     if (shouldFetch.current) {
-      // socket.current = io("http://localhost:3000", {
-      //   transports: ["websocket"],
-      // });
-
-      socket.current = io("https://ridebnb-backend.onrender.com", {
-        transports: ["websocket"],
-      });
+      if (user) {
+        socket.current = io("https://ridebnb-backend.onrender.com", {
+          transports: ["websocket"],
+        });
+      }
     }
 
     shouldFetch.current = false;
@@ -64,7 +62,7 @@ const App = () => {
   // console.log(User);
 
   return (
-    <div className="app">
+    <div className="">
       {/* <RouterProvider router={router} /> */}
       <ShowNavbar>
         <Navbar socket={socket} />

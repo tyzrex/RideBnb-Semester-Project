@@ -82,7 +82,11 @@ const Footer = () => {
               <h4 className="font-semibold text-black">Stay up to date</h4>
 
               <form>
+<<<<<<< HEAD
                 <div className="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-white rounded-md">
+=======
+                <div className="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-white dark:bg-transparent rounded-md">
+>>>>>>> new-production
                   <div className="w-full">
                     <label htmlFor="hero-input" className="sr-only">
                       Search

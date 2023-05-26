@@ -55,3 +55,70 @@
 .button-hover {
   @apply border-2 border-black hover:text-black hover:border-gray-500 hover:bg-white transition-all ease-in-out duration-300;
 }
+<<<<<<< HEAD
+=======
+
+@layer components {
+  .mobile-nav-links {
+    @apply block p-4 text-sm font-semibold text-gray-700 dark:text-accent-3 hover:bg-accent-1 dark:hover:bg-gray-900 hover:text-white rounded-xl;
+  }
+
+  .btn-main {
+    @apply py-4 px-6 bg-accent-1 hover:bg-teal-500 text-sm text-white font-bold rounded-full transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply py-4 px-6 bg-accent-2 hover:bg-gray-700 hover:text-accent-1 text-sm text-white font-bold rounded-full transition duration-300;
+  }
+
+  .glass {
+    @apply bg-[#01050e] bg-opacity-10  shadow-lg backdrop-filter backdrop-blur-[70px] backdrop-contrast-[86%] border border-gray-900 border-opacity-30;
+  }
+
+  .dark-glass {
+    /* @apply bg-[#01050e] bg-opacity-50 shadow-lg backdrop-filter backdrop-blur-[1000px] backdrop-contrast-[1.1] border border-gray-900 border-opacity-30; */
+  }
+
+  .hero-dark {
+    @apply bg-[url("./assets/pattern.jpg")];
+  }
+
+  .hero-light {
+    @apply bg-[url("./assets/polygon.jpg")];
+  }
+
+  .hero-light-rotate {
+    @apply bg-[url("./assets/polygonrotate.jpg")];
+  }
+
+  .details-hero {
+    @apply bg-[url("./assets/faqPattern.jpg")];
+  }
+
+  .dark-glass-messenger {
+    /* @apply bg-[#01050e] bg-opacity-80 shadow-lg backdrop-filter backdrop-blur-[1000px] backdrop-contrast-[1.1] border border-gray-900 border-opacity-30; */
+  }
+
+  .faq-dark {
+    @apply bg-[url("./assets/pattern2.jpg")];
+  }
+
+  .faq-light {
+    @apply bg-[url("./assets/polygon.jpg")];
+  }
+
+  .hero-dark {
+    @apply bg-[url("./assets/pattern.jpg")] bg-cover bg-center bg-no-repeat;
+  }
+
+  .hero-light {
+    @apply bg-[url("./assets/lightpattern.jpg")] bg-cover bg-center bg-no-repeat;
+  }
+}
+
+body * {
+  @apply transition-[background-image,background-color] ease-in-out duration-700;
+
+  font-family: "Poppins", sans-serif;
+}
+>>>>>>> new-production

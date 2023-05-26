@@ -4,7 +4,11 @@ import MiniNav from "../MiniNav/MiniNav";
 
 const About = () => {
   return (
+<<<<<<< HEAD
     <div>
+=======
+    <div className="dark:bg-dark-secondary">
+>>>>>>> new-production
       <div>
         <MiniNav />
       </div>

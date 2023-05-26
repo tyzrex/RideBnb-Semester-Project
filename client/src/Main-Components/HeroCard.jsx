@@ -100,33 +100,12 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
     <div className="flex justify-center h-auto items-center w-screen ">
       <div className="w-full flex h-auto flex-col justify-center items-center">
         <div className="w-[90%]  xl:max-w-[1200px]  xl:w-[100%] relative ">
-          {/* <div className="bg-white xl:w-[30%] w-[100%] rounded-t-3xl flex justify-around h-[50px] items-center absolute -translate-y-[50px]">
-            <div>
-              <button
-                onClick={handleCarClick}
-                className="flex justify-center items-center gap-1"
-              >
-                <AiFillCar className= text-xl"md:text-2xl" />
-                <h1 className="">Rent a car</h1>
-              </button>
-            </div>
-            <div>
-              <button
-                onClick={handleBikeClick}
-                className="flex justify-center items-center gap-1"
-              >
-                <RiMotorbikeFill className= text-xl"md:text-2xl" />
-                <h1>Rent a bike</h1>
-              </button>
-            </div>
-          </div> */}
-
-          <div className="bg-white p-8 md:p-10 lg:p-12 shadow-2xl rounded-3xl">
+          <div className="bg-white dark:glass p-8 md:p-10 lg:p-12 shadow-2xl rounded-3xl">
             <div className="grid content-center md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-5 ">
               <div>
                 <div className="flex gap-3 items-center">
                   <TbLocation className="text-3xl text-yellow-500" />
-                  <label className="text-black text-xl md:text-2xl font-bold">
+                  <label className="text-gray-800 dark:text-accent-3 text-xl md:text-2xl font-bold">
                     {" "}
                     Location
                   </label>
@@ -135,7 +114,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
                   <input
                     type="text"
                     placeholder="Preferred Location"
-                    className="w-full border-none text-gray-500 bg-white rounded-lg p-2  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
+                    className="w-full border-none text-gray-500 bg-transparent rounded-lg p-2  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
                     onChange={handleChange}
                     id="location"
                     name="location"
@@ -146,7 +125,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
               <div>
                 <div className="flex gap-3 items-center">
                   <FcCalendar className="text-3xl text-gray-500" />
-                  <label className="text-black text-xl md:text-2xl font-bold">
+                  <label className="text-gray-800 dark:text-accent-3 text-xl md:text-2xl font-bold">
                     {" "}
                     Check In
                   </label>
@@ -158,7 +137,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
                   value={data.checkIn}
                   onChange={handleChange}
                   placeholder="Pick a date"
-                  className="w-full border-none text-gray-500 bg-white rounded-lg p-2  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
+                  className="w-full border-none text-gray-500 bg-transparent rounded-lg p-2  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
                   name="checkIn"
                 />
               </div>
@@ -166,7 +145,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
               <div>
                 <div className="flex gap-3 items-center">
                   <FcPlanner className="text-3xl text-gray-500" />
-                  <label className="text-black text-xl md:text-2xl font-bold">
+                  <label className="text-gray-800 dark:text-accent-3 text-xl md:text-2xl font-bold">
                     {" "}
                     Check Out
                   </label>
@@ -178,7 +157,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
                   value={data.checkOut}
                   onChange={handleChange}
                   placeholder="Pick a date"
-                  className="w-full border-none text-gray-500 bg-white rounded-lg p-2  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
+                  className="w-full border-none text-gray-500 bg-transparent rounded-lg p-2  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
                   id="checkOut"
                   name="checkOut"
                 />
@@ -208,7 +187,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
               <div className="flex flex-col">
                 <div className="flex gap-3 items-center">
                   <FcList className="text-3xl text-gray-500" />
-                  <label className="text-black text-xl md:text-2xl font-bold">
+                  <label className="text-gray-800 dark:text-accent-3 text-xl md:text-2xl font-bold">
                     {" "}
                     Vehicle Type
                   </label>
@@ -216,7 +195,7 @@ const HeroCard = ({ onCarClick, onBikeClick }) => {
                 <select
                   id="hs-select-label"
                   onChange={handleChange}
-                  className="w-full border-none text-gray-500 bg-white rounded-lg p-1  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
+                  className="w-full border-none text-gray-500 bg-transparent rounded-lg p-1  placeholder:text-gray-400 text-xl md:text-2xl font-medium py focus:outline-none"
                   name="vehicleType"
                 >
                   <option>{vehicleChoice}</option>

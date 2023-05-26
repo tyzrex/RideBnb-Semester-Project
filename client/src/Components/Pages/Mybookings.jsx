@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import axiosInstance from "../../Instance/instance";
 import SearchItem from "../../Main-Components/Cards/SearchCards";
 import MiniNav from "../MiniNav/MiniNav";
+import Footer from "../../Main-Components/Footer";
+import Table from "../../Components/Table/MyBookings";
 
 const Mybookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -25,30 +27,14 @@ const Mybookings = () => {
   }, []);
 
   return (
-    <div>
-      <MiniNav />
-      <div className="w-screen max-w-[1200px] flex justify-center items-center mx-auto mt-10">
-        <div className="">
-          {bookings.map((booking, index) => (
-            <SearchItem
-              key={index}
-              vehicle_id={booking.vehicle_post_id}
-              vehicle_name={booking.vehicle_name}
-              vehicle_type={booking.vehicle_type}
-              vehicle_price={booking.vehicle_price}
-              vehicle_image={booking.vehicle_image}
-              vehicle_location={booking.vehicle_location}
-              vehicle_listing_type={booking.vehicle_listing_type}
-              address={booking.address}
-              vehicle_color={booking.vehicle_color}
-              vehicle_brand={booking.vehicle_brand}
-              posted_by={booking.customername}
-              price_per_day={booking.price_per_day}
-              vehicle_rating={booking.avg_rating}
-            />
-          ))}
+    <div className="dark:bg-dark-secondary">
+      <div className="min-h-[52vh]">
+        <MiniNav />
+        <div className="w-screen max-w-[1200px] flex justify-center items-center mx-auto mt-10">
+          <Table />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

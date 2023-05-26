@@ -46,7 +46,7 @@ const HomeCards = () => {
             <div className="max-w-[90%] flex justify-between w-full xl:max-w-[1200px]">
               <h1 className="text-3xl font-bold">Popular Rent Choices</h1>
               <h1 className="text-md font-bold">
-                <u>Explore All</u>
+                <u className="dark:text-accent-1">Explore All</u>
               </h1>
             </div>
           </div>
@@ -74,9 +74,11 @@ const HomeCards = () => {
         <div className="mb-[250px] md:mb-[180px] lg:mb-[130px]">
           <div className="flex justify-center w-full items-center">
             <div className="max-w-[90%] flex justify-between w-full xl:max-w-[1200px]">
-              <h1 className="text-3xl font-bold">Popular Sell Choices</h1>
+              <h1 className="text-3xl font-bold dark:text-accent-3">
+                Popular Sell Choices
+              </h1>
               <h1 className="text-md font-bold">
-                <u>Explore All</u>
+                <u className="dark:text-accent-1">Explore All</u>
               </h1>
             </div>
           </div>
@@ -101,6 +103,7 @@ const HomeCards = () => {
           </div>
         </div>
       </div>
+
       <div className="absolute z-[2] -translate-y-[50%] self-end w-full">
         <LogoCloud />
       </div>

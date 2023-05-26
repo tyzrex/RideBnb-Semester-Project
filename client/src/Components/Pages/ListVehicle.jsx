@@ -183,7 +183,11 @@ const ListVehicle = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div>
+=======
+    <div className="dark:bg-dark-secondary">
+>>>>>>> new-production
       <MiniNav />
 
       <div className="flex justify-between mx-auto w-screen xl:max-w-[1200px] max-w-[90%] gap-2">
