@@ -84,7 +84,7 @@ const Notification = ({ socket }) => {
         className="mx-auto xl:max-w-[1200px] hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden w-full z-10 rounded-lg p-2 "
         id="notification"
       >
-        <div className="lg:w-5/12 w-screen rounded-b-2xl md:rounded-2xl lg:mt-0 bg-gray-50 dark:bg-gray-900 border dark:border-gray-800 h-[400px]  overflow-y-auto p-8 absolute right-0">
+        <div className="lg:w-5/12 w-screen rounded-b-2xl md:rounded-2xl lg:mt-0 bg-gray-50 dark:bg-dark-secondary border dark:border-gray-800 h-[400px]  overflow-y-auto p-8 absolute right-0">
           <div className="flex items-center justify-between">
             <p className="text-2xl font-semibold leading-6 dark:text-white text-gray-800">
               Notifications
@@ -119,18 +119,20 @@ const Notification = ({ socket }) => {
             {notify?.map((item, index) => (
               <div
                 key={index}
-                className="w-full p-3 mt-2 bg-indigo-50 rounded-3xl flex"
+                className="w-full p-3 mt-2 bg-gray-200 dark:bg-gray-800 rounded-3xl flex"
               >
                 <div className="pl-3 flex gap-3 items-center">
-                  <div className="relative inline-flex items-center p-2 justify-center w-10 h-10 overflow-hidden bg-indigo-500 rounded-full dark:bg-gray-600">
+                  <div className="relative inline-flex items-center p-2 justify-center w-10 h-10 overflow-hidden bg-accent-1 rounded-full dark:bg-gray-600">
                     <span className="font-medium text-sm text-white dark:text-gray-300">
                       {item.sender_name[0]}
                       {item.sender_name[1]}
                     </span>
                   </div>
                   <p className="text-sm leading-none flex flex-col gap-1">
-                    <span className="text-indigo-700">{item.sender_name}</span>{" "}
-                    <span className=" leading-5">
+                    <span className="dark:text-accent-3">
+                      {item.sender_name}
+                    </span>{" "}
+                    <span className=" leading-5 dark:text-white">
                       {item.notification_message}
                     </span>
                   </p>

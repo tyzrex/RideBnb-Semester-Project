@@ -26,7 +26,7 @@ module.exports = {
         "dark-main": "#01050e",
         "dark-secondary": "rgb(3 7 18);",
         "accent-1": "#47a1db",
-        "accent-2": "#00887a",
+        "accent-2": "#000000",
         "accent-3": "#bbdbf0",
         "accent-4": "#7a5b72",
       },

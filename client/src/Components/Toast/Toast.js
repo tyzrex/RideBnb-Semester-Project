@@ -9,7 +9,7 @@ const toastStyle = {
   pauseOnHover: true,
   draggable: true,
   progress: undefined,
-  theme: "light",
+  theme: window.localStorage.getItem("theme") === "dark" ? "dark" : "light",
 };
 
 export const toastError = (message) => {

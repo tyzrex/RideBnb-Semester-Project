@@ -8,6 +8,7 @@ import {
   getChatTwoUsers,
   getUserChatRooms,
   checkUserOnline,
+  searchForUser,
 } from "../controllers/message.js";
 import { isAuthenticated } from "../middleware/isAuthenticated.js";
 
@@ -17,5 +18,6 @@ router.route("/createChatRoom").post(isAuthenticated, createChatRoom);
 router.route("/getChatTwoUsers").get(isAuthenticated, getChatTwoUsers);
 router.route("/getUserChatRooms").get(isAuthenticated, getUserChatRooms);
 router.route("/checkUserOnline").get(isAuthenticated, checkUserOnline);
+router.route("/searchForUser").get(isAuthenticated, searchForUser);
 
 export default router;

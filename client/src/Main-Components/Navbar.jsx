@@ -1,41 +1,75 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { RiMenu4Line } from "react-icons/ri";
+import { Link, useLocation } from "react-router-dom";
+import { RiMenu4Line, RiMessengerLine } from "react-icons/ri";
 import {
   AiOutlineClose,
   AiOutlineProfile,
   AiFillMessage,
 } from "react-icons/ai";
+import {
+  Bars3Icon,
+  EllipsisVerticalIcon,
+  XMarkIcon,
+} from "@heroicons/react/20/solid";
 import { AuthContext } from "../Context/AuthContext";
 import { IoSettingsOutline } from "react-icons/io5";
 import Notification from "../Components/Notification/Notification";
 import Theme from "../hooks/theme";
-
+import { motion, AnimatePresence } from "framer-motion";
 import("preline");
 
 const Navbar = ({ socket }) => {
-  const [nav, setNav] = useState(true);
+  const [nav, setNav] = useState(false);
   const handleNav = () => {
-    setNav(!nav);
+    setNav(true);
+  };
+
+  const closeNav = () => {
+    setNav(false);
+  };
+
+  const path = useLocation().pathname;
+
+  useEffect(() => {
+    closeNav();
+  }, [path]);
+
+  const item = {
+    exit: {
+      opacity: 0,
+      height: 0,
+      transition: {
+        ease: "easeInOut",
+        duration: 0.4,
+      },
+    },
+  };
+
+  const navItem = {
+    exit: {
+      x: -90,
+      transition: {
+        ease: "easeInOut",
+        duration: 0.4,
+      },
+    },
   };
 
   const { user, logoutUser } = useContext(AuthContext);
 
   return (
-    <div className="sticky top-0 dark:bg-dark-main z-10">
+    <div className="bg-white dark:details-hero z-50 ">
       <div
         id="navbar"
-        className=" flex relative z-[20] justify-center items-center w-screen dark:bg-dark-main text-black py-6 "
+        className=" flex relative z-[20] justify-center items-center w-screen text-black py-6 dark:dark-glass-messenger "
       >
         <div className="xl:max-w-[1200px] max-w-[90%] flex justify-center w-full items-center">
           <div className="flex justify-between items-center w-full">
             <div className="logo flex justify-center items-center gap-4">
               <Link to="/">
-                <h1 className="text-3xl">
-                  <span className="font-semibold dark:text-accent-3">Ride</span>
-                  <span className="font-semibold text-sky-500 dark:text-accent-1">
-                    Bnb
-                  </span>
+                <h1 className="text-3xl font-bold text-accent-1 dark:text-accent-1">
+                  <span className="text-accent-2 dark:text-accent-3">Ride</span>
+                  Bnb
                 </h1>
                 {/* <img src={RideBnb} alt="logo" className="w-[200px]" /> */}
               </Link>
@@ -84,9 +118,9 @@ const Navbar = ({ socket }) => {
                 {user ? (
                   <div className="flex justify-center items-center gap-2 ">
                     <div>
-                      <div className="flex justify-center items-center gap-4">
+                      <div className="flex justify-center items-center gap-4 ">
                         <Link to="/messenger">
-                          <div className="p-[10px] rounded-full bg-accent-1 text-white">
+                          <div className="p-[10px] rounded-full bg-accent-1 text-white hidden md:block">
                             <AiFillMessage className="text-3xl" />
                           </div>
                         </Link>
@@ -136,6 +170,14 @@ const Navbar = ({ socket }) => {
                                   Profile
                                 </div>
                               </Link>
+
+                              <Link to={`/messenger`}>
+                                <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-green-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300">
+                                  <RiMessengerLine className="text-[16px]" />
+                                  Messenger
+                                </div>
+                              </Link>
+
                               <button
                                 className="flex w-full items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-green-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                                 onClick={logoutUser}
@@ -168,10 +210,10 @@ const Navbar = ({ socket }) => {
                       <button
                         id="hs-dropdown-custom-icon-trigger"
                         type="button"
-                        className="hs-dropdown-toggle p-3 inline-flex justify-center items-center gap-2 rounded-md font-medium bg-accent-2 text-gray-700 shadow-sm align-middle hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+                        className="hs-dropdown-toggle p-[14px] inline-flex justify-center items-center gap-2  rounded-md font-medium bg-white border-2 dark:border-0 text-gray-700 align-middle hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
                       >
                         <svg
-                          className="w-4 h-4 text-accent-3"
+                          className="w-4 h-4 text-black dark:text-accent-3"
                           xmlns="http://www.w3.org/2000/svg"
                           width="16"
                           height="16"
@@ -212,54 +254,143 @@ const Navbar = ({ socket }) => {
                 )}
               </div>
 
-              <div className="dropdown-menu lg:hidden">
-                <div onClick={handleNav}>
-                  {!nav ? (
-                    <AiOutlineClose size={28} />
-                  ) : (
-                    <RiMenu4Line size={28} />
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div
-              className={
-                !nav
-                  ? `absolute top-20 left-0 flex justify-start z-10  rounded-b-3xl py-5 bg-white h-screen w-screen opacity-100 transition-all ease-in-out duration-1000 `
-                  : `bg-transparent opacity-100 absolute w-screen left-0 -top-[800px] transition-all duration-1000 ease-in-out`
-              }
-            >
-              <ul className="flex flex-col  p-8 gap-4 cursor-pointer w-full">
-                <div className="flex flex-col gap-4 border-b w-full border-b-gray-200">
-                  <li className=" font-medium ">Home</li>
-                  <li className=" font-medium mb-3">About</li>
-                </div>
-                <div className="flex flex-col gap-4 border-b w-full border-b-gray-200">
-                  <li className=" font-medium ">Dashboard</li>
-                  <li className=" font-medium mb-3">List Your Vehicle</li>
-                </div>
-                <div className="flex flex-col gap-4">
-                  {user ? (
-                    <li className="" onClick={logoutUser}>
-                      Log out
-                    </li>
-                  ) : (
-                    <div className="flex flex-col gap-4">
-                      <Link to="/register">
-                        <li className=" font-medium ">Register</li>
-                      </Link>
-                      <Link to="/login">
-                        <li className="font-medium">Log in</li>
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              </ul>
+              <button
+                onClick={handleNav}
+                className="navbar-burger lg:hidden flex items-center dark:text-accent-3"
+              >
+                <Bars3Icon className="h-10 w-10" />
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      <AnimatePresence>
+        {nav && (
+          <motion.div
+            variants={item}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "100vh", opacity: 1 }}
+            transition={{ duration: 0.4 }}
+            exit="exit"
+            className={`relative z-50 w-screen`}
+          >
+            <div className="fixed top-0 left-0 bottom-0 bg-light-main dark:bg-dark-main w-screen  overflow-y-auto ">
+              <nav className="max-w-[90%] flex flex-col h-full py-4 mx-auto w-full">
+                <div className="flex items-center mb-8">
+                  <div className="mr-auto leading-none">
+                    <h1 className="text-3xl font-bold text-accent-1 dark:text-accent-3">
+                      <span className="text-accent-2">Ride</span>Bnb
+                    </h1>
+                  </div>
+                  <button className="navbar-close" onClick={closeNav}>
+                    <XMarkIcon className="w-12 h-12 text-accent-1" />
+                  </button>
+                </div>
+                <div>
+                  <ul>
+                    <li className="mb-1">
+                      <motion.div
+                        variants={navItem}
+                        initial={{ x: -80, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                        exit="exit"
+                        className="mobile-nav-links"
+                      >
+                        Home
+                      </motion.div>
+                    </li>
+                    <li className="mb-1">
+                      <motion.div
+                        variants={navItem}
+                        initial={{ x: -80, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.25 }}
+                        exit="exit"
+                        className="mobile-nav-links"
+                      >
+                        About Us
+                      </motion.div>
+                    </li>
+                    <li className="mb-1">
+                      <motion.div
+                        variants={navItem}
+                        initial={{ x: -80, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        exit="exit"
+                        className="mobile-nav-links"
+                      >
+                        My Bookings
+                      </motion.div>
+                    </li>
+                    <li className="mb-1">
+                      <Link to="/explore">
+                        <motion.div
+                          variants={navItem}
+                          initial={{ x: -80, opacity: 0 }}
+                          animate={{ x: 0, opacity: 1 }}
+                          transition={{ delay: 0.35 }}
+                          exit="exit"
+                          className="mobile-nav-links"
+                        >
+                          Explore
+                        </motion.div>
+                      </Link>
+                    </li>
+
+                    <li className="mb-1">
+                      <motion.div
+                        variants={navItem}
+                        initial={{ x: -80, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.45 }}
+                        exit="exit"
+                        className="flex items-center"
+                      >
+                        <h1 className="mobile-nav-links">Theme</h1>
+                        <Theme />
+                      </motion.div>
+                    </li>
+                  </ul>
+                </div>
+                <div className="mt-auto">
+                  <div className="pt-6">
+                    <Link to="/login">
+                      <motion.div
+                        variants={navItem}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        exit="exit"
+                        className="block px-4 py-4 mb-3 text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
+                      >
+                        Sign in
+                      </motion.div>
+                    </Link>
+                    <Link to="/register">
+                      <motion.div
+                        variants={navItem}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.3 }}
+                        exit="exit"
+                        className="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-accent-1 hover:bg-blue-700  rounded-xl"
+                      >
+                        Sign Up
+                      </motion.div>
+                    </Link>
+                  </div>
+                  <p className="my-4 text-xs text-center text-gray-700 dark:text-accent-3">
+                    <span>Copyright © 2021</span>
+                  </p>
+                </div>
+              </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

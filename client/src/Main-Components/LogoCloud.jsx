@@ -1,13 +1,13 @@
 import React from "react";
-import car2 from "../assets/car2.png";
-import car3 from "../assets/car3.png";
-import car4 from "../assets/car4.png";
-import car5 from "../assets/car5.png";
-import car7 from "../assets/car7.png";
-import mercedez from "../assets/mercedez.png";
+import bmw from "../assets/bmw.svg";
+import mazda from "../assets/mazda-2.svg";
+import tesla from "../assets/teslamotor.svg";
+import porsche from "../assets/car5.png";
+import lambo from "../assets/lamborghini.svg";
+import mercedez from "../assets/mercedes-benz-logo.svg";
 
 const LogoCloud = () => {
-  const images = [car3, car4, car5, car7, mercedez, car2];
+  const images = [mazda, tesla, porsche, lambo, bmw, mercedez];
 
   return (
     <div className={`bg-no-repeat bg-cover bg-center rounded-3xl`}>
@@ -21,7 +21,7 @@ const LogoCloud = () => {
               <img
                 src={image}
                 key={index}
-                className="max-w-[80px] filter "
+                className="max-w-[80px] lg:max-w-[90px] max-h-[110px] filter "
                 alt="mercedes benz car logo png brand image "
               />
             </div>

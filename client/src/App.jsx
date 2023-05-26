@@ -65,7 +65,7 @@ const App = () => {
   // console.log(User);
 
   return (
-    <div className="app">
+    <div className="">
       {/* <RouterProvider router={router} /> */}
       <ShowNavbar>
         <Navbar socket={socket} />
