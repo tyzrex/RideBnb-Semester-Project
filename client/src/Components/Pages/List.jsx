@@ -116,8 +116,8 @@ const List = () => {
   }, []);
 
   return (
-    <div className="dark:details-hero bg-cover bg-center">
-      <div className="dark:dark-glass">
+    <div className="dark:bg-gradient-to-r from-gray-900 via-gray-700 to-dark-main bg-cover bg-center">
+      <div className="dark:dark-glass-messenger">
         <MiniNav />
         {prevState.state ? (
           <>

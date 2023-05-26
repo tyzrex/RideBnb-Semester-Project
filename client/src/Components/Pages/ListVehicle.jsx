@@ -187,8 +187,8 @@ const ListVehicle = () => {
   };
 
   return (
-    <div className="dark:details-hero bg-cover">
-      <div className="dark:dark-glass">
+    <div className="dark:bg-gradient-to-r from-gray-900 via-gray-700 to-dark-main">
+      <div className="dark:dark-glass-messenger">
         <MiniNav />
 
         <div className="flex justify-between mx-auto w-screen xl:max-w-[1200px] max-w-[90%] gap-2 ">

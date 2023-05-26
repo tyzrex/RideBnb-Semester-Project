@@ -3,8 +3,8 @@ import React from "react";
 const Footer = () => {
   return (
     <div>
-      <footer className="bg-white dark:details-hero border-t dark:border-t-gray-800 text-gray-800 ">
-        <div className="dark:dark-glass">
+      <footer className="bg-white dark:bg-gradient-to-r from-gray-900 via-gray-700 to-dark-main border-t dark:border-t-gray-800 text-gray-800 ">
+        <div className="dark:dark-glass-messenger">
           <div className="xl:max-w-[1200px] max-w-[90%] py-10 px-4 lg:pt-20 mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
               <div className="col-span-full lg:col-span-1">

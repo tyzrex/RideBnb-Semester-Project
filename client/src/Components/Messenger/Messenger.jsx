@@ -170,7 +170,7 @@ const Messenger = ({ socket }) => {
   }, []);
 
   return (
-    <div className="dark:details-hero">
+    <div className="dark:bg-gradient-to-r from-gray-900 via-gray-700 to-dark-main">
       <div className="dark:dark-glass-messenger min-h-[60vh]">
         <MiniNav />
         <div className="w-screen max-w-[90%] xl:max-w-[1200px] antialiased text-gray-800 mx-auto ">
