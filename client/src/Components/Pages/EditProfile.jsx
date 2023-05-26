@@ -81,13 +81,13 @@ const EditProfile = () => {
   }, []);
 
   return (
-    <div className="dark:details-hero bg-gray-100">
+    <div className="dark:bg-gradient-to-r from-gray-900 via-gray-700 to-dark-main bg-gray-100">
       <div className="dark:dark-glass-messenger">
         <h1 className="text-3xl font-bold text-center pt-20 dark:text-accent-3">
           Edit Your Personal <span className="text-accent-1">Details</span>
         </h1>
         <div className="xl:max-w-[1200px] px-4 py-10 max-w-[90%] lg:py-14 mb-10 mx-auto w-screen">
-          <div className="bg-white rounded-xl p-4 sm:p-7 dark:glass">
+          <div className="bg-white rounded-xl p-4 sm:p-7 dark:bg-gray-900">
             <div className="mb-8">
               <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-200">
                 Profile

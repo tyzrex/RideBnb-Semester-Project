@@ -39,7 +39,7 @@ const HomeCards = () => {
   }, []);
 
   return (
-    <div className=" w-screen mx-auto h-auto bg-gray-100 dark:details-hero">
+    <div className=" w-screen mx-auto h-auto bg-gray-100 dark:bg-gradient-to-r from-gray-900 via-gray-700 to-dark-main">
       <div className="dark:dark-glass-messenger">
         <div className="w-full max-w-[90%] xl:max-w-[1200px] mx-auto flex flex-col gap-10 justify-center items-center ">
           <div className=" mt-[300px] mt:mb-[150px] md:mt-[250px] xl:mt-[130px]">
@@ -49,7 +49,7 @@ const HomeCards = () => {
                   Popular Rent Choices
                 </h1>
                 <h1 className="text-md font-bold">
-                  <u>Explore All</u>
+                  <u className="dark:text-accent-1">Explore All</u>
                 </h1>
               </div>
             </div>
@@ -77,9 +77,11 @@ const HomeCards = () => {
           <div className="mb-[250px] md:mb-[180px] lg:mb-[130px]">
             <div className="flex justify-center w-full items-center">
               <div className="max-w-[90%] flex justify-between w-full xl:max-w-[1200px]">
-                <h1 className="text-3xl font-bold">Popular Sell Choices</h1>
+                <h1 className="text-3xl font-bold dark:text-accent-3">
+                  Popular Sell Choices
+                </h1>
                 <h1 className="text-md font-bold">
-                  <u>Explore All</u>
+                  <u className="dark:text-accent-1">Explore All</u>
                 </h1>
               </div>
             </div>
