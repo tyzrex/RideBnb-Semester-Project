@@ -8,6 +8,8 @@ import {
   XMarkIcon,
   UserCircleIcon,
   UserPlusIcon,
+  ChevronRightIcon,
+  ChevronLeftIcon,
 } from "@heroicons/react/20/solid";
 import { toastSuccess } from "../Toast/Toast";
 
@@ -175,13 +177,13 @@ const Messenger = ({ socket }) => {
         <MiniNav />
         <div className="w-screen max-w-[90%] xl:max-w-[1200px] antialiased text-gray-800 mx-auto ">
           <div className="flex flex-col lg:flex-row gap-6">
-            <div className="lg:w-[40%] border-b pb-5 lg:border-r dark:border-r-gray-800 lg:border-b-0">
+            <div className="lg:w-[40%] border-b dark:border-b-gray-800 pb-5 lg:border-r dark:border-r-gray-800 lg:border-b-0">
               <div className="flex flex-col h-full w-full ">
                 <h1 className="text-2xl font-semibold py-4 px-6 dark:text-accent-3">
                   Conversations
                 </h1>
 
-                <div className="flex flex-col mx-4 gap-4 " ref={chatBox}>
+                <div className="flex flex-col mx-4 gap-4 ">
                   <div className="flex flex-row items-center relative py-3 px-4 rounded-2xl border dark:border-gray-800 dark:bg-gray-900">
                     <input
                       type="text"
@@ -237,7 +239,7 @@ const Messenger = ({ socket }) => {
                       ""
                     )}
                   </div>
-                  <div className="flex lg:flex-col">
+                  <div className="flex lg:flex-col overflow-scroll">
                     {conversation.map((conversation) => (
                       <div
                         key={conversation.conversation_id}
@@ -311,12 +313,12 @@ const Messenger = ({ socket }) => {
 
                                     <div className="flex-col flex justify-center items-end gap-1">
                                       <div className="flex flex-col mr-3">
-                                        <div className="text-sm font-semibold">
+                                        <div className="text-sm font-semibold dark:text-accent-3">
                                           {message.sender_name}
                                         </div>
                                       </div>
 
-                                      <div className="relative ml-3 text-sm bg-gradient-to-r text-white from-indigo-500 to-purple-500 mr-3 py-2 px-4 shadow rounded-xl">
+                                      <div className="relative ml-3 text-sm bg-gray-300 text-black dark:text-white dark:bg-gray-900  mr-3 py-2 px-3 shadow rounded-xl">
                                         <div>{message.message_text}</div>
                                       </div>
                                     </div>
@@ -331,12 +333,12 @@ const Messenger = ({ socket }) => {
 
                                     <div className="flex-col flex justify-center items-start gap-1">
                                       <div className="flex flex-col ml-5">
-                                        <div className="text-sm font-semibold">
+                                        <div className="text-sm font-semibold dark:text-accent-3">
                                           {message.sender_name}
                                         </div>
                                       </div>
 
-                                      <div className="relative ml-3 text-sm text-black bg-gray-200 py-2 px-4 shadow rounded-xl">
+                                      <div className="relative ml-3 text-sm text-black bg-gray-200 dark:text-white dark:bg-gray-900 py-2 px-4 shadow rounded-xl">
                                         <div>{message.message_text}</div>
                                       </div>
                                     </div>
