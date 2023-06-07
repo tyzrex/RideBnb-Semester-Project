@@ -1,4 +1,3 @@
-
 # RideBnb - A vehicle sharing platform
 
 Ridebnb is a project that aims to revolutionize the way people explore the world by offering a unique marketplace for booking rides on their own terms. This project provides a platform where users can rent cars and bikes directly from owners, ensuring freedom, flexibility, and affordability.
@@ -71,11 +70,11 @@ To run this project, you will need to add the following environment variables to
 
 Dark Mode
 
-![App Screenshot](./docs/darkmode.jpg)
+![App Screenshot](./docs/darkmode.png)
 
 Light Mode
 
-![App](./docs/lightmode.jpg)
+![App](./docs/lightmode.png)
 
 ## Lessons Learned
 
